@@ -1,0 +1,19 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.NiagaraSystemSongEvent.cpp.obj": [
+			"GestorNiagaraParameters.cpp.obj",
+			"NiagaraSystemSongEvent.cpp.obj",
+			"NSSE_ActionGestor.cpp.obj",
+			"NSSE_Manager.cpp.obj",
+			"NSSE_NiagGestorCompo.cpp.obj"
+		],
+		"Module.NiagaraSystemSongEvent.gen.cpp.obj": [
+			"GestorNiagaraParameters.gen.cpp.obj",
+			"NiagaraSystemSongEvent.init.gen.cpp.obj",
+			"NSSE_ActionGestor.gen.cpp.obj",
+			"NSSE_Manager.gen.cpp.obj",
+			"NSSE_NiagGestorCompo.gen.cpp.obj"
+		]
+	}
+}

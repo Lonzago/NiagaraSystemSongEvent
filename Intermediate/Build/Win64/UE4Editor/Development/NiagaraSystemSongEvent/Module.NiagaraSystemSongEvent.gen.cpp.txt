@@ -1,0 +1,19 @@
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Definitions.NiagaraSystemSongEvent.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\GestorNiagaraParameters.gen.cpp
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent/Public/GestorNiagaraParameters.h
+d:\brainboxvr\documents\unreal projects\danceparticles4_22\plugins\niagarasystemsongevent\intermediate\build\win64\ue4editor\inc\niagarasystemsongevent\GestorNiagaraParameters.generated.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NiagaraSystemSongEvent.init.gen.cpp
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NSSE_ActionGestor.gen.cpp
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent/Public/NSSE_ActionGestor.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/DataTable.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Public\DataTableUtils.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\DataTable.generated.h
+d:\brainboxvr\documents\unreal projects\danceparticles4_22\plugins\niagarasystemsongevent\source\niagarasystemsongevent\public\NSSE_NiagGestorCompo.h
+d:\brainboxvr\documents\unreal projects\danceparticles4_22\plugins\niagarasystemsongevent\intermediate\build\win64\ue4editor\inc\niagarasystemsongevent\NSSE_NiagGestorCompo.generated.h
+d:\brainboxvr\documents\unreal projects\danceparticles4_22\plugins\niagarasystemsongevent\intermediate\build\win64\ue4editor\inc\niagarasystemsongevent\NSSE_ActionGestor.generated.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NSSE_Manager.gen.cpp
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent/Public/NSSE_Manager.h
+d:\brainboxvr\documents\unreal projects\danceparticles4_22\plugins\niagarasystemsongevent\intermediate\build\win64\ue4editor\inc\niagarasystemsongevent\NSSE_Manager.generated.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NSSE_NiagGestorCompo.gen.cpp
