@@ -31,22 +31,137 @@ enum class ENSSE_ParameterChange : uint8
 };
 
 
-template<typename T>
+USTRUCT(BlueprintType)
+struct FNSSE_InputParametersChangeData
+{
+
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ENSSE_ParameterType PType;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	AActor*			PActor;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool			PBool;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float			PFloat;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32			PInt;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FLinearColor	PLinearColor;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FQuat			PQuat;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D		PVec2D;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector			PVec;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector4		PVec4;
+
+private:
+
+	bool bIsSetParameter;
+
+public:
+
+	//Retorna un valor segun el tipo
+	template <typename T>
+	T GetInputData()const
+	{
+		switch (PType)
+		{
+		case ENSSE_ParameterType::EPT_Actor:
+			return PActor;
+			break;
+		case ENSSE_ParameterType::EPT_Bool:
+			return PBool;
+			break;
+		case ENSSE_ParameterType::EPT_Float:
+			return PFloat;
+			break;
+		case ENSSE_ParameterType::EPT_Int32:
+			return PInt;
+			break;
+		case ENSSE_ParameterType::EPT_LinearColor:
+			return PLinearColor;
+			break;
+		case ENSSE_ParameterType::EPT_Quaternion:
+			return PQuat;
+			break;
+		case ENSSE_ParameterType::EPT_Vector2:
+			return PVec2D;
+			break;
+		case ENSSE_ParameterType::EPT_Vector3:
+			return PVec;
+			break;
+		case ENSSE_ParameterType::EPT_Vector4:
+			return PVec4;
+			break;
+		default:
+			break;
+		}
+	}
+
+	bool IsSet()const{ return bIsSetParameter;}
+
+};
+
+
+//template<typename T>
+//struct FNSSE_ParametersChangeData
+//{
+//	T ParametroInicial;
+//	T ParametroFinal;
+//	float TiempoTrans;
+//	bool Instan;
+//
+//	FNSSE_ParametersChangeData(T ParamInit, T ParamEnd, float Time, bool ForceInstan = false)
+//	{
+//		ParametroInicial = ParamInit;
+//		ParametroFinal = ParamEnd;
+//		TiempoTrans = Time;
+//		Instan = ForceInstan
+//	}
+//};
+USTRUCT(BlueprintType)
 struct FNSSE_ParametersChangeData
 {
-	T ParametroInicial;
-	T ParametroFinal;
+
+	GENERATED_BODY()
+
+	
+	ENSSE_ParameterType DataType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString NameParam;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FNSSE_InputParametersChangeData ParametroInicial;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FNSSE_InputParametersChangeData ParametroFinal;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float TiempoTrans;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool Instan;
 
-	FNSSE_ParametersChangeData(T ParamInit, T ParamEnd, float Time, bool ForceInstan = false)
+	ENSSE_ParameterType GetDataType()
 	{
-		ParametroInicial = ParamInit;
-		ParametroFinal = ParamEnd;
-		TiempoTrans = Time;
-		Instan = ForceInstan
+		if (ParametroInicial.IsSet() && ParametroFinal.IsSet())
+		{
+			DataType = ParametroInicial.PType;
+		}
 	}
+
+	template<typename R>
+	void GetInputsParameters(R& ParamIni, R& ParamFinal)
+	{
+		ParamIni = ParametroInicial.GetInputData<R>();
+		ParamFinal = ParametroFinal.GetInputData<R>();
+	}
+	
 };
+
 
 
 
@@ -57,27 +172,52 @@ class NIAGARASYSTEMSONGEVENT_API UGestorNiagaraParameters : public USceneCompone
 
 public:	
 
-
-	
-	float TransicionTime;
-
 	UGestorNiagaraParameters();
 
 protected:
 
-	UNiagaraComponent* NiagCompo;
+	bool bDoStart;
+	float StartTime;
+	float CurrentTime;
 
+
+	UNiagaraComponent* TargetNiagCompo;
+	float TransicionTime;
+	bool ForceInstanTrans;
+
+	FTimerHandle TimerHandler;
+	FNSSE_ParametersChangeData* Data;
+
+	
+	
 	virtual void BeginPlay() override;
 
 public:	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+
+	void InicializerTimer();
+	void EndTimer();
+
+	float GetRemainTime(float&Porcentage);
+	float GetCurrentTime();
+
+
+
+	////////////////////
+	//				CUSTOM METHODS
+	////////////////////
+
+
 	template<typename T>
 	T TransitionParam(T ParamIn, T ParamOut);
 
-	template<typename T>
-	void ChangeSingleParameter(FString ParameterName,ENSSE_ParameterType ParamType, T Parameter);
 
-	void StartParameterChanges(UNiagaraSystem* NiagaraSysRef, ENSSE_ParameterChange Change, ENSSE_ParameterType Type)
+
+	
+	void ChangeSingleParameter(FString ParameterName,ENSSE_ParameterType ParamType);
+
+	UFUNCTION(BlueprintCallable, Category= "Gestor Params Niagara")
+	void StartParameterChanges(UNiagaraComponent* NiagaraCompoRef,const FNSSE_ParametersChangeData& DataRef);
 
 };

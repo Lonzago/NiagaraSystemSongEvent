@@ -1,0 +1,73 @@
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Definitions.NiagaraSystemSongEvent.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Private\GestorNiagaraParameters.cpp
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Public\GestorNiagaraParameters.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\GestorNiagaraParameters.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Source\Niagara\Public\NiagaraComponent.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\public\NiagaraCommon.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\public\NiagaraTypes.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/UserDefinedStruct.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\UserDefinedStruct.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraTypes.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraCommon.generated.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\public\NiagaraUserRedirectionParameterStore.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Source\Niagara\Classes\NiagaraDataInterface.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Source\NiagaraShader\Public\NiagaraShared.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraShader\NiagaraShared.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\VectorVM\Public\VectorVM.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Source\NiagaraCore\Public\NiagaraMergeable.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraCore\NiagaraMergeable.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Source\NiagaraCore\Public\NiagaraDataInterfaceBase.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraCore\NiagaraDataInterfaceBase.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraDataInterface.generated.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\public\NiagaraParameterStore.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraParameterStore.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraUserRedirectionParameterStore.generated.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\public\NiagaraSystemInstance.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Source\Niagara\Classes\NiagaraEmitterInstance.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\classes\NiagaraDataSet.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\classes\NiagaraEvents.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraEvents.generated.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\classes\NiagaraCollision.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\classes\NiagaraEmitterHandle.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\public\NiagaraModule.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraEmitterHandle.generated.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\classes\NiagaraEmitter.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\classes\NiagaraScript.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Source\NiagaraShader\Public\NiagaraShader.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagarashader\public\NiagaraShaderType.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Renderer\Public\SceneRenderTargetParameters.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\public\NiagaraParameters.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraParameters.generated.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\public\NiagaraScriptExecutionParameterStore.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraScriptExecutionParameterStore.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Source\NiagaraCore\Public\NiagaraCustomVersion.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraScript.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraEmitter.generated.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\classes\NiagaraScriptExecutionContext.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\RHI\Public\RHIGPUReadback.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Source\Niagara\Classes\NiagaraSystem.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\classes\NiagaraParameterCollection.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraParameterCollection.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraSystem.generated.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\public\NiagaraParameterBindingInstance.h
+c:\program files\epic games\ue_4.22\engine\plugins\fx\niagara\source\niagara\public\NiagaraDataInterfaceBindingInstance.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara\NiagaraComponent.generated.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\typeinfo
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vcruntime_typeinfo.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Private\NiagaraSystemSongEvent.cpp
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Public\NiagaraSystemSongEvent.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Private\NSSE_ActionGestor.cpp
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Public\NSSE_ActionGestor.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/DataTable.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Public\DataTableUtils.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\DataTable.generated.h
+d:\brainboxvr\documents\unreal projects\danceparticles4_22\plugins\niagarasystemsongevent\source\niagarasystemsongevent\public\NSSE_NiagGestorCompo.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NSSE_NiagGestorCompo.generated.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NSSE_ActionGestor.generated.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Public\NSSE_Manager.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NSSE_Manager.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Public\EngineUtils.h
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Private\NSSE_Manager.cpp
+D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Private\NSSE_NiagGestorCompo.cpp
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Components\BillboardComponent.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\BillboardComponent.generated.h

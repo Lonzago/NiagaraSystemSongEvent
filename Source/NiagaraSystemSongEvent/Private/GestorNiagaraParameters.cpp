@@ -2,36 +2,44 @@
 
 
 #include "GestorNiagaraParameters.h"
+#include "GameFramework\Actor.h"
+#include "Engine\Engine.h"
 #include "Niagara\Public\NiagaraComponent.h"
 
-// Sets default values for this component's properties
+
 UGestorNiagaraParameters::UGestorNiagaraParameters()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
 }
 
 
-// Called when the game starts
 void UGestorNiagaraParameters::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
 	
 }
 
 
-// Called every frame
 void UGestorNiagaraParameters::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	if (bDoStart)
+	{
+		ChangeSingleParameter(FString("Nada"), ENSSE_ParameterType::EPT_Float);
+	}
+
 }
+
+
+
+
+////////////////////
+//				CUSTOM METHODS
+////////////////////
+
 
 template<typename T>
 T UGestorNiagaraParameters::TransitionParam(T ParamIn, T ParamOut)
@@ -39,37 +47,51 @@ T UGestorNiagaraParameters::TransitionParam(T ParamIn, T ParamOut)
 	return FMath::InterpEaseIn<T>(ParamIn, ParamOut, TransicionTime, 3);
 }
 
+//Variables Dynamicas
 template<typename T>
-void UGestorNiagaraParameters::ChangeSingleParameter(FString ParameterName, ENSSE_ParameterType ParamType, T Parameter)
+T DataIni ;
+template<typename T>
+T DataFinal ;
+
+
+
+void UGestorNiagaraParameters::ChangeSingleParameter(FString ParameterName, ENSSE_ParameterType ParamType)
 {
-	switch (ENSSE_ParameterType)
+
+	FNSSE_InputParametersChangeData InputIni;
+	FNSSE_InputParametersChangeData InputFinal;
+
+	switch (ParamType)
 	{
 	case ENSSE_ParameterType::EPT_Actor:
-		NiagCompo->SetNiagaraVariableActor(ParameterName, Parameter);
 		break;
 	case ENSSE_ParameterType::EPT_Bool:
-		NiagCompo->SetNiagaraVariableBool(ParameterName, Parameter);
 		break;
 	case ENSSE_ParameterType::EPT_Float:
-		NiagCompo->SetNiagaraVariableFloat(ParameterName, Parameter);
+		
+		TargetNiagCompo->SetNiagaraVariableFloat(ParameterName, TransitionParam<float>(InputIni.PFloat, InputFinal.PFloat));
+
 		break;
 	case ENSSE_ParameterType::EPT_Int32:
-		NiagCompo->SetNiagaraVariableInt(ParameterName, Parameter);
+
+		TargetNiagCompo->SetNiagaraVariableInt(ParameterName, TransitionParam<int32>(InputIni.PInt, InputFinal.PInt));
+
 		break;
 	case ENSSE_ParameterType::EPT_LinearColor:
-		NiagCompo->SetNiagaraVariableLinearColor(ParameterName, Parameter);
+
+		TargetNiagCompo->SetNiagaraVariableLinearColor(ParameterName, TransitionParam<FLinearColor>(InputIni.PLinearColor, InputFinal.PLinearColor));
+
 		break;
 	case ENSSE_ParameterType::EPT_Quaternion:
-		NiagCompo->SetNiagaraVariableQuat(ParameterName, Parameter);
 		break;
 	case ENSSE_ParameterType::EPT_Vector2:
-		NiagCompo->SetNiagaraVariableVec2(ParameterName, Parameter);
 		break;
 	case ENSSE_ParameterType::EPT_Vector3:
-		NiagCompo->SetNiagaraVariableVec3(ParameterName, Parameter);
+
+		TargetNiagCompo->SetNiagaraVariableVec3(ParameterName, TransitionParam<FVector>(InputIni.PVec, InputFinal.PVec));
+
 		break;
 	case ENSSE_ParameterType::EPT_Vector4:
-		NiagCompo->SetNiagaraVariableVec4(ParameterName, Parameter);
 		break;
 	default:
 		break;
@@ -77,3 +99,33 @@ void UGestorNiagaraParameters::ChangeSingleParameter(FString ParameterName, ENSS
 
 }
 
+
+void UGestorNiagaraParameters::InicializerTimer()
+{
+	UWorld* world = GetWorld();
+	if (world)
+	{
+		world->GetTimerManager().SetTimer(TimerHandler, this, &UGestorNiagaraParameters::EndTimer, TransicionTime, false);
+	}
+	
+}
+
+float UGestorNiagaraParameters::GetRemainTime(float & Porcentage)
+{
+	float Current = TransicionTime - GetCurrentTime();
+	Porcentage = Current * 100 / TransicionTime;
+	return  Current;
+}
+
+float UGestorNiagaraParameters::GetCurrentTime()
+{
+	return StartTime - GetWorld()->GetTimeSeconds();
+}
+
+void UGestorNiagaraParameters::StartParameterChanges(UNiagaraComponent* NiagaraCompoRef, const FNSSE_ParametersChangeData& DataRef)
+{
+	TargetNiagCompo = NiagaraCompoRef;
+	StartTime = GetWorld()->GetTimeSeconds();
+		
+	bDoStart = true;
+}
