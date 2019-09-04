@@ -537,6 +537,7 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_In
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UGestorNiagaraParameters_StartParameterChanges_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Gestor Params Niagara" },
 		{ "ModuleRelativePath", "Public/GestorNiagaraParameters.h" },
+		{ "ToolTip", "Funcion de Inicializacion del conteo de cambios de parametros en NiagaraComponent.\n@param NiagaraCompoRef Componente al que se quiere realizar los cambios .\n@param DataRef Custom DataReferencia para introducir que parametros se quieren modificar .\n@note Tiene que tener los paratros bien nombrados." },
 	};
 #endif
 	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UGestorNiagaraParameters_StartParameterChanges_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UGestorNiagaraParameters, nullptr, "StartParameterChanges", sizeof(GestorNiagaraParameters_eventStartParameterChanges_Parms), Z_Construct_UFunction_UGestorNiagaraParameters_StartParameterChanges_Statics::PropPointers, ARRAY_COUNT(Z_Construct_UFunction_UGestorNiagaraParameters_StartParameterChanges_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UGestorNiagaraParameters_StartParameterChanges_Statics::Function_MetaDataParams, ARRAY_COUNT(Z_Construct_UFunction_UGestorNiagaraParameters_StartParameterChanges_Statics::Function_MetaDataParams)) };
@@ -568,7 +569,7 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_In
 		(UObject* (*)())Z_Construct_UPackage__Script_NiagaraSystemSongEvent,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UGestorNiagaraParameters_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UGestorNiagaraParameters_StartParameterChanges, "StartParameterChanges" }, // 2399717966
+		{ &Z_Construct_UFunction_UGestorNiagaraParameters_StartParameterChanges, "StartParameterChanges" }, // 1599292926
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UGestorNiagaraParameters_Statics::Class_MetaDataParams[] = {
@@ -606,7 +607,7 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_In
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UGestorNiagaraParameters, 3988121650);
+	IMPLEMENT_CLASS(UGestorNiagaraParameters, 1862748320);
 	template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<UGestorNiagaraParameters>()
 	{
 		return UGestorNiagaraParameters::StaticClass();

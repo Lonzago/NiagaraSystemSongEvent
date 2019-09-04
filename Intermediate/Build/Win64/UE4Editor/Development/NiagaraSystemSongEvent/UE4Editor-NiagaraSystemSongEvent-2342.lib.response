@@ -1,0 +1,14 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-NiagaraSystemSongEvent-2342.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Intermediate\Build\Win64\DanceParticles4_22Editor\Development\Engine\SharedPCH.Engine.h.obj"
+"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Module.NiagaraSystemSongEvent.cpp.obj"
+"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Module.NiagaraSystemSongEvent.gen.cpp.obj"
+"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Default.rc2.res"
+/OUT:"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\UE4Editor-NiagaraSystemSongEvent-2342.lib"
+/INCLUDE:IMPLEMENT_MODULE_NiagaraSystemSongEvent

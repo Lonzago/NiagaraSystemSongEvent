@@ -8,7 +8,9 @@
 
 class UNiagaraComponent;
 class UNiagaraSystem;
+class FTimerManager;
 
+#pragma region Estructuras
 UENUM(BlueprintType)
 enum class ENSSE_ParameterType : uint8
 {
@@ -159,10 +161,11 @@ struct FNSSE_ParametersChangeData
 		ParamIni = ParametroInicial.GetInputData<R>();
 		ParamFinal = ParametroFinal.GetInputData<R>();
 	}
+
+
 	
 };
-
-
+#pragma endregion Estructuras
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -173,50 +176,45 @@ class NIAGARASYSTEMSONGEVENT_API UGestorNiagaraParameters : public USceneCompone
 public:	
 
 	UGestorNiagaraParameters();
-
+	float TotalTimeTrasition;
 protected:
+
+	
+	UNiagaraComponent* TargetNiagCompo;
+	FNSSE_ParametersChangeData ParameterData;
 
 	bool bDoStart;
 	float StartTime;
 	float CurrentTime;
-
-
-	UNiagaraComponent* TargetNiagCompo;
-	float TransicionTime;
 	bool ForceInstanTrans;
 
-	FTimerHandle TimerHandler;
-	FNSSE_ParametersChangeData* Data;
-
-	
 	
 	virtual void BeginPlay() override;
 
 public:	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-
-	void InicializerTimer();
-	void EndTimer();
-
-	float GetRemainTime(float&Porcentage);
+	////		TimerControl		////
+	void StopCountTime();
+	float GetRemainTime();
 	float GetCurrentTime();
-
-
-
+	float GetPercentage();
+	float GetAlphaTime();
 	////////////////////
 	//				CUSTOM METHODS
 	////////////////////
 
 
-	template<typename T>
-	T TransitionParam(T ParamIn, T ParamOut);
-
-
-
+	
 	
 	void ChangeSingleParameter(FString ParameterName,ENSSE_ParameterType ParamType);
 
+	/**
+	* Funcion de Inicializacion del conteo de cambios de parametros en NiagaraComponent.
+	* @param NiagaraCompoRef Componente al que se quiere realizar los cambios .
+	* @param DataRef Custom DataReferencia para introducir que parametros se quieren modificar .
+	* @note Tiene que tener los paratros bien nombrados.
+	*/
 	UFUNCTION(BlueprintCallable, Category= "Gestor Params Niagara")
 	void StartParameterChanges(UNiagaraComponent* NiagaraCompoRef,const FNSSE_ParametersChangeData& DataRef);
 
