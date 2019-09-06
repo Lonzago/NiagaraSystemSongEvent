@@ -3,7 +3,9 @@
 
 #include "NSSE_NiagGestorCompo.h"
 #include "Niagara\Public\NiagaraComponent.h"
+#include "GestorNiagaraParameters.h"
 #include "Components\BillboardComponent.h"
+
 
 
 UNSSE_NiagGestorCompo::UNSSE_NiagGestorCompo()
@@ -17,6 +19,8 @@ UNSSE_NiagGestorCompo::UNSSE_NiagGestorCompo()
 	NiagaraC_Main->SetupAttachment(this);
 	NiagaraC_Main->RegisterComponent();*/
 
+	MyParameterGestor = CreateDefaultSubobject<UGestorNiagaraParameters>(TEXT("GestorParameters"));
+	MyParameterGestor->SetupAttachment(this);
 }
 
 
@@ -40,38 +44,38 @@ void UNSSE_NiagGestorCompo::TickComponent(float DeltaTime, ELevelTick TickType, 
 //					CUSTOM METHOS
 ////////////////////////////
 
-
-
-void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENiagaraGestorActions Action)
+void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_EventParameterChange& EventParameters)
 {
 	switch (Action)
 	{
-	case ENiagaraGestorActions::NGA_KillSlow:
+	case ENSSE_NiagaraGestorActions::NGA_KillSlow:
 		//
 		KillSlow();
 		break;
-	case ENiagaraGestorActions::NGA_KillInstan:
+	case ENSSE_NiagaraGestorActions::NGA_KillInstan:
 		//
 		KillInstan();
 		break;
-	case ENiagaraGestorActions::NGA_SpawmSlow:
+	case ENSSE_NiagaraGestorActions::NGA_SpawmSlow:
 		//
 		SpawnSlow();
 		break;
-	case ENiagaraGestorActions::NGA_SpawnInstan:
+	case ENSSE_NiagaraGestorActions::NGA_SpawnInstan:
 		//
 		SpanwInstan();
 		break;
-	case ENiagaraGestorActions::NGA_FadeParticles:
+	case ENSSE_NiagaraGestorActions::NGA_FadeParticles:
 		break;
-	case ENiagaraGestorActions::NGA_SwitchParticles:
+	case ENSSE_NiagaraGestorActions::NGA_SwitchParticles:
 		break;
-	case ENiagaraGestorActions::NGA_SwitchHardParticles:
+	case ENSSE_NiagaraGestorActions::NGA_SwitchHardParticles:
 
 		break;
-	case ENiagaraGestorActions::NGA_ModifierParamInstan:
+	case ENSSE_NiagaraGestorActions::NGA_ModifierParamInstan:
 		break;
-	case ENiagaraGestorActions::NGA_ModifierParamByTime:
+	case ENSSE_NiagaraGestorActions::NGA_ModifierParamByTime:
+		//
+		ModifierParamByTime(EventParameters);
 		break;
 	default:
 		break;
@@ -98,15 +102,9 @@ void UNSSE_NiagGestorCompo::SpanwInstan()
 	}
 
 	//Tiene que tener una particula asignada
-	if (NiagaraS_Default)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Creando Componente"));
-		NiagaraC_Main = NewObject<UNiagaraComponent>(this);
-		NiagaraC_Main->SetupAttachment(this);
-		NiagaraC_Main->RegisterComponentWithWorld(GetWorld());
-		NiagaraC_Main->SetAsset(NiagaraS_Default);
-		NiagaraC_Main->ResetSystem();
-	}
+	CreateNewNiagaraCompo();
+
+	
 }
 
 void UNSSE_NiagGestorCompo::KillSlow()
@@ -131,4 +129,33 @@ void UNSSE_NiagGestorCompo::SwitchHardParticles()
 		NiagaraC_Main->ResetSystem();
 	}
 
+}
+
+void UNSSE_NiagGestorCompo::ModifierParamByTime(const FNSSE_EventParameterChange& EventData)
+{
+	if (!NiagaraC_Main)
+	{
+		CreateNewNiagaraCompo();
+	}
+	MyParameterGestor->SetUpGestorParticleEvent(NiagaraC_Main, EventData);
+	
+	
+}
+
+void UNSSE_NiagGestorCompo::CreateNewNiagaraCompo()
+{
+	if (NiagaraS_Default)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Creando Componente"));
+		NiagaraC_Main = NewObject<UNiagaraComponent>(this);
+		NiagaraC_Main->SetupAttachment(this);
+		NiagaraC_Main->RegisterComponentWithWorld(GetWorld());
+		NiagaraC_Main->SetAsset(NiagaraS_Default);
+		NiagaraC_Main->ResetSystem();
+	}
+	else
+	{	
+		//Error si no hay una referencia de NiagaraSystem
+		UE_LOG(LogTemp, Error, TEXT("NiagaraGestorCompo::CreateNewNiagaraComponent   No NiagaraSystem asiganado. Componente no creado"));
+	}
 }

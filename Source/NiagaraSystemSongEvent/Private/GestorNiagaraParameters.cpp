@@ -5,6 +5,8 @@
 #include "GameFramework\Actor.h"
 #include "Engine\Engine.h"
 #include "TimerManager.h"
+#include "Kismet/KismetMathLibrary.h"
+
 #include "Niagara\Public\NiagaraComponent.h"
 
 
@@ -14,43 +16,59 @@ UGestorNiagaraParameters::UGestorNiagaraParameters()
 
 }
 
-
 void UGestorNiagaraParameters::BeginPlay()
 {
 	Super::BeginPlay();
 
 
-	
-}
 
+}
 
 void UGestorNiagaraParameters::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	bool IsUnderPorcentage = GetPercentage() <= 100;
-	
-	if (bDoStart&& IsUnderPorcentage)
-	{	
-		//#DebugText
+
+
+	if (bDoStart && IsUnderPorcentage)
+	{
+		//Hace el paso por multiples parametros o por uno solo.
+		switch (NumParamChange)
+		{
+		case ENSSE_NumberParameterChange::EPC_SinglerParameter:
+
+			ChangeSingleParameter(0, EventData);
+
+			break;
+
+		case ENSSE_NumberParameterChange::EPC_MultipleParameters:
+
+			//Pasa por todos los parametros a cambiar
+			for (int i = 0 ; i< EventData.ListParamChange.Num()-1; i++)
+			{
+				ChangeSingleParameter(i, EventData);
+			}
+
+			break;
+		default:
+			break;
+		}
+
+		//#DebugText Debugeo por formato de los parametros del Gestor
 		if (GEngine)
 		{
-			FNumberFormattingOptions NumberFormat;					//Text.h
+			FNumberFormattingOptions NumberFormat;
 			NumberFormat.MinimumIntegralDigits = 1;
 			NumberFormat.MinimumFractionalDigits = 2;
 			NumberFormat.MaximumFractionalDigits = 2;
 
-			FString TimeCurrent = FText::AsNumber(GetCurrentTime(),&NumberFormat).ToString();
-			FString PercentageTime = FText::AsNumber(GetAlphaTime(),&NumberFormat).ToString();
+			FString TimeCurrent = FText::AsNumber(GetCurrentTime(), &NumberFormat).ToString();
+			FString PercentageTime = FText::AsNumber(GetAlphaTime(), &NumberFormat).ToString();
 			FString RemainTime = FText::AsNumber(GetRemainTime(), &NumberFormat).ToString();
-			GEngine->AddOnScreenDebugMessage(-1, 0.001, FColor::Emerald, FString::Printf(TEXT("ParameterName: %s TotalTime: %f TimeCurrent: %s  Percentage: %s  Remain: %s"),*ParameterData.NameParam,TotalTimeTrasition, *TimeCurrent,*PercentageTime,*RemainTime),true, FVector2D(1.5, 1.5));
-			ChangeSingleParameter(ParameterData.NameParam, ENSSE_ParameterType::EPT_Float);
+			GEngine->AddOnScreenDebugMessage(-1, 0.001, FColor::Emerald, FString::Printf(TEXT("TotalTime: %f TimeCurrent: %s  Alphatime: %s  Remain: %s"), TotalTimeTrasition, *TimeCurrent, *PercentageTime, *RemainTime), true, FVector2D(1.5, 1.5));
 		}
-
-		
-
 	}
-
 	else if (bDoStart)
 	{
 		StopCountTime();
@@ -90,17 +108,254 @@ float UGestorNiagaraParameters::GetAlphaTime()
 	return FMath::GetMappedRangeValueClamped(InputClamp, OutClamp, GetPercentage());
 }
 
-//#NOTWORK Al pasar los parametros a Niagara los lee como 0 hay que debugearlo
-void UGestorNiagaraParameters::ChangeSingleParameter(FString ParameterName, ENSSE_ParameterType ParamType)
+void UGestorNiagaraParameters::SetUpGestorParticleEvent(UNiagaraComponent* NiagaraCompoTargert, const FNSSE_EventParameterChange& DataParticleChange)
 {
 
-	FNSSE_InputParametersChangeData InputIni;
-	FNSSE_InputParametersChangeData InputFinal;
+	TargetNiagCompo = NiagaraCompoTargert;
+	EventData = DataParticleChange;
 
-	float alphaTime = GetAlphaTime();
+	if (EventData.ListParamChange.Num() != 0 && EventData.ListParamChange.Num() == 1)
+	{
+		NumParamChange = ENSSE_NumberParameterChange::EPC_SinglerParameter;
+
+	}
+	else if (EventData.ListParamChange.Num() != 0 && EventData.ListParamChange.Num() > 1)
+	{
+		NumParamChange = ENSSE_NumberParameterChange::EPC_MultipleParameters;
+	}
 
 	//#DebugText
-	GEngine->AddOnScreenDebugMessage(-1, 0.001, FColor::Purple, FString::Printf(TEXT("Alphatime: %s"), *FString::SanitizeFloat(alphaTime,2)), true, FVector2D(1.5, 1.5));
+	FString enumname = FindObject<UEnum>(ANY_PACKAGE, TEXT("ENSSE_NumberParameterChange"), true)->GetNameStringByIndex(static_cast<uint8>(NumParamChange));
+	UE_LOG(LogTemp, Warning, TEXT("Parameters : %s"), *enumname);
+
+
+	TotalTimeTrasition = DataParticleChange.TiempoTrans;
+
+
+
+
+	//#GonDev #IncluirTimeDelay Incluir aqui un delay si queremos que empiece mas tarde el evento. Aunque estoy hay que plantearselo porque quizas no haga fata.
+	/*
+		Incluir.
+	*/
+
+	StartParameterChanges();
+
+
+
+}
+
+void UGestorNiagaraParameters::StartParameterChanges()
+{
+	StartTime = GetWorld()->GetTimeSeconds();
+	bDoStart = true;
+}
+
+//No soporte para algunos tipos de datos de momneto #TOFUTURE Implementar para todos los tipos de datos en niagara
+void UGestorNiagaraParameters::ChangeSingleParameter(int32 IndexParam, const FNSSE_EventParameterChange& InputData)
+{
+	//Get Name and Type
+	FString ParameterName = InputData.ListParamChange[IndexParam].NameParam;
+	ENSSE_ParameterType ParamType = InputData.ListParamChange[IndexParam].DataType;
+	
+	//Instan Varaibles
+	bool IsInstanChange = InputData.Instan;
+	ENSSE_InstanTransTiming InstanMoment = InputData.InstanTiming;
+
+	//Parameters Inicial and Final
+	FNSSE_InputParametersChangeData InputInicial = InputData.ListParamChange[IndexParam].ParametroInicial;
+	FNSSE_InputParametersChangeData InputFinal = InputData.ListParamChange[IndexParam].ParametroFinal;
+
+	float AlphaTime = GetAlphaTime();
+
+	if (IsInstanChange)
+	{
+		InstanNiagaraChanges(InstanMoment, ParameterName, InputFinal, ParamType, AlphaTime);
+	}
+	else
+	{
+		LerpNiagaraChanges(ParameterName, InputInicial, InputFinal, ParamType, AlphaTime);
+	}
+
+}
+
+void UGestorNiagaraParameters::InstanNiagaraChanges(ENSSE_InstanTransTiming InstaTiming, FString ParameterName, const FNSSE_InputParametersChangeData& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime)
+{
+	switch (ParamType)
+	{
+	case ENSSE_ParameterType::EPT_Actor:
+		switch (InstaTiming)
+		{
+		case ENSSE_InstanTransTiming::EITT_AtStart:
+			if (AlphaTime < 0.1)
+			{
+				TargetNiagCompo->SetNiagaraVariableActor(ParameterName, InputFinal.PActor);
+			}
+			break;
+		case ENSSE_InstanTransTiming::ETII_Middle:
+			if (AlphaTime > 0.49 && AlphaTime < 0.51)
+			{
+				TargetNiagCompo->SetNiagaraVariableActor(ParameterName, InputFinal.PActor);
+			}
+			break;
+
+		case ENSSE_InstanTransTiming::ETII_AtEnd:
+			if (AlphaTime > 0.99)
+			{
+				TargetNiagCompo->SetNiagaraVariableActor(ParameterName, InputFinal.PActor);
+			}
+			break;
+		default:
+			break;
+		}
+		break;
+	case ENSSE_ParameterType::EPT_Bool:
+		switch (InstaTiming)
+		{
+		case ENSSE_InstanTransTiming::EITT_AtStart:
+			if (AlphaTime < 0.1)
+			{
+				TargetNiagCompo->SetNiagaraVariableBool(ParameterName, InputFinal.PBool);
+			}
+			break;
+		case ENSSE_InstanTransTiming::ETII_Middle:
+			if (AlphaTime > 0.49 && AlphaTime < 0.51)
+			{
+				TargetNiagCompo->SetNiagaraVariableBool(ParameterName, InputFinal.PBool);
+			}
+			break;
+
+		case ENSSE_InstanTransTiming::ETII_AtEnd:
+			if (AlphaTime > 0.99)
+			{
+				TargetNiagCompo->SetNiagaraVariableBool(ParameterName, InputFinal.PBool);
+			}
+			break;
+		default:
+			break;
+		}
+		break;
+	case ENSSE_ParameterType::EPT_Float:
+		switch (InstaTiming)
+		{
+		case ENSSE_InstanTransTiming::EITT_AtStart:
+			if (AlphaTime < 0.1)
+			{
+				TargetNiagCompo->SetNiagaraVariableFloat(ParameterName, InputFinal.PFloat);
+			}
+			break;
+		case ENSSE_InstanTransTiming::ETII_Middle:
+			if (AlphaTime > 0.49 && AlphaTime < 0.51)
+			{
+				TargetNiagCompo->SetNiagaraVariableFloat(ParameterName, InputFinal.PFloat);
+			}
+			break;
+
+		case ENSSE_InstanTransTiming::ETII_AtEnd:
+			if (AlphaTime > 0.99)
+			{
+				TargetNiagCompo->SetNiagaraVariableFloat(ParameterName, InputFinal.PFloat);
+			}
+			break;
+		default:
+			break;
+		}
+		break;
+	case ENSSE_ParameterType::EPT_Int32:
+		switch (InstaTiming)
+		{
+		case ENSSE_InstanTransTiming::EITT_AtStart:
+			if (AlphaTime < 0.1)
+			{
+				TargetNiagCompo->SetNiagaraVariableInt(ParameterName, InputFinal.PInt);
+			}
+			break;
+		case ENSSE_InstanTransTiming::ETII_Middle:
+			if (AlphaTime > 0.49 && AlphaTime < 0.51)
+			{
+				TargetNiagCompo->SetNiagaraVariableInt(ParameterName, InputFinal.PInt);
+			}
+			break;
+
+		case ENSSE_InstanTransTiming::ETII_AtEnd:
+			if (AlphaTime > 0.99)
+			{
+				TargetNiagCompo->SetNiagaraVariableInt(ParameterName, InputFinal.PInt);
+			}
+			break;
+		default:
+			break;
+		}
+		break;
+	case ENSSE_ParameterType::EPT_LinearColor:
+		switch (InstaTiming)
+		{
+		case ENSSE_InstanTransTiming::EITT_AtStart:
+			if (AlphaTime < 0.1)
+			{
+				TargetNiagCompo->SetNiagaraVariableLinearColor(ParameterName, InputFinal.PLinearColor);
+			}
+			break;
+		case ENSSE_InstanTransTiming::ETII_Middle:
+			if (AlphaTime > 0.49 && AlphaTime < 0.51)
+			{
+				TargetNiagCompo->SetNiagaraVariableLinearColor(ParameterName, InputFinal.PLinearColor);
+			}
+			break;
+
+		case ENSSE_InstanTransTiming::ETII_AtEnd:
+			if (AlphaTime > 0.99)
+			{
+				TargetNiagCompo->SetNiagaraVariableLinearColor(ParameterName, InputFinal.PLinearColor);
+			}
+			break;
+		default:
+			break;
+		}
+		break;
+	case ENSSE_ParameterType::EPT_Quaternion:
+
+		break;
+	case ENSSE_ParameterType::EPT_Vector2:
+
+		break;
+	case ENSSE_ParameterType::EPT_Vector3:
+		switch (InstaTiming)
+		{
+		case ENSSE_InstanTransTiming::EITT_AtStart:
+			if (AlphaTime < 0.1)
+			{
+				TargetNiagCompo->SetNiagaraVariableVec3(ParameterName, InputFinal.PVec);
+			}
+			break;
+		case ENSSE_InstanTransTiming::ETII_Middle:
+			if (AlphaTime > 0.49 && AlphaTime < 0.51)
+			{
+				TargetNiagCompo->SetNiagaraVariableVec3(ParameterName, InputFinal.PVec);
+			}
+			break;
+
+		case ENSSE_InstanTransTiming::ETII_AtEnd:
+			if (AlphaTime > 0.99)
+			{
+				TargetNiagCompo->SetNiagaraVariableVec3(ParameterName, InputFinal.PVec);
+			}
+			break;
+		default:
+			break;
+		}
+		break;
+	case ENSSE_ParameterType::EPT_Vector4:
+
+		break;
+	default:
+		break;
+	}
+
+}
+
+void UGestorNiagaraParameters::LerpNiagaraChanges(FString ParameterName, const FNSSE_InputParametersChangeData& InputInicial ,const FNSSE_InputParametersChangeData& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime)
+{
 
 	switch (ParamType)
 	{
@@ -109,28 +364,34 @@ void UGestorNiagaraParameters::ChangeSingleParameter(FString ParameterName, ENSS
 	case ENSSE_ParameterType::EPT_Bool:
 		break;
 	case ENSSE_ParameterType::EPT_Float:
-
-		TargetNiagCompo->SetNiagaraVariableFloat(ParameterName, FMath::LerpStable(InputIni.PFloat, InputFinal.PFloat, alphaTime));
-	
+	{
+		//FLOAT SET
+		float LerpValue = UKismetMathLibrary::Lerp(InputInicial.PFloat, InputFinal.PFloat, AlphaTime);
+		TargetNiagCompo->SetNiagaraVariableFloat(ParameterName, LerpValue);
+		//UE_LOG(LogTemp, Warning, TEXT("ValueChange-> Type: Float Value: %s "), *FString::SanitizeFloat(LepValue, 2));
 		break;
+	}
 	case ENSSE_ParameterType::EPT_Int32:
+	{
+		//INT SET
+		float ConverInit = float(InputInicial.PInt);
+		float ConverFinal = float(InputInicial.PInt);
+		int32 FinalIntNumber = FMath::FloorToInt(UKismetMathLibrary::Lerp(ConverInit, ConverFinal, AlphaTime));
 
-		TargetNiagCompo->SetNiagaraVariableInt(ParameterName, FMath::Lerp(InputIni.PInt,InputFinal.PInt, alphaTime));
-
+		TargetNiagCompo->SetNiagaraVariableInt(ParameterName, FinalIntNumber);
 		break;
+	}
 	case ENSSE_ParameterType::EPT_LinearColor:
-
-		TargetNiagCompo->SetNiagaraVariableLinearColor(ParameterName, FMath::Lerp(InputIni.PLinearColor,InputFinal.PLinearColor, alphaTime));
-
+		//LINEARCOLOR SET
+		TargetNiagCompo->SetNiagaraVariableLinearColor(ParameterName, UKismetMathLibrary::LinearColorLerp(InputInicial.PLinearColor, InputFinal.PLinearColor, AlphaTime));
 		break;
 	case ENSSE_ParameterType::EPT_Quaternion:
 		break;
 	case ENSSE_ParameterType::EPT_Vector2:
 		break;
 	case ENSSE_ParameterType::EPT_Vector3:
-
-		TargetNiagCompo->SetNiagaraVariableVec3(ParameterName, FMath::Lerp(InputIni.PVec,InputFinal.PVec, alphaTime));
-
+		//VECTOR SET
+		TargetNiagCompo->SetNiagaraVariableVec3(ParameterName, UKismetMathLibrary::VLerp(InputInicial.PVec, InputFinal.PVec, AlphaTime));
 		break;
 	case ENSSE_ParameterType::EPT_Vector4:
 		break;
@@ -139,14 +400,3 @@ void UGestorNiagaraParameters::ChangeSingleParameter(FString ParameterName, ENSS
 	}
 
 }
-
-void UGestorNiagaraParameters::StartParameterChanges(UNiagaraComponent* NiagaraCompoRef, const FNSSE_ParametersChangeData& DataRef)
-{
-	ParameterData = DataRef;
-	TotalTimeTrasition = DataRef.TiempoTrans;
-	TargetNiagCompo = NiagaraCompoRef;
-	StartTime = GetWorld()->GetTimeSeconds();
-	bDoStart = true;
-}
-
-

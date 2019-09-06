@@ -2,5 +2,6 @@
 #include "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\GestorNiagaraParameters.gen.cpp"
 #include "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NiagaraSystemSongEvent.init.gen.cpp"
 #include "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NSSE_ActionGestor.gen.cpp"
+#include "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NSSE_DataStrucTypes.gen.cpp"
 #include "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NSSE_Manager.gen.cpp"
 #include "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent\NSSE_NiagGestorCompo.gen.cpp"

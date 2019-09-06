@@ -4,31 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "NSSE_DataStrucTypes.h"
 #include "NSSE_Manager.generated.h"
 
 
-USTRUCT(BlueprintType)
-struct FEventListData {
-
-	GENERATED_BODY()
-
-
-	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	float EventTime;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString EventName;
-};
-
-
-USTRUCT(BlueprintType)
-struct FEventList {
-
-	GENERATED_BODY()
-
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FEventListData> EventsList;
-};
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEventSendCast, FString, EventName);
@@ -46,7 +25,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
 		FString GroupManager = "Trackers";
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
-		TArray<FEventListData> EventTable;
+		TArray<FNSSE_EventListData> EventTable;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
 		float ToleranceRange=0.001f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
