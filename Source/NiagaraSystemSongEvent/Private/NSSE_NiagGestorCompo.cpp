@@ -28,6 +28,7 @@ void UNSSE_NiagGestorCompo::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetNigarasComponentsAttached();
 	
 }
 
@@ -84,6 +85,26 @@ void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Acti
 }
 
 
+
+void UNSSE_NiagGestorCompo::GetNigarasComponentsAttached()
+{
+	TArray<USceneComponent*> ActachCompos = this->GetAttachChildren();
+	NiagarasComponentsArray.Empty();
+
+	if (ActachCompos.Num() >= 1)
+	{
+		for (USceneComponent* Compo : ActachCompos)
+		{
+			NiagarasComponentsArray.Add(Cast<UNiagaraComponent>(Compo));
+		}
+	}
+	else
+	{
+		//#DebugText
+		UE_LOG(LogTemp, Warning, TEXT("NiagaraGestor::GetNiagarasComponents  No NiagaraComponent Child assigned."));
+	}
+
+}
 
 bool UNSSE_NiagGestorCompo::IsRefNiagaraCompoEmpty() const
 {

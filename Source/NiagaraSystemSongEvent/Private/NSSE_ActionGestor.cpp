@@ -9,7 +9,8 @@
 #include "Engine/Engine.h"
 
 
-UNSSE_ActionGestor::UNSSE_ActionGestor()
+UNSSE_ActionGestor::UNSSE_ActionGestor(const FObjectInitializer& OI)
+	:Super(OI)
 {
 	PrimaryComponentTick.bCanEverTick = false;
 
@@ -17,6 +18,8 @@ UNSSE_ActionGestor::UNSSE_ActionGestor()
 	/*
 		Añadir aqui
 	*/
+
+	
 }
 
 void UNSSE_ActionGestor::BeginPlay()
@@ -50,10 +53,43 @@ void UNSSE_ActionGestor::BeginPlay()
 	}
 }
 
+void UNSSE_ActionGestor::Activate(bool bReset)
+{
+	
+}
+
+void UNSSE_ActionGestor::OnRegister()
+{
+	UE_LOG(LogTemp, Warning, TEXT("ActionGestor::OnRegister OwnerName --> %s"), *GetOwner()->GetName());
+	GetAllNiagaraGestors();
+	Super::OnRegister();
+	
+}
+
+void UNSSE_ActionGestor::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	//GetAllNiagaraGestors();
+}
+
 void UNSSE_ActionGestor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+}
+
+TArray<FString> UNSSE_ActionGestor::GetRegisterNiagaraGestorNames()
+{
+	TArray<FString> Names;
+
+	for (UNSSE_NiagGestorCompo* Compo : OwnNiagaraGestorArray)
+	{
+		Names.Add(Compo->GetName());
+	}
+
+	return Names;
 }
 
 //////////////
@@ -73,9 +109,12 @@ void UNSSE_ActionGestor::EventNiagaraCalled(FString NameEvent)
 		FNSSE_DataTableActionGestor* DataTableActionEvent = ActionEventList->FindRow<FNSSE_DataTableActionGestor>(NEvent,*Context,true);
 
 		
-		if (MyNiagaraGestor)
+  		if (OwnNiagaraGestorArray.Num()>=1)
 		{
-			MyNiagaraGestor->NSSE_DoNiagaraAction(DataTableActionEvent->ActionGestor, DataTableActionEvent->ParamActionData);
+			for (UNSSE_NiagGestorCompo* Gestor : OwnNiagaraGestorArray)
+			{
+				Gestor->NSSE_DoNiagaraAction(DataTableActionEvent->ActionGestor, DataTableActionEvent->ParamActionData);
+			}
 		}
 		else
 		{
@@ -114,4 +153,40 @@ void UNSSE_ActionGestor::EventManagerBind()
 bool UNSSE_ActionGestor::CheckEventName(FName NameEvent)
 {
 	return EventRowNames[0]==NameEvent;
+}
+
+void UNSSE_ActionGestor::GetAllNiagaraGestors()
+{
+	AActor* Owner = this->GetOwner();
+	TArray<USceneComponent*> ArrayComponents;
+
+	if (!Owner) { //#DebugError
+					UE_LOG(LogTemp, Error, TEXT("ActionGestor::GetAllNiagaraGestor  Owner NOT FOUND¡")); 
+					return; }
+
+	Owner->GetRootComponent()->GetChildrenComponents(true, ArrayComponents);
+
+	//Clear previous array and ensure that is empty
+	OwnNiagaraGestorArray.Empty();
+	
+
+
+	for (USceneComponent* Compo : ArrayComponents)
+	{
+		UNSSE_NiagGestorCompo* NigCompo = Cast<UNSSE_NiagGestorCompo>(Compo);
+		if (NigCompo)
+		{	
+			//Add To array the component
+			if (!OwnNiagaraGestorArray.Contains(NigCompo))
+			{
+				OwnNiagaraGestorArray.Add(NigCompo);
+			}
+			//#DebugText
+			UE_LOG(LogTemp, Warning, TEXT("ActionGestor::GetAllNiagaragestors  Add component --> %s"), *Compo->GetName());
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("ActionGestor::GetAllNiagaragestors NO Added component --> %s"), *Compo->GetName());
+		}
+	}
 }

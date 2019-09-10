@@ -40,7 +40,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "NSSE TEST")
 	void NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_NiagaraGestorData& NiagaraGestorData);
-
+	void GetNigarasComponentsAttached();
 	bool IsRefNiagaraCompoEmpty() const;
 
 	//////////////////////////

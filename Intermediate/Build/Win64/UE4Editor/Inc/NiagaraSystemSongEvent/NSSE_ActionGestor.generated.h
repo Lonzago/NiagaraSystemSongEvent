@@ -22,6 +22,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 		P_NATIVE_BEGIN; \
 		P_THIS->EventNiagaraCalled(Z_Param_NameEvent); \
 		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetRegisterNiagaraGestorNames) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(TArray<FString>*)Z_Param__Result=P_THIS->GetRegisterNiagaraGestorNames(); \
+		P_NATIVE_END; \
 	}
 
 
@@ -33,6 +41,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
 		P_THIS->EventNiagaraCalled(Z_Param_NameEvent); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetRegisterNiagaraGestorNames) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(TArray<FString>*)Z_Param__Result=P_THIS->GetRegisterNiagaraGestorNames(); \
 		P_NATIVE_END; \
 	}
 
@@ -57,7 +73,7 @@ public: \
 
 #define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_ActionGestor_h_14_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API UNSSE_ActionGestor(const FObjectInitializer& ObjectInitializer); \
+	NO_API UNSSE_ActionGestor(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UNSSE_ActionGestor) \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UNSSE_ActionGestor); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UNSSE_ActionGestor); \
@@ -76,7 +92,7 @@ private: \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UNSSE_ActionGestor); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UNSSE_ActionGestor); \
-	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UNSSE_ActionGestor)
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UNSSE_ActionGestor)
 
 
 #define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_ActionGestor_h_14_PRIVATE_PROPERTY_OFFSET
