@@ -70,7 +70,7 @@ void UNSSE_ActionGestor::EventNiagaraCalled(FString NameEvent)
 	if (CheckEventName(NEvent))
 	{
 		FString Context = "Action Event";
-		FNSSE_DataTableActionEvent* DataTableActionEvent = ActionEventList->FindRow<FNSSE_DataTableActionEvent>(NEvent,*Context,true);
+		FNSSE_DataTableActionGestor* DataTableActionEvent = ActionEventList->FindRow<FNSSE_DataTableActionGestor>(NEvent,*Context,true);
 
 		
 		if (MyNiagaraGestor)

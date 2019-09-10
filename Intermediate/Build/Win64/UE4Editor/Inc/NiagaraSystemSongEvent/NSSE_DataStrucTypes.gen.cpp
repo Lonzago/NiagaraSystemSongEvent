@@ -19,9 +19,9 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_DataStrucTypes() {}
 	NIAGARASYSTEMSONGEVENT_API UEnum* Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NumberParameterChange();
 	NIAGARASYSTEMSONGEVENT_API UEnum* Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_ParameterType();
 	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_ManagerEventList();
-	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent();
+	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor();
 	ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FTableRowBase();
-	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData();
+	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData();
 	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_SinglerParameterData();
 	NIAGARA_API UClass* Z_Construct_UClass_UNiagaraSystem_NoRegister();
 	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_UnitParameterType();
@@ -49,7 +49,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_DataStrucTypes() {}
 		return ENSSE_NiagaraGestorActions_StaticEnum();
 	}
 	static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ENSSE_NiagaraGestorActions(ENSSE_NiagaraGestorActions_StaticEnum, TEXT("/Script/NiagaraSystemSongEvent"), TEXT("ENSSE_NiagaraGestorActions"), false, nullptr, nullptr);
-	uint32 Get_Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NiagaraGestorActions_Hash() { return 2656220922U; }
+	uint32 Get_Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NiagaraGestorActions_Hash() { return 3411070270U; }
 	UEnum* Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NiagaraGestorActions()
 	{
 #if WITH_HOT_RELOAD
@@ -84,7 +84,6 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_DataStrucTypes() {}
 				{ "NGA_SpawnInstan.DisplayName", "Spawn Instan" },
 				{ "NGA_SwitchHardParticles.DisplayName", "Switch Hard Particles" },
 				{ "NGA_SwitchParticles.DisplayName", "Switch Particles" },
-				{ "ToolTip", "/\n                                       NiagaraGestorCompo" },
 			};
 #endif
 			static const UE4CodeGen_Private::FEnumParams EnumParams = {
@@ -225,7 +224,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_DataStrucTypes() {}
 		return ENSSE_ParameterType_StaticEnum();
 	}
 	static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ENSSE_ParameterType(ENSSE_ParameterType_StaticEnum, TEXT("/Script/NiagaraSystemSongEvent"), TEXT("ENSSE_ParameterType"), false, nullptr, nullptr);
-	uint32 Get_Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_ParameterType_Hash() { return 2265226672U; }
+	uint32 Get_Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_ParameterType_Hash() { return 3188149807U; }
 	UEnum* Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_ParameterType()
 	{
 #if WITH_HOT_RELOAD
@@ -260,7 +259,6 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_DataStrucTypes() {}
 				{ "EPT_Vector3.DisplayName", "Param Vector" },
 				{ "EPT_Vector4.DisplayName", "Param Vector4" },
 				{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
-				{ "ToolTip", "/\n                                       GestorNiagaraParameters" },
 			};
 #endif
 			static const UE4CodeGen_Private::FEnumParams EnumParams = {
@@ -322,7 +320,6 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Ma
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_ManagerEventList_Statics::Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
 		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
-		{ "ToolTip", "/\n                                       EventManager" },
 	};
 #endif
 	void* Z_Construct_UScriptStruct_FNSSE_ManagerEventList_Statics::NewStructOps()
@@ -375,30 +372,30 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Ma
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FNSSE_ManagerEventList_Hash() { return 604230125U; }
-class UScriptStruct* FNSSE_DataTableActionEvent::StaticStruct()
+	uint32 Get_Z_Construct_UScriptStruct_FNSSE_ManagerEventList_Hash() { return 155773100U; }
+class UScriptStruct* FNSSE_DataTableActionGestor::StaticStruct()
 {
 	static class UScriptStruct* Singleton = NULL;
 	if (!Singleton)
 	{
-		extern NIAGARASYSTEMSONGEVENT_API uint32 Get_Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Hash();
-		Singleton = GetStaticStruct(Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent, Z_Construct_UPackage__Script_NiagaraSystemSongEvent(), TEXT("NSSE_DataTableActionEvent"), sizeof(FNSSE_DataTableActionEvent), Get_Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Hash());
+		extern NIAGARASYSTEMSONGEVENT_API uint32 Get_Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Hash();
+		Singleton = GetStaticStruct(Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor, Z_Construct_UPackage__Script_NiagaraSystemSongEvent(), TEXT("NSSE_DataTableActionGestor"), sizeof(FNSSE_DataTableActionGestor), Get_Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Hash());
 	}
 	return Singleton;
 }
-template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<FNSSE_DataTableActionEvent>()
+template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<FNSSE_DataTableActionGestor>()
 {
-	return FNSSE_DataTableActionEvent::StaticStruct();
+	return FNSSE_DataTableActionGestor::StaticStruct();
 }
-static FCompiledInDeferStruct Z_CompiledInDeferStruct_UScriptStruct_FNSSE_DataTableActionEvent(FNSSE_DataTableActionEvent::StaticStruct, TEXT("/Script/NiagaraSystemSongEvent"), TEXT("NSSE_DataTableActionEvent"), false, nullptr, nullptr);
-static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_DataTableActionEvent
+static FCompiledInDeferStruct Z_CompiledInDeferStruct_UScriptStruct_FNSSE_DataTableActionGestor(FNSSE_DataTableActionGestor::StaticStruct, TEXT("/Script/NiagaraSystemSongEvent"), TEXT("NSSE_DataTableActionGestor"), false, nullptr, nullptr);
+static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_DataTableActionGestor
 {
-	FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_DataTableActionEvent()
+	FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_DataTableActionGestor()
 	{
-		UScriptStruct::DeferCppStructOps(FName(TEXT("NSSE_DataTableActionEvent")),new UScriptStruct::TCppStructOps<FNSSE_DataTableActionEvent>);
+		UScriptStruct::DeferCppStructOps(FName(TEXT("NSSE_DataTableActionGestor")),new UScriptStruct::TCppStructOps<FNSSE_DataTableActionGestor>);
 	}
-} ScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_DataTableActionEvent;
-	struct Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics
+} ScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_DataTableActionGestor;
+	struct Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics
 	{
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[];
@@ -417,88 +414,87 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Da
 		static const UE4CodeGen_Private::FStructParams ReturnStructParams;
 	};
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::Struct_MetaDataParams[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
 		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
-		{ "ToolTip", "DEPRECATED\nUSTRUCT(BlueprintType)\nstruct FNSSE_ActionEventList : public FTableRowBase\n{\n       GENERATED_BODY()\n       TArray<FNSSE_DataTableEventAction> ActionEvents;\n};" },
 	};
 #endif
-	void* Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewStructOps()
+	void* Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewStructOps()
 	{
-		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FNSSE_DataTableActionEvent>();
+		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FNSSE_DataTableActionGestor>();
 	}
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ParamActionData_MetaData[] = {
-		{ "Category", "NSSE_DataTableActionEvent" },
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ParamActionData_MetaData[] = {
+		{ "Category", "NSSE_DataTableActionGestor" },
 		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ParamActionData = { "ParamActionData", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FNSSE_DataTableActionEvent, ParamActionData), Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData, METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ParamActionData_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ParamActionData_MetaData)) };
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ParamActionData = { "ParamActionData", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FNSSE_DataTableActionGestor, ParamActionData), Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData, METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ParamActionData_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ParamActionData_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ActionGestor_MetaData[] = {
-		{ "Category", "NSSE_DataTableActionEvent" },
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ActionGestor_MetaData[] = {
+		{ "Category", "NSSE_DataTableActionGestor" },
 		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ActionGestor = { "ActionGestor", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FNSSE_DataTableActionEvent, ActionGestor), Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NiagaraGestorActions, METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ActionGestor_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ActionGestor_MetaData)) };
-	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ActionGestor_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
-	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ParamActionData,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ActionGestor,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::NewProp_ActionGestor_Underlying,
+	const UE4CodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ActionGestor = { "ActionGestor", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FNSSE_DataTableActionGestor, ActionGestor), Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NiagaraGestorActions, METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ActionGestor_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ActionGestor_MetaData)) };
+	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ActionGestor_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ParamActionData,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ActionGestor,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::NewProp_ActionGestor_Underlying,
 	};
-	const UE4CodeGen_Private::FStructParams Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::ReturnStructParams = {
+	const UE4CodeGen_Private::FStructParams Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::ReturnStructParams = {
 		(UObject* (*)())Z_Construct_UPackage__Script_NiagaraSystemSongEvent,
 		Z_Construct_UScriptStruct_FTableRowBase,
 		&NewStructOps,
-		"NSSE_DataTableActionEvent",
-		sizeof(FNSSE_DataTableActionEvent),
-		alignof(FNSSE_DataTableActionEvent),
-		Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::PropPointers,
-		ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::PropPointers),
+		"NSSE_DataTableActionGestor",
+		sizeof(FNSSE_DataTableActionGestor),
+		alignof(FNSSE_DataTableActionGestor),
+		Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::PropPointers,
+		ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::PropPointers),
 		RF_Public|RF_Transient|RF_MarkAsNative,
 		EStructFlags(0x00000001),
-		METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::Struct_MetaDataParams, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::Struct_MetaDataParams))
+		METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::Struct_MetaDataParams, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::Struct_MetaDataParams))
 	};
-	UScriptStruct* Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent()
+	UScriptStruct* Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor()
 	{
 #if WITH_HOT_RELOAD
-		extern uint32 Get_Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Hash();
+		extern uint32 Get_Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Hash();
 		UPackage* Outer = Z_Construct_UPackage__Script_NiagaraSystemSongEvent();
-		static UScriptStruct* ReturnStruct = FindExistingStructIfHotReloadOrDynamic(Outer, TEXT("NSSE_DataTableActionEvent"), sizeof(FNSSE_DataTableActionEvent), Get_Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Hash(), false);
+		static UScriptStruct* ReturnStruct = FindExistingStructIfHotReloadOrDynamic(Outer, TEXT("NSSE_DataTableActionGestor"), sizeof(FNSSE_DataTableActionGestor), Get_Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Hash(), false);
 #else
 		static UScriptStruct* ReturnStruct = nullptr;
 #endif
 		if (!ReturnStruct)
 		{
-			UE4CodeGen_Private::ConstructUScriptStruct(ReturnStruct, Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Statics::ReturnStructParams);
+			UE4CodeGen_Private::ConstructUScriptStruct(ReturnStruct, Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics::ReturnStructParams);
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FNSSE_DataTableActionEvent_Hash() { return 2885992004U; }
-class UScriptStruct* FNSSE_ChangeParamsActionData::StaticStruct()
+	uint32 Get_Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Hash() { return 3450925455U; }
+class UScriptStruct* FNSSE_NiagaraGestorData::StaticStruct()
 {
 	static class UScriptStruct* Singleton = NULL;
 	if (!Singleton)
 	{
-		extern NIAGARASYSTEMSONGEVENT_API uint32 Get_Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Hash();
-		Singleton = GetStaticStruct(Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData, Z_Construct_UPackage__Script_NiagaraSystemSongEvent(), TEXT("NSSE_ChangeParamsActionData"), sizeof(FNSSE_ChangeParamsActionData), Get_Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Hash());
+		extern NIAGARASYSTEMSONGEVENT_API uint32 Get_Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Hash();
+		Singleton = GetStaticStruct(Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData, Z_Construct_UPackage__Script_NiagaraSystemSongEvent(), TEXT("NSSE_NiagaraGestorData"), sizeof(FNSSE_NiagaraGestorData), Get_Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Hash());
 	}
 	return Singleton;
 }
-template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<FNSSE_ChangeParamsActionData>()
+template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<FNSSE_NiagaraGestorData>()
 {
-	return FNSSE_ChangeParamsActionData::StaticStruct();
+	return FNSSE_NiagaraGestorData::StaticStruct();
 }
-static FCompiledInDeferStruct Z_CompiledInDeferStruct_UScriptStruct_FNSSE_ChangeParamsActionData(FNSSE_ChangeParamsActionData::StaticStruct, TEXT("/Script/NiagaraSystemSongEvent"), TEXT("NSSE_ChangeParamsActionData"), false, nullptr, nullptr);
-static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_ChangeParamsActionData
+static FCompiledInDeferStruct Z_CompiledInDeferStruct_UScriptStruct_FNSSE_NiagaraGestorData(FNSSE_NiagaraGestorData::StaticStruct, TEXT("/Script/NiagaraSystemSongEvent"), TEXT("NSSE_NiagaraGestorData"), false, nullptr, nullptr);
+static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_NiagaraGestorData
 {
-	FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_ChangeParamsActionData()
+	FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_NiagaraGestorData()
 	{
-		UScriptStruct::DeferCppStructOps(FName(TEXT("NSSE_ChangeParamsActionData")),new UScriptStruct::TCppStructOps<FNSSE_ChangeParamsActionData>);
+		UScriptStruct::DeferCppStructOps(FName(TEXT("NSSE_NiagaraGestorData")),new UScriptStruct::TCppStructOps<FNSSE_NiagaraGestorData>);
 	}
-} ScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_ChangeParamsActionData;
-	struct Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics
+} ScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_NiagaraGestorData;
+	struct Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics
 	{
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[];
@@ -517,65 +513,64 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Ch
 		static const UE4CodeGen_Private::FStructParams ReturnStructParams;
 	};
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::Struct_MetaDataParams[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
 		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
-		{ "ToolTip", "DEPRECATED\nUSTRUCT(BlueprintType)\nstruct FNSSE_ChangeParamsActionData\n{\n       GENERATED_BODY()\n\n       UPROPERTY(EditAnywhere, BlueprintReadWrite)\n               TArray<FNSSE_SinglerParameterData> SingleParameterData;\n\n};" },
 	};
 #endif
-	void* Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewStructOps()
+	void* Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewStructOps()
 	{
-		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FNSSE_ChangeParamsActionData>();
+		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FNSSE_NiagaraGestorData>();
 	}
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_SingleParametersList_MetaData[] = {
-		{ "Category", "NSSE_ChangeParamsActionData" },
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_SingleParametersList_MetaData[] = {
+		{ "Category", "NSSE_NiagaraGestorData" },
 		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_SingleParametersList = { "SingleParametersList", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FNSSE_ChangeParamsActionData, SingleParametersList), METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_SingleParametersList_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_SingleParametersList_MetaData)) };
-	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_SingleParametersList_Inner = { "SingleParametersList", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FNSSE_SinglerParameterData, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_SingleParametersList = { "SingleParametersList", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FNSSE_NiagaraGestorData, SingleParametersList), METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_SingleParametersList_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_SingleParametersList_MetaData)) };
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_SingleParametersList_Inner = { "SingleParametersList", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FNSSE_SinglerParameterData, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_NiagaraSystemRef_MetaData[] = {
-		{ "Category", "NSSE_ChangeParamsActionData" },
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_NiagaraSystemRef_MetaData[] = {
+		{ "Category", "NSSE_NiagaraGestorData" },
 		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_NiagaraSystemRef = { "NiagaraSystemRef", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FNSSE_ChangeParamsActionData, NiagaraSystemRef), Z_Construct_UClass_UNiagaraSystem_NoRegister, METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_NiagaraSystemRef_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_NiagaraSystemRef_MetaData)) };
-	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_SingleParametersList,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_SingleParametersList_Inner,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::NewProp_NiagaraSystemRef,
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_NiagaraSystemRef = { "NiagaraSystemRef", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FNSSE_NiagaraGestorData, NiagaraSystemRef), Z_Construct_UClass_UNiagaraSystem_NoRegister, METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_NiagaraSystemRef_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_NiagaraSystemRef_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_SingleParametersList,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_SingleParametersList_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::NewProp_NiagaraSystemRef,
 	};
-	const UE4CodeGen_Private::FStructParams Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::ReturnStructParams = {
+	const UE4CodeGen_Private::FStructParams Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::ReturnStructParams = {
 		(UObject* (*)())Z_Construct_UPackage__Script_NiagaraSystemSongEvent,
 		nullptr,
 		&NewStructOps,
-		"NSSE_ChangeParamsActionData",
-		sizeof(FNSSE_ChangeParamsActionData),
-		alignof(FNSSE_ChangeParamsActionData),
-		Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::PropPointers,
-		ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::PropPointers),
+		"NSSE_NiagaraGestorData",
+		sizeof(FNSSE_NiagaraGestorData),
+		alignof(FNSSE_NiagaraGestorData),
+		Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::PropPointers,
+		ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::PropPointers),
 		RF_Public|RF_Transient|RF_MarkAsNative,
 		EStructFlags(0x00000001),
-		METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::Struct_MetaDataParams, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::Struct_MetaDataParams))
+		METADATA_PARAMS(Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::Struct_MetaDataParams, ARRAY_COUNT(Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::Struct_MetaDataParams))
 	};
-	UScriptStruct* Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData()
+	UScriptStruct* Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData()
 	{
 #if WITH_HOT_RELOAD
-		extern uint32 Get_Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Hash();
+		extern uint32 Get_Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Hash();
 		UPackage* Outer = Z_Construct_UPackage__Script_NiagaraSystemSongEvent();
-		static UScriptStruct* ReturnStruct = FindExistingStructIfHotReloadOrDynamic(Outer, TEXT("NSSE_ChangeParamsActionData"), sizeof(FNSSE_ChangeParamsActionData), Get_Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Hash(), false);
+		static UScriptStruct* ReturnStruct = FindExistingStructIfHotReloadOrDynamic(Outer, TEXT("NSSE_NiagaraGestorData"), sizeof(FNSSE_NiagaraGestorData), Get_Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Hash(), false);
 #else
 		static UScriptStruct* ReturnStruct = nullptr;
 #endif
 		if (!ReturnStruct)
 		{
-			UE4CodeGen_Private::ConstructUScriptStruct(ReturnStruct, Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Statics::ReturnStructParams);
+			UE4CodeGen_Private::ConstructUScriptStruct(ReturnStruct, Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics::ReturnStructParams);
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData_Hash() { return 3614292633U; }
+	uint32 Get_Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Hash() { return 2660231791U; }
 class UScriptStruct* FNSSE_SinglerParameterData::StaticStruct()
 {
 	static class UScriptStruct* Singleton = NULL;
@@ -696,7 +691,6 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Si
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FNSSE_SinglerParameterData_Statics::NewProp_Instan_MetaData[] = {
 		{ "Category", "NSSE_SinglerParameterData" },
 		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
-		{ "ToolTip", "INCLUIR SI ES INSTANTANEO\nINCLUIR TIEMPO DE MODIFICACION" },
 	};
 #endif
 	void Z_Construct_UScriptStruct_FNSSE_SinglerParameterData_Statics::NewProp_Instan_SetBit(void* Obj)
@@ -743,7 +737,7 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Si
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FNSSE_SinglerParameterData_Hash() { return 592498081U; }
+	uint32 Get_Z_Construct_UScriptStruct_FNSSE_SinglerParameterData_Hash() { return 1060128211U; }
 class UScriptStruct* FNSSE_UnitParameterType::StaticStruct()
 {
 	static class UScriptStruct* Singleton = NULL;

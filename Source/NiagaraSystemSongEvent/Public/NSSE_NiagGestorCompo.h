@@ -16,7 +16,8 @@ class NIAGARASYSTEMSONGEVENT_API UNSSE_NiagGestorCompo : public USceneComponent
 
 public:	
 	
-	class UNiagaraComponent* NiagaraC_Main;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "NSSE NiagaraComponent")
+	TArray <class UNiagaraComponent*> NiagarasComponentsArray;
 	class UNiagaraComponent* NiagaraC_Second;
 
 
@@ -38,7 +39,9 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable, Category = "NSSE TEST")
-	void NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_ChangeParamsActionData& EventParameters);
+	void NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_NiagaraGestorData& NiagaraGestorData);
+
+	bool IsRefNiagaraCompoEmpty() const;
 
 	//////////////////////////
 	//Actions Functions
@@ -52,7 +55,7 @@ public:
 	void SwitchHardParticles();
 
 
-	void ModifierParamByTime(const FNSSE_ChangeParamsActionData& EventData);
+	void ModifierParamByTime(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
 	void CreateNewNiagaraCompo();
 };

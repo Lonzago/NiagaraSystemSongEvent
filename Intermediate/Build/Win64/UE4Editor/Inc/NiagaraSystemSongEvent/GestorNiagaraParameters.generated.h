@@ -9,7 +9,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UNiagaraComponent;
-struct FNSSE_ChangeParamsActionData;
+struct FNSSE_NiagaraGestorData;
 #ifdef NIAGARASYSTEMSONGEVENT_GestorNiagaraParameters_generated_h
 #error "GestorNiagaraParameters.generated.h already included, missing '#pragma once' in GestorNiagaraParameters.h"
 #endif
@@ -19,11 +19,11 @@ struct FNSSE_ChangeParamsActionData;
  \
 	DECLARE_FUNCTION(execSetUpGestorParticleEvent) \
 	{ \
-		P_GET_OBJECT(UNiagaraComponent,Z_Param_NiagaraCompoTargert); \
-		P_GET_STRUCT_REF(FNSSE_ChangeParamsActionData,Z_Param_Out_DataParticleChange); \
+		P_GET_TARRAY_REF(UNiagaraComponent*,Z_Param_Out_NiagaraCompoTargert); \
+		P_GET_STRUCT_REF(FNSSE_NiagaraGestorData,Z_Param_Out_NiagaraGestorData); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		P_THIS->SetUpGestorParticleEvent(Z_Param_NiagaraCompoTargert,Z_Param_Out_DataParticleChange); \
+		P_THIS->SetUpGestorParticleEvent(Z_Param_Out_NiagaraCompoTargert,Z_Param_Out_NiagaraGestorData); \
 		P_NATIVE_END; \
 	}
 
@@ -32,11 +32,11 @@ struct FNSSE_ChangeParamsActionData;
  \
 	DECLARE_FUNCTION(execSetUpGestorParticleEvent) \
 	{ \
-		P_GET_OBJECT(UNiagaraComponent,Z_Param_NiagaraCompoTargert); \
-		P_GET_STRUCT_REF(FNSSE_ChangeParamsActionData,Z_Param_Out_DataParticleChange); \
+		P_GET_TARRAY_REF(UNiagaraComponent*,Z_Param_Out_NiagaraCompoTargert); \
+		P_GET_STRUCT_REF(FNSSE_NiagaraGestorData,Z_Param_Out_NiagaraGestorData); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		P_THIS->SetUpGestorParticleEvent(Z_Param_NiagaraCompoTargert,Z_Param_Out_DataParticleChange); \
+		P_THIS->SetUpGestorParticleEvent(Z_Param_Out_NiagaraCompoTargert,Z_Param_Out_NiagaraGestorData); \
 		P_NATIVE_END; \
 	}
 

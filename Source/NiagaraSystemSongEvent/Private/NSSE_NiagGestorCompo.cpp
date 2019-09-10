@@ -44,7 +44,7 @@ void UNSSE_NiagGestorCompo::TickComponent(float DeltaTime, ELevelTick TickType, 
 //					CUSTOM METHOS
 ////////////////////////////
 
-void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_ChangeParamsActionData& EventParameters)
+void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
 	switch (Action)
 	{
@@ -75,7 +75,7 @@ void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Acti
 		break;
 	case ENSSE_NiagaraGestorActions::NGA_ModifierParamByTime:
 		//
-		ModifierParamByTime(EventParameters.EventParameters);
+		ModifierParamByTime(NiagaraGestorData);
 		break;
 	default:
 		break;
@@ -84,6 +84,11 @@ void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Acti
 }
 
 
+
+bool UNSSE_NiagGestorCompo::IsRefNiagaraCompoEmpty() const
+{
+	return NiagarasComponentsArray.Num() >= 1;
+}
 
 ////////////////////////////
 //	Actions Functions
@@ -96,15 +101,12 @@ void UNSSE_NiagGestorCompo::SpawnSlow()
 void UNSSE_NiagGestorCompo::SpanwInstan()
 {
 	//Si ya tiene una referencia la destruye
-	if (NiagaraC_Main)
+	if (!IsRefNiagaraCompoEmpty())
 	{
 		KillInstan();
 	}
-
 	//Tiene que tener una particula asignada
 	CreateNewNiagaraCompo();
-
-	
 }
 
 void UNSSE_NiagGestorCompo::KillSlow()
@@ -113,33 +115,42 @@ void UNSSE_NiagGestorCompo::KillSlow()
 
 void UNSSE_NiagGestorCompo::KillInstan()
 {
-	if (NiagaraC_Main)
+	if (!IsRefNiagaraCompoEmpty())
 	{
-		NiagaraC_Main->DestroyComponent();
-		NiagaraC_Main = nullptr;
+		for (UNiagaraComponent* Compo : NiagarasComponentsArray)
+		{
+			Compo->DestroyComponent();
+		}
+		NiagarasComponentsArray.Empty();
+	}
+	else
+	{
+		//#DebugText
+		UE_LOG(LogTemp, Warning, TEXT("NiagaraGestor::KillInstan  NiagaraComponentArray is Empty. Nothing to remove."));
 	}
 
 }
 
 void UNSSE_NiagGestorCompo::SwitchHardParticles()
 {
-	if (NiagaraC_Main && NiagaraS_Default && NiagaraS_Swip)
+	//#TODOTestSystem Cambiar las referencias para que no sean los sistemas de pruebas
+	if (!IsRefNiagaraCompoEmpty() && NiagaraS_Default && NiagaraS_Swip)
 	{
-		NiagaraC_Main->SetAsset(NiagaraS_Swip);
-		NiagaraC_Main->ResetSystem();
+		for (int32 i = 0; i < NiagarasComponentsArray.Num(); i++)
+		{
+			NiagarasComponentsArray[i]->SetAsset(NiagaraS_Swip);
+			NiagarasComponentsArray[i]->ResetSystem();
+		}
 	}
-
 }
 
-void UNSSE_NiagGestorCompo::ModifierParamByTime(const FNSSE_ChangeParamsActionData& EventData)
+void UNSSE_NiagGestorCompo::ModifierParamByTime(const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
-	if (!NiagaraC_Main)
+	if (IsRefNiagaraCompoEmpty())
 	{
 		CreateNewNiagaraCompo();
 	}
-	MyParameterGestor->SetUpGestorParticleEvent(NiagaraC_Main, EventData);
-	
-	
+	MyParameterGestor->SetUpGestorParticleEvent(NiagarasComponentsArray, NiagaraGestorData);	
 }
 
 void UNSSE_NiagGestorCompo::CreateNewNiagaraCompo()
@@ -147,15 +158,18 @@ void UNSSE_NiagGestorCompo::CreateNewNiagaraCompo()
 	if (NiagaraS_Default)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Creando Componente"));
-		NiagaraC_Main = NewObject<UNiagaraComponent>(this);
-		NiagaraC_Main->SetupAttachment(this);
-		NiagaraC_Main->RegisterComponentWithWorld(GetWorld());
-		NiagaraC_Main->SetAsset(NiagaraS_Default);
-		NiagaraC_Main->ResetSystem();
+		UNiagaraComponent* NewNiagaraCompo = NewObject<UNiagaraComponent>(this);
+		NewNiagaraCompo->SetupAttachment(this);
+		NewNiagaraCompo->RegisterComponentWithWorld(GetWorld());
+		
+		//#TODO Ahora mismo esta puesto el Systema Test. Hay que cambiarlo a el sistema de referencia dentro de NiagaraGestorData
+		NewNiagaraCompo->SetAsset(NiagaraS_Default);
+		NewNiagaraCompo->ResetSystem();
+		NiagarasComponentsArray.Add(NewNiagaraCompo);
 	}
 	else
 	{	
-		//Error si no hay una referencia de NiagaraSystem
+		//#DebugError si no hay una referencia de NiagaraSystem
 		UE_LOG(LogTemp, Error, TEXT("NiagaraGestorCompo::CreateNewNiagaraComponent   No NiagaraSystem asiganado. Componente no creado"));
 	}
 }

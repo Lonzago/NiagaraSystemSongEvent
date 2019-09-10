@@ -9,7 +9,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 enum class ENSSE_NiagaraGestorActions : uint8;
-struct FNSSE_ChangeParamsActionData;
+struct FNSSE_NiagaraGestorData;
 #ifdef NIAGARASYSTEMSONGEVENT_NSSE_NiagGestorCompo_generated_h
 #error "NSSE_NiagGestorCompo.generated.h already included, missing '#pragma once' in NSSE_NiagGestorCompo.h"
 #endif
@@ -20,10 +20,10 @@ struct FNSSE_ChangeParamsActionData;
 	DECLARE_FUNCTION(execNSSE_DoNiagaraAction) \
 	{ \
 		P_GET_ENUM(ENSSE_NiagaraGestorActions,Z_Param_Action); \
-		P_GET_STRUCT_REF(FNSSE_ChangeParamsActionData,Z_Param_Out_EventParameters); \
+		P_GET_STRUCT_REF(FNSSE_NiagaraGestorData,Z_Param_Out_NiagaraGestorData); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		P_THIS->NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions(Z_Param_Action),Z_Param_Out_EventParameters); \
+		P_THIS->NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions(Z_Param_Action),Z_Param_Out_NiagaraGestorData); \
 		P_NATIVE_END; \
 	}
 
@@ -33,10 +33,10 @@ struct FNSSE_ChangeParamsActionData;
 	DECLARE_FUNCTION(execNSSE_DoNiagaraAction) \
 	{ \
 		P_GET_ENUM(ENSSE_NiagaraGestorActions,Z_Param_Action); \
-		P_GET_STRUCT_REF(FNSSE_ChangeParamsActionData,Z_Param_Out_EventParameters); \
+		P_GET_STRUCT_REF(FNSSE_NiagaraGestorData,Z_Param_Out_NiagaraGestorData); \
 		P_FINISH; \
 		P_NATIVE_BEGIN; \
-		P_THIS->NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions(Z_Param_Action),Z_Param_Out_EventParameters); \
+		P_THIS->NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions(Z_Param_Action),Z_Param_Out_NiagaraGestorData); \
 		P_NATIVE_END; \
 	}
 
