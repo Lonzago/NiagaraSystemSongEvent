@@ -11,22 +11,22 @@
 #endif
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeNiagaraSystemSongEvent_init() {}
-	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UDelegateFunction_NiagaraSystemSongEvent_EventSendCast__DelegateSignature();
+	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UDelegateFunction_NiagaraSystemSongEvent_EventManagerTrigger__DelegateSignature();
 	UPackage* Z_Construct_UPackage__Script_NiagaraSystemSongEvent()
 	{
 		static UPackage* ReturnPackage = nullptr;
 		if (!ReturnPackage)
 		{
 			static UObject* (*const SingletonFuncArray[])() = {
-				(UObject* (*)())Z_Construct_UDelegateFunction_NiagaraSystemSongEvent_EventSendCast__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_NiagaraSystemSongEvent_EventManagerTrigger__DelegateSignature,
 			};
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/NiagaraSystemSongEvent",
 				SingletonFuncArray,
 				ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x575A872D,
-				0xF63D94A4,
+				0xF2EC3791,
+				0x01289E90,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

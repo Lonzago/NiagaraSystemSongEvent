@@ -43,8 +43,27 @@ enum class ENSSE_InstanTransTiming : uint8
 	ETII_AtEnd		UMETA(DisplayName = "At End")
 };
 
+///////////////////
+//					NiagaraGestorCompo
+//////////////////////////////////////
+
+UENUM(BlueprintType)
+enum class ENSSE_NiagaraGestorActions : uint8
+{
+	NGA_KillSlow			UMETA(DisplayName = "Kill Slow"),
+	NGA_KillInstan			UMETA(DisplayName = "Kill Instan"),
+	NGA_SpawmSlow			UMETA(DisplayName = "Spawn Slow"),
+	NGA_SpawnInstan			UMETA(DisplayName = "Spawn Instan"),
+	NGA_FadeParticles		UMETA(DisplayName = "Fade Partticles"),
+	NGA_SwitchHardParticles	UMETA(DisplayName = "Switch Hard Particles"),
+	NGA_SwitchParticles		UMETA(DisplayName = "Switch Particles"),
+	NGA_ModifierParamInstan UMETA(DisplayName = "ModifierParamInstan"),
+	NGA_ModifierParamByTime UMETA(DisplayName = "ModifierParam by Time")
+
+};
+
 USTRUCT(BlueprintType)
-struct FNSSE_InputParametersChangeData
+struct FNSSE_UnitParameterType
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -66,92 +85,87 @@ struct FNSSE_InputParametersChangeData
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FVector4		PVec4;
 
+	FNSSE_UnitParameterType()
+		: 	PActor(nullptr)
+	{
+
+	}
+
 };
 
 USTRUCT(BlueprintType)
-struct FNSSE_ParametersChangeData
+struct FNSSE_SinglerParameterData
 {
 	GENERATED_BODY()
 
-		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	//INCLUIR SI ES INSTANTANEO
+	//INCLUIR TIEMPO DE MODIFICACION
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool Instan;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		ENSSE_InstanTransTiming InstanTiming;	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float TiempoTrans;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ENSSE_ParameterType DataType;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FString NameParam;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FNSSE_InputParametersChangeData ParametroInicial;
+		FNSSE_UnitParameterType ParametroInicial;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FNSSE_InputParametersChangeData ParametroFinal;
+		FNSSE_UnitParameterType ParametroFinal;
 
 
 };
 
+//DEPRECATED
+//USTRUCT(BlueprintType)
+//struct FNSSE_ChangeParamsActionData
+//{
+//	GENERATED_BODY()
+//
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+//		TArray<FNSSE_SinglerParameterData> SingleParameterData;
+//
+//};
+
 USTRUCT(BlueprintType)
-struct FNSSE_EventParameterChange
+struct FNSSE_ChangeParamsActionData
 {
 	GENERATED_BODY()
 
-		UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float TiempoTrans;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		bool Instan;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		ENSSE_InstanTransTiming InstanTiming;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TArray<FNSSE_ParametersChangeData> ListParamChange;
-
-};
-
-///////////////////
-//					NiagaraGestorCompo
-//////////////////////////////////////
-
-UENUM(BlueprintType)
-enum class ENSSE_NiagaraGestorActions : uint8
-{
-	NGA_KillSlow			UMETA(DisplayName = "Kill Slow"),
-	NGA_KillInstan			UMETA(DisplayName = "Kill Instan"),
-	NGA_SpawmSlow			UMETA(DisplayName = "Spawn Slow"),
-	NGA_SpawnInstan			UMETA(DisplayName = "Spawn Instan"),
-	NGA_FadeParticles		UMETA(DisplayName = "Fade Partticles"),
-	NGA_SwitchHardParticles	UMETA(DisplayName = "Switch Hard Particles"),
-	NGA_SwitchParticles		UMETA(DisplayName = "Switch Particles"),
-	NGA_ModifierParamInstan UMETA(DisplayName = "ModifierParamInstan"),
-	NGA_ModifierParamByTime UMETA(DisplayName = "ModifierParam by Time")
-
-};
-
-USTRUCT(BlueprintType)
-struct FNSSE_EventData
-{
-	GENERATED_BODY()
-
-		UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UNiagaraSystem* NiagaraSystemRef;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FNSSE_EventParameterChange EventParameters;
+		TArray<FNSSE_SinglerParameterData> SingleParametersList;
+	
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		//FNSSE_ChangeParamsActionData EventParameters;
 };
 
 ///////////////////
 //					Action Gestor
 //////////////////////////////////////
 
-USTRUCT(BlueprintType)
-struct FNSSE_ActionEventList : public FTableRowBase
-{
-	GENERATED_BODY()
-	TArray<FNSSE_ActionEvent> ActionEvents;
-};
+//DEPRECATED
+//USTRUCT(BlueprintType)
+//struct FNSSE_ActionEventList : public FTableRowBase
+//{
+//	GENERATED_BODY()
+//	TArray<FNSSE_DataTableEventAction> ActionEvents;
+//};
 
 
 USTRUCT(BlueprintType)
-struct FNSSE_ActionEvent : public FTableRowBase
+struct FNSSE_DataTableActionEvent : public FTableRowBase
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ENSSE_NiagaraGestorActions ActionGestor;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FNSSE_EventData EventData;
+		FNSSE_ChangeParamsActionData ParamActionData;
 
 };
 
@@ -161,27 +175,28 @@ struct FNSSE_ActionEvent : public FTableRowBase
 
 
 USTRUCT(BlueprintType)
-struct FNSSE_EventListData 
+struct FNSSE_ManagerEventList 
 {
 
 	GENERATED_BODY()
 
-		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float EventTime;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FString EventName;
 };
 
 
-USTRUCT(BlueprintType)
-struct FNSSE_EventList 
-{
-
-	GENERATED_BODY()
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		TArray<FNSSE_EventListData> EventsList;
-};
+//DEPRECATED
+//USTRUCT(BlueprintType)
+//struct FNSSE_EventList 
+//{
+//
+//	GENERATED_BODY()
+//
+//	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+//		TArray<FNSSE_EventListData> EventsList;
+//};
 
 
 

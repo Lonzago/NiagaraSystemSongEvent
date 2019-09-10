@@ -10,7 +10,7 @@
 
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEventSendCast, FString, EventName);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEventManagerTrigger, FString, EventName);
 
 
 UCLASS()
@@ -25,13 +25,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
 		FString GroupManager = "Trackers";
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
-		TArray<FNSSE_EventListData> EventTable;
+		TArray<FNSSE_ManagerEventList> EventTable;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
 		float ToleranceRange=0.001f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
 		int32 PresitionValue = 2;
 
-	FEventSendCast EventCast;		
+	FEventManagerTrigger EventCast;		
 
 	float StartTime;
 	int32 IndexCheck;

@@ -5,24 +5,25 @@
 #include "NSSE_Manager.h"
 #include "EngineUtils.h"
 #include "Engine/DataTable.h"
-#include "Engine\Engine.h"
+#include "NSSE_NiagGestorCompo.h"
+#include "Engine/Engine.h"
 
 
-// Sets default values for this component's properties
 UNSSE_ActionGestor::UNSSE_ActionGestor()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
 
-	// ...
+	//#TOFUTURE :: Inicializar un componente de NSSE_NiagaraGestorCompo por default y registarlo dentro del Blueprint..
+	/*
+		Añadir aqui
+	*/
 }
-
 
 void UNSSE_ActionGestor::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	//Get Names from Datatable--------------
 	if (ActionEventList)
 	{
 		EventRowNames = ActionEventList->GetRowNames();
@@ -32,7 +33,7 @@ void UNSSE_ActionGestor::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("NSSE_ActionGestor::GetRowNames DataTable No Asigned"));
 	}
 
-	//Looking NSSE_Manager
+	//Looking NSSE_Manager------------------
 	EventManager = GetManagerWithGroup(GetWorld(), GroupName);
 
 	if (EventManager)
@@ -61,15 +62,26 @@ void UNSSE_ActionGestor::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 void UNSSE_ActionGestor::EventNiagaraCalled(FString NameEvent)
 {
 	//Called Event
+	//#DebugText
 	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, FString::Printf(TEXT("Mensaje: %s en %s"), *NameEvent, *GetOwner()->GetName()));
+	
+	FName NEvent = FName(*NameEvent);
 
-	if (CheckEventName(NameEvent))
+	if (CheckEventName(NEvent))
 	{
-		FNSSE_ActionEvent ActionEventData = ActionEventList->FindRow<FNSSE_ActionEvent>(NameEvent);
+		FString Context = "Action Event";
+		FNSSE_DataTableActionEvent* DataTableActionEvent = ActionEventList->FindRow<FNSSE_DataTableActionEvent>(NEvent,*Context,true);
+
 		
-		//#TODO Hacer la llamada al NSSE_NiagaraGestorComponent
-		
-		/*Aqui*/
+		if (MyNiagaraGestor)
+		{
+			MyNiagaraGestor->NSSE_DoNiagaraAction(DataTableActionEvent->ActionGestor, DataTableActionEvent->ParamActionData);
+		}
+		else
+		{
+			//#DebugError 
+			UE_LOG(LogTemp, Error, TEXT("ActionGestor::EventNiagaraCalledtoNiagaraGestorCompo NiagaraGestorCompo NO ASSIGNED"));
+		}
 	}
 }
 
@@ -99,7 +111,7 @@ void UNSSE_ActionGestor::EventManagerBind()
 	EventManager->EventCast.AddDynamic(this, &UNSSE_ActionGestor::EventNiagaraCalled); //Bindeo de la funcion 
 }
 
-bool UNSSE_ActionGestor::CheckEventName(FString NameEvent)
+bool UNSSE_ActionGestor::CheckEventName(FName NameEvent)
 {
 	return EventRowNames[0]==NameEvent;
 }

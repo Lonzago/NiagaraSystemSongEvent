@@ -45,7 +45,7 @@ void UGestorNiagaraParameters::TickComponent(float DeltaTime, ELevelTick TickTyp
 		case ENSSE_NumberParameterChange::EPC_MultipleParameters:
 
 			//Pasa por todos los parametros a cambiar
-			for (int i = 0 ; i< EventData.ListParamChange.Num()-1; i++)
+			for (int i = 0 ; i< EventData.SingleParametersList.Num()-1; i++)
 			{
 				ChangeSingleParameter(i, EventData);
 			}
@@ -108,18 +108,18 @@ float UGestorNiagaraParameters::GetAlphaTime()
 	return FMath::GetMappedRangeValueClamped(InputClamp, OutClamp, GetPercentage());
 }
 
-void UGestorNiagaraParameters::SetUpGestorParticleEvent(UNiagaraComponent* NiagaraCompoTargert, const FNSSE_EventParameterChange& DataParticleChange)
+void UGestorNiagaraParameters::SetUpGestorParticleEvent(UNiagaraComponent* NiagaraCompoTargert, const FNSSE_ChangeParamsActionData& DataParticleChange)
 {
 
 	TargetNiagCompo = NiagaraCompoTargert;
 	EventData = DataParticleChange;
 
-	if (EventData.ListParamChange.Num() != 0 && EventData.ListParamChange.Num() == 1)
+	if (EventData.SingleParametersList.Num() != 0 && EventData.SingleParametersList.Num() == 1)
 	{
 		NumParamChange = ENSSE_NumberParameterChange::EPC_SinglerParameter;
 
 	}
-	else if (EventData.ListParamChange.Num() != 0 && EventData.ListParamChange.Num() > 1)
+	else if (EventData.SingleParametersList.Num() != 0 && EventData.SingleParametersList.Num() > 1)
 	{
 		NumParamChange = ENSSE_NumberParameterChange::EPC_MultipleParameters;
 	}
@@ -129,7 +129,7 @@ void UGestorNiagaraParameters::SetUpGestorParticleEvent(UNiagaraComponent* Niaga
 	UE_LOG(LogTemp, Warning, TEXT("Parameters : %s"), *enumname);
 
 
-	TotalTimeTrasition = DataParticleChange.TiempoTrans;
+	
 
 
 
@@ -152,19 +152,19 @@ void UGestorNiagaraParameters::StartParameterChanges()
 }
 
 //No soporte para algunos tipos de datos de momneto #TOFUTURE Implementar para todos los tipos de datos en niagara
-void UGestorNiagaraParameters::ChangeSingleParameter(int32 IndexParam, const FNSSE_EventParameterChange& InputData)
+void UGestorNiagaraParameters::ChangeSingleParameter(int32 IndexParam, const FNSSE_ChangeParamsActionData& InputData)
 {
 	//Get Name and Type
-	FString ParameterName = InputData.ListParamChange[IndexParam].NameParam;
-	ENSSE_ParameterType ParamType = InputData.ListParamChange[IndexParam].DataType;
+	FString ParameterName = InputData.SingleParametersList[IndexParam].NameParam;
+	ENSSE_ParameterType ParamType = InputData.SingleParametersList[IndexParam].DataType;
 	
 	//Instan Varaibles
 	bool IsInstanChange = InputData.Instan;
 	ENSSE_InstanTransTiming InstanMoment = InputData.InstanTiming;
 
 	//Parameters Inicial and Final
-	FNSSE_InputParametersChangeData InputInicial = InputData.ListParamChange[IndexParam].ParametroInicial;
-	FNSSE_InputParametersChangeData InputFinal = InputData.ListParamChange[IndexParam].ParametroFinal;
+	FNSSE_UnitParameterType InputInicial = InputData.SingleParametersList[IndexParam].ParametroInicial;
+	FNSSE_UnitParameterType InputFinal = InputData.SingleParametersList[IndexParam].ParametroFinal;
 
 	float AlphaTime = GetAlphaTime();
 
@@ -179,7 +179,7 @@ void UGestorNiagaraParameters::ChangeSingleParameter(int32 IndexParam, const FNS
 
 }
 
-void UGestorNiagaraParameters::InstanNiagaraChanges(ENSSE_InstanTransTiming InstaTiming, FString ParameterName, const FNSSE_InputParametersChangeData& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime)
+void UGestorNiagaraParameters::InstanNiagaraChanges(ENSSE_InstanTransTiming InstaTiming, FString ParameterName, const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime)
 {
 	switch (ParamType)
 	{
@@ -354,7 +354,7 @@ void UGestorNiagaraParameters::InstanNiagaraChanges(ENSSE_InstanTransTiming Inst
 
 }
 
-void UGestorNiagaraParameters::LerpNiagaraChanges(FString ParameterName, const FNSSE_InputParametersChangeData& InputInicial ,const FNSSE_InputParametersChangeData& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime)
+void UGestorNiagaraParameters::LerpNiagaraChanges(FString ParameterName, const FNSSE_UnitParameterType& InputInicial ,const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime)
 {
 
 	switch (ParamType)

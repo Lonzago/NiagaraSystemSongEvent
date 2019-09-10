@@ -7,15 +7,9 @@
 #include "NSSE_DataStrucTypes.h"
 #include "NSSE_NiagGestorCompo.generated.h"
 
-//class UNiagaraSystem;
-//class UNiagaraComponent;
-//class UGestorNiagaraParameters;
 
 
-
-
-
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(NiagaraSystemSongEvent), meta=(BlueprintSpawnableComponent) )
 class NIAGARASYSTEMSONGEVENT_API UNSSE_NiagGestorCompo : public USceneComponent
 {
 	GENERATED_BODY()
@@ -34,6 +28,7 @@ public:
 	class UNiagaraSystem* NiagaraS_Swip;
 
 	
+	
 	UNSSE_NiagGestorCompo();
 
 protected:
@@ -43,7 +38,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable, Category = "NSSE TEST")
-	void NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_EventParameterChange& EventParameters);
+	void NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_ChangeParamsActionData& EventParameters);
 
 	//////////////////////////
 	//Actions Functions
@@ -56,7 +51,8 @@ public:
 
 	void SwitchHardParticles();
 
-	void ModifierParamByTime(const FNSSE_EventParameterChange& EventData);
+
+	void ModifierParamByTime(const FNSSE_ChangeParamsActionData& EventData);
 
 	void CreateNewNiagaraCompo();
 };

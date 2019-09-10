@@ -25,7 +25,7 @@ protected:
 	
 	UNiagaraComponent* TargetNiagCompo;
 	ENSSE_NumberParameterChange NumParamChange;
-	FNSSE_EventParameterChange EventData;
+	FNSSE_ChangeParamsActionData EventData;
 
 	bool bDoStart;
 	float StartTime;
@@ -51,12 +51,12 @@ public:
 	////////////////////
 
 	UFUNCTION(BlueprintCallable, Category = "Gestor Params Niagara")
-	void SetUpGestorParticleEvent(UNiagaraComponent* NiagaraCompoTargert,const FNSSE_EventParameterChange& DataParticleChange);
+	void SetUpGestorParticleEvent(UNiagaraComponent* NiagaraCompoTargert,const FNSSE_ChangeParamsActionData& DataParticleChange);
 
 	void StartParameterChanges();
 
-	void ChangeSingleParameter(int32 IndexParam, const FNSSE_EventParameterChange& InputData);
+	void ChangeSingleParameter(int32 IndexParam, const FNSSE_ChangeParamsActionData& InputData);
 
-	void InstanNiagaraChanges(ENSSE_InstanTransTiming InstaTiming, FString ParameterName, const FNSSE_InputParametersChangeData& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime);
-	void LerpNiagaraChanges(FString ParameterName, const FNSSE_InputParametersChangeData& InputInicial ,const FNSSE_InputParametersChangeData& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime);
+	void InstanNiagaraChanges(ENSSE_InstanTransTiming InstaTiming, FString ParameterName, const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime);
+	void LerpNiagaraChanges(FString ParameterName, const FNSSE_UnitParameterType& InputInicial ,const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime);
 };

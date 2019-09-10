@@ -8,7 +8,7 @@
 #include "NSSE_ActionGestor.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(NiagaraSystemSongEvent), meta=(BlueprintSpawnableComponent) )
 class NIAGARASYSTEMSONGEVENT_API UNSSE_ActionGestor : public UActorComponent
 {
 	GENERATED_BODY()
@@ -22,9 +22,10 @@ public:
 	FString GroupName = "Trackers";
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE ActionGestor")
 	UDataTable* ActionEventList;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE ActionGestor")
+	class UNSSE_NiagGestorCompo* MyNiagaraGestor;
 
-
-	TArray<FString> EventRowNames;
+	TArray<FName> EventRowNames;
 
 	UNSSE_ActionGestor();
 
@@ -37,7 +38,7 @@ protected:
 	/**This method make a bind to recived events from NSSE_Manager*/
 	void EventManagerBind();
 	/**Check is recived event from NSSE_Manager has the same name form own list event name*/
-	bool CheckEventName(FString NameEvent);
+	bool CheckEventName(FName NameEvent);
 
 
 

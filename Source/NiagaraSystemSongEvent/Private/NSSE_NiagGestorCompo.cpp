@@ -44,7 +44,7 @@ void UNSSE_NiagGestorCompo::TickComponent(float DeltaTime, ELevelTick TickType, 
 //					CUSTOM METHOS
 ////////////////////////////
 
-void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_EventParameterChange& EventParameters)
+void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_ChangeParamsActionData& EventParameters)
 {
 	switch (Action)
 	{
@@ -75,7 +75,7 @@ void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Acti
 		break;
 	case ENSSE_NiagaraGestorActions::NGA_ModifierParamByTime:
 		//
-		ModifierParamByTime(EventParameters);
+		ModifierParamByTime(EventParameters.EventParameters);
 		break;
 	default:
 		break;
@@ -131,7 +131,7 @@ void UNSSE_NiagGestorCompo::SwitchHardParticles()
 
 }
 
-void UNSSE_NiagGestorCompo::ModifierParamByTime(const FNSSE_EventParameterChange& EventData)
+void UNSSE_NiagGestorCompo::ModifierParamByTime(const FNSSE_ChangeParamsActionData& EventData)
 {
 	if (!NiagaraC_Main)
 	{

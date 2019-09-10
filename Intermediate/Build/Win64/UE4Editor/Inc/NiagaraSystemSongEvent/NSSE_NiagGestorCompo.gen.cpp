@@ -18,7 +18,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_NiagGestorCompo() {}
 	ENGINE_API UClass* Z_Construct_UClass_USceneComponent();
 	UPackage* Z_Construct_UPackage__Script_NiagaraSystemSongEvent();
 	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction();
-	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_EventParameterChange();
+	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData();
 	NIAGARASYSTEMSONGEVENT_API UEnum* Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NiagaraGestorActions();
 	NIAGARA_API UClass* Z_Construct_UClass_UNiagaraSystem_NoRegister();
 // End Cross Module References
@@ -35,7 +35,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_NiagGestorCompo() {}
 		struct NSSE_NiagGestorCompo_eventNSSE_DoNiagaraAction_Parms
 		{
 			ENSSE_NiagaraGestorActions Action;
-			FNSSE_EventParameterChange EventParameters;
+			FNSSE_ChangeParamsActionData EventParameters;
 		};
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_EventParameters_MetaData[];
@@ -54,7 +54,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_NiagGestorCompo() {}
 		{ "NativeConst", "" },
 	};
 #endif
-	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction_Statics::NewProp_EventParameters = { "EventParameters", nullptr, (EPropertyFlags)0x0010000008000182, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_NiagGestorCompo_eventNSSE_DoNiagaraAction_Parms, EventParameters), Z_Construct_UScriptStruct_FNSSE_EventParameterChange, METADATA_PARAMS(Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction_Statics::NewProp_EventParameters_MetaData, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction_Statics::NewProp_EventParameters_MetaData)) };
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction_Statics::NewProp_EventParameters = { "EventParameters", nullptr, (EPropertyFlags)0x0010000008000182, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_NiagGestorCompo_eventNSSE_DoNiagaraAction_Parms, EventParameters), Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData, METADATA_PARAMS(Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction_Statics::NewProp_EventParameters_MetaData, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction_Statics::NewProp_EventParameters_MetaData)) };
 	const UE4CodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction_Statics::NewProp_Action = { "Action", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_NiagGestorCompo_eventNSSE_DoNiagaraAction_Parms, Action), Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NiagaraGestorActions, METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction_Statics::NewProp_Action_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction_Statics::PropPointers[] = {
@@ -106,16 +106,15 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_NiagGestorCompo() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_NiagaraSystemSongEvent,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction, "NSSE_DoNiagaraAction" }, // 2003695096
+		{ &Z_Construct_UFunction_UNSSE_NiagGestorCompo_NSSE_DoNiagaraAction, "NSSE_DoNiagaraAction" }, // 3540310427
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
-		{ "ClassGroupNames", "Custom" },
+		{ "ClassGroupNames", "NiagaraSystemSongEvent" },
 		{ "HideCategories", "Trigger PhysicsVolume" },
 		{ "IncludePath", "NSSE_NiagGestorCompo.h" },
 		{ "ModuleRelativePath", "Public/NSSE_NiagGestorCompo.h" },
-		{ "ToolTip", "class UNiagaraSystem;\nclass UNiagaraComponent;\nclass UGestorNiagaraParameters;" },
 	};
 #endif
 #if WITH_METADATA
@@ -163,7 +162,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_NiagGestorCompo() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UNSSE_NiagGestorCompo, 2227736331);
+	IMPLEMENT_CLASS(UNSSE_NiagGestorCompo, 1051979893);
 	template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<UNSSE_NiagGestorCompo>()
 	{
 		return UNSSE_NiagGestorCompo::StaticClass();

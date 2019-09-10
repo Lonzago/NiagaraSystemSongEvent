@@ -18,7 +18,7 @@ void EmptyLinkFunctionForGeneratedCodeGestorNiagaraParameters() {}
 	ENGINE_API UClass* Z_Construct_UClass_USceneComponent();
 	UPackage* Z_Construct_UPackage__Script_NiagaraSystemSongEvent();
 	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_UGestorNiagaraParameters_SetUpGestorParticleEvent();
-	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_EventParameterChange();
+	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData();
 	NIAGARA_API UClass* Z_Construct_UClass_UNiagaraComponent_NoRegister();
 // End Cross Module References
 	void UGestorNiagaraParameters::StaticRegisterNativesUGestorNiagaraParameters()
@@ -34,7 +34,7 @@ void EmptyLinkFunctionForGeneratedCodeGestorNiagaraParameters() {}
 		struct GestorNiagaraParameters_eventSetUpGestorParticleEvent_Parms
 		{
 			UNiagaraComponent* NiagaraCompoTargert;
-			FNSSE_EventParameterChange DataParticleChange;
+			FNSSE_ChangeParamsActionData DataParticleChange;
 		};
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_DataParticleChange_MetaData[];
@@ -55,7 +55,7 @@ void EmptyLinkFunctionForGeneratedCodeGestorNiagaraParameters() {}
 		{ "NativeConst", "" },
 	};
 #endif
-	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UGestorNiagaraParameters_SetUpGestorParticleEvent_Statics::NewProp_DataParticleChange = { "DataParticleChange", nullptr, (EPropertyFlags)0x0010000008000182, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(GestorNiagaraParameters_eventSetUpGestorParticleEvent_Parms, DataParticleChange), Z_Construct_UScriptStruct_FNSSE_EventParameterChange, METADATA_PARAMS(Z_Construct_UFunction_UGestorNiagaraParameters_SetUpGestorParticleEvent_Statics::NewProp_DataParticleChange_MetaData, ARRAY_COUNT(Z_Construct_UFunction_UGestorNiagaraParameters_SetUpGestorParticleEvent_Statics::NewProp_DataParticleChange_MetaData)) };
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UGestorNiagaraParameters_SetUpGestorParticleEvent_Statics::NewProp_DataParticleChange = { "DataParticleChange", nullptr, (EPropertyFlags)0x0010000008000182, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(GestorNiagaraParameters_eventSetUpGestorParticleEvent_Parms, DataParticleChange), Z_Construct_UScriptStruct_FNSSE_ChangeParamsActionData, METADATA_PARAMS(Z_Construct_UFunction_UGestorNiagaraParameters_SetUpGestorParticleEvent_Statics::NewProp_DataParticleChange_MetaData, ARRAY_COUNT(Z_Construct_UFunction_UGestorNiagaraParameters_SetUpGestorParticleEvent_Statics::NewProp_DataParticleChange_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UGestorNiagaraParameters_SetUpGestorParticleEvent_Statics::NewProp_NiagaraCompoTargert_MetaData[] = {
 		{ "EditInline", "true" },
@@ -102,7 +102,7 @@ void EmptyLinkFunctionForGeneratedCodeGestorNiagaraParameters() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_NiagaraSystemSongEvent,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UGestorNiagaraParameters_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UGestorNiagaraParameters_SetUpGestorParticleEvent, "SetUpGestorParticleEvent" }, // 2293886788
+		{ &Z_Construct_UFunction_UGestorNiagaraParameters_SetUpGestorParticleEvent, "SetUpGestorParticleEvent" }, // 3484596874
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UGestorNiagaraParameters_Statics::Class_MetaDataParams[] = {
@@ -140,7 +140,7 @@ void EmptyLinkFunctionForGeneratedCodeGestorNiagaraParameters() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UGestorNiagaraParameters, 3541483283);
+	IMPLEMENT_CLASS(UGestorNiagaraParameters, 4021500658);
 	template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<UGestorNiagaraParameters>()
 	{
 		return UGestorNiagaraParameters::StaticClass();

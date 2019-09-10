@@ -6,9 +6,9 @@
 /NAME:"UE4Editor-NiagaraSystemSongEvent-0002.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Intermediate\Build\Win64\DanceParticles4_22Editor\Development\Engine\SharedPCH.Engine.h.obj"
-"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Module.NiagaraSystemSongEvent.cpp.obj"
-"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Module.NiagaraSystemSongEvent.gen.cpp.obj"
-"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Default.rc2.res"
-/OUT:"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\UE4Editor-NiagaraSystemSongEvent-0002.lib"
+"D:\ProgramingProyects\Unreal\PluginNiagara\Intermediate\Build\Win64\PluginNiagaraEditor\Development\Engine\SharedPCH.Engine.h.obj"
+"D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Module.NiagaraSystemSongEvent.cpp.obj"
+"D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Module.NiagaraSystemSongEvent.gen.cpp.obj"
+"D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Default.rc2.res"
+/OUT:"D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\UE4Editor-NiagaraSystemSongEvent-0002.lib"
 /INCLUDE:IMPLEMENT_MODULE_NiagaraSystemSongEvent

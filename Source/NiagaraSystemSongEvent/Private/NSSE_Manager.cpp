@@ -65,6 +65,7 @@ void ANSSE_Manager::StartManager()
 void ANSSE_Manager::StopManager()
 {
 	bIsRecording = false;
+	//#DebugText
 	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, TEXT("StopedManger"));
 }
 
@@ -100,7 +101,8 @@ void ANSSE_Manager::DisplayTimeCount()
 	float ConvertedTime = FloatPresition(GetTimeManager(),PresitionValue);
 	int32 Minuts = FrameTime / 60;
 	int32 Seconds = FMath::TruncToInt(FrameTime) % 60;
-
+	
+	//#DebugText
 	GEngine->AddOnScreenDebugMessage(-1, .01f, FColor::Red, FString::Printf(TEXT("CurrentTime: %d : %d   RawTime: %f"), Minuts, Seconds,ConvertedTime));
 }
 

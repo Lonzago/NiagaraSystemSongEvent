@@ -18,6 +18,8 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_ActionGestor() {}
 	ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
 	UPackage* Z_Construct_UPackage__Script_NiagaraSystemSongEvent();
 	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_UNSSE_ActionGestor_EventNiagaraCalled();
+	NIAGARASYSTEMSONGEVENT_API UClass* Z_Construct_UClass_UNSSE_NiagGestorCompo_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UDataTable_NoRegister();
 // End Cross Module References
 	void UNSSE_ActionGestor::StaticRegisterNativesUNSSE_ActionGestor()
 	{
@@ -71,6 +73,14 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_ActionGestor() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_MyNiagaraGestor_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_MyNiagaraGestor;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ActionEventList_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_ActionEventList;
+#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_GroupName_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FStrPropertyParams NewProp_GroupName;
@@ -88,19 +98,37 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_ActionGestor() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNSSE_ActionGestor_Statics::Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
-		{ "ClassGroupNames", "Custom" },
+		{ "ClassGroupNames", "NiagaraSystemSongEvent" },
 		{ "IncludePath", "NSSE_ActionGestor.h" },
 		{ "ModuleRelativePath", "Public/NSSE_ActionGestor.h" },
 	};
 #endif
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_GroupName_MetaData[] = {
-		{ "Category", "NSSE Component" },
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_MyNiagaraGestor_MetaData[] = {
+		{ "Category", "NSSE ActionGestor" },
+		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/NSSE_ActionGestor.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_MyNiagaraGestor = { "MyNiagaraGestor", nullptr, (EPropertyFlags)0x001000000008000d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UNSSE_ActionGestor, MyNiagaraGestor), Z_Construct_UClass_UNSSE_NiagGestorCompo_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_MyNiagaraGestor_MetaData, ARRAY_COUNT(Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_MyNiagaraGestor_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_ActionEventList_MetaData[] = {
+		{ "Category", "NSSE ActionGestor" },
+		{ "ModuleRelativePath", "Public/NSSE_ActionGestor.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_ActionEventList = { "ActionEventList", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UNSSE_ActionGestor, ActionEventList), Z_Construct_UClass_UDataTable_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_ActionEventList_MetaData, ARRAY_COUNT(Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_ActionEventList_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_GroupName_MetaData[] = {
+		{ "Category", "NSSE ActionGestor" },
+		{ "ModuleRelativePath", "Public/NSSE_ActionGestor.h" },
+		{ "ToolTip", "Try to find a Manager with this group name. Else will take the first found" },
 	};
 #endif
 	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_GroupName = { "GroupName", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UNSSE_ActionGestor, GroupName), METADATA_PARAMS(Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_GroupName_MetaData, ARRAY_COUNT(Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_GroupName_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UNSSE_ActionGestor_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_MyNiagaraGestor,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_ActionEventList,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNSSE_ActionGestor_Statics::NewProp_GroupName,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UNSSE_ActionGestor_Statics::StaticCppClassTypeInfo = {
@@ -130,7 +158,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_ActionGestor() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UNSSE_ActionGestor, 1536563838);
+	IMPLEMENT_CLASS(UNSSE_ActionGestor, 2375833624);
 	template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<UNSSE_ActionGestor>()
 	{
 		return UNSSE_ActionGestor::StaticClass();
