@@ -3,6 +3,8 @@
 
 #include "NSSE_Manager.h"
 #include "Engine/Engine.h"
+#include "Niagara/Public/NiagaraComponent.h"
+#include "NiagaraTypes.h"
 
 // Sets default values for this component's properties
 ANSSE_Manager::ANSSE_Manager()
@@ -68,6 +70,50 @@ void ANSSE_Manager::StopManager()
 }
 
 
+
+TArray<FString> ANSSE_Manager::GetParametersOverrride(const class UNiagaraComponent* NiagCompoRef)
+{
+
+	TArray<FNiagaraVariable> NiagVarArray;
+	NiagCompoRef->GetSystemInstance()->GetInstanceParameters().GetParameters(NiagVarArray);
+		
+	TArray<FString> NamesParams;
+
+	for (const FNiagaraVariable& Var : NiagVarArray)
+	{
+		NamesParams.Add(Var.GetName().ToString());
+	}
+
+
+	return NamesParams;
+}
+
+
+bool ANSSE_Manager::GetNiagFloatParamByName(const class UNiagaraComponent* NiagCompoRef, FName ParamName, float& OutFloat)
+{
+
+	
+
+
+	TArray<FNiagaraVariable> NiagVarArray;
+	NiagCompoRef->GetSystemInstance()->GetInstanceParameters().GetParameters(NiagVarArray);
+
+	for (const FNiagaraVariable& Var : NiagVarArray)
+	{
+		if (Var.GetName()==ParamName)
+		{
+			OutFloat = NiagCompoRef->GetOverrideParameters().GetParameterValue<float>(Var);
+
+
+			/*FNiagaraTypeDefinition FloatValue = Var.GetValue<FNiagaraTypeDefinition>();
+			OutFloat = FloatValue.FloatStruct->;
+			*/
+			return true;
+		}
+	}
+
+	return false;
+}
 
 float ANSSE_Manager::GetTimeManager()
 {

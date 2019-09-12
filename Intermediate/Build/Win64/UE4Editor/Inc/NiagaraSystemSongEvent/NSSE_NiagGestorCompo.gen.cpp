@@ -90,10 +90,10 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_NiagGestorCompo() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NiagarasComponentsArray_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_OwnNiagarasComponentsArray_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_NiagarasComponentsArray;
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_NiagarasComponentsArray_Inner;
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_OwnNiagarasComponentsArray;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_OwnNiagarasComponentsArray_Inner;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -115,18 +115,18 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_NiagGestorCompo() {}
 	};
 #endif
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_NiagarasComponentsArray_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_OwnNiagarasComponentsArray_MetaData[] = {
 		{ "Category", "NSSE NiagaraComponent" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/NSSE_NiagGestorCompo.h" },
 		{ "ToolTip", "Registro de NiagaraComponents que esten atachados a este componente" },
 	};
 #endif
-	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_NiagarasComponentsArray = { "NiagarasComponentsArray", nullptr, (EPropertyFlags)0x001000800002001d, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UNSSE_NiagGestorCompo, NiagarasComponentsArray), METADATA_PARAMS(Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_NiagarasComponentsArray_MetaData, ARRAY_COUNT(Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_NiagarasComponentsArray_MetaData)) };
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_NiagarasComponentsArray_Inner = { "NiagarasComponentsArray", nullptr, (EPropertyFlags)0x00000000000a0008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_OwnNiagarasComponentsArray = { "OwnNiagarasComponentsArray", nullptr, (EPropertyFlags)0x001000800002001d, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UNSSE_NiagGestorCompo, OwnNiagarasComponentsArray), METADATA_PARAMS(Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_OwnNiagarasComponentsArray_MetaData, ARRAY_COUNT(Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_OwnNiagarasComponentsArray_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_OwnNiagarasComponentsArray_Inner = { "OwnNiagarasComponentsArray", nullptr, (EPropertyFlags)0x00000000000a0008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_NiagarasComponentsArray,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_NiagarasComponentsArray_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_OwnNiagarasComponentsArray,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::NewProp_OwnNiagarasComponentsArray_Inner,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UNSSE_NiagGestorCompo_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UNSSE_NiagGestorCompo>::IsAbstract,
@@ -155,7 +155,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_NiagGestorCompo() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UNSSE_NiagGestorCompo, 3355840803);
+	IMPLEMENT_CLASS(UNSSE_NiagGestorCompo, 694472173);
 	template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<UNSSE_NiagGestorCompo>()
 	{
 		return UNSSE_NiagGestorCompo::StaticClass();

@@ -64,7 +64,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "NSSE_Manager")
 		void StopManager();
 		
-	
-		
+	UFUNCTION(BlueprintCallable, Category = "NSSE_Manager")
+		TArray<FString> GetParametersOverrride(const class UNiagaraComponent* NiagCompoRef);
+	UFUNCTION(BlueprintCallable, Category = "NSSE_Manager")
+		bool GetNiagFloatParamByName(const class UNiagaraComponent* NiagCompoRef, FName ParamName, float& OutFloat);
 
 };

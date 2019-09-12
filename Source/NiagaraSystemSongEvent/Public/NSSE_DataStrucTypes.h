@@ -26,7 +26,8 @@ UENUM(BlueprintType)
 enum class ENSSE_NumberParameterChange : uint8
 {
 	EPC_SinglerParameter	UMETA(DisplayName = "Singler Parameter"),
-	EPC_MultipleParameters	UMETA(DisplayName = "Multiple Parameter")
+	EPC_MultipleParameters	UMETA(DisplayName = "Multiple Parameter"),
+	EPC_ErrorParameters
 };
 
 UENUM(BlueprintType)
@@ -104,6 +105,29 @@ struct FNSSE_SinglerParameterData
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FNSSE_UnitParameterType ParametroFinal;
 
+	
+
+	void SpawnSlow(float _TimeTransition, float _LastValue, FString _NameParam = TEXT("User.SpawnRate"))
+	{
+		Instan = false;
+		TiempoTrans = _TimeTransition;
+		DataType = ENSSE_ParameterType::EPT_Float;
+		NameParam = _NameParam;
+
+		ParametroInicial.PFloat = 0;
+		ParametroFinal.PFloat	= _LastValue;
+	}
+	
+	void KillSlow (float _TimeTransition, float _CurrentValue, FString _NameParam = TEXT("User.SpawnRate"))
+	{
+		Instan = false;
+		TiempoTrans = _TimeTransition;
+		DataType = ENSSE_ParameterType::EPT_Float;
+		NameParam = _NameParam;
+
+		ParametroInicial.PFloat = _CurrentValue;
+		ParametroFinal.PFloat = 0;
+	}
 
 };
 

@@ -171,7 +171,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_DataStrucTypes() {}
 		return ENSSE_NumberParameterChange_StaticEnum();
 	}
 	static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ENSSE_NumberParameterChange(ENSSE_NumberParameterChange_StaticEnum, TEXT("/Script/NiagaraSystemSongEvent"), TEXT("ENSSE_NumberParameterChange"), false, nullptr, nullptr);
-	uint32 Get_Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NumberParameterChange_Hash() { return 1508568422U; }
+	uint32 Get_Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NumberParameterChange_Hash() { return 3562263326U; }
 	UEnum* Z_Construct_UEnum_NiagaraSystemSongEvent_ENSSE_NumberParameterChange()
 	{
 #if WITH_HOT_RELOAD
@@ -185,6 +185,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_DataStrucTypes() {}
 			static const UE4CodeGen_Private::FEnumeratorParam Enumerators[] = {
 				{ "ENSSE_NumberParameterChange::EPC_SinglerParameter", (int64)ENSSE_NumberParameterChange::EPC_SinglerParameter },
 				{ "ENSSE_NumberParameterChange::EPC_MultipleParameters", (int64)ENSSE_NumberParameterChange::EPC_MultipleParameters },
+				{ "ENSSE_NumberParameterChange::EPC_ErrorParameters", (int64)ENSSE_NumberParameterChange::EPC_ErrorParameters },
 			};
 #if WITH_METADATA
 			const UE4CodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {

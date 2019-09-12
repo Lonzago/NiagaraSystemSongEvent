@@ -18,7 +18,7 @@ public:
 	
 	/*Registro de NiagaraComponents que esten atachados a este componente*/
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "NSSE NiagaraComponent")
-	TArray <class UNiagaraComponent*> NiagarasComponentsArray;
+	TArray <class UNiagaraComponent*> OwnNiagarasComponentsArray;
 
 	UGestorNiagaraParameters* OwnGestorParameters;
 	

@@ -25,8 +25,8 @@ void EmptyLinkFunctionForGeneratedCodeNiagaraSystemSongEvent_init() {}
 				SingletonFuncArray,
 				ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x1E021E19,
-				0x522868D0,
+				0x0FCC0444,
+				0x06B38DA9,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

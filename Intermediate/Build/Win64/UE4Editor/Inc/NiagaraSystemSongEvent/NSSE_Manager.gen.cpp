@@ -18,6 +18,9 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 	NIAGARASYSTEMSONGEVENT_API UClass* Z_Construct_UClass_ANSSE_Manager_NoRegister();
 	NIAGARASYSTEMSONGEVENT_API UClass* Z_Construct_UClass_ANSSE_Manager();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
+	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName();
+	NIAGARA_API UClass* Z_Construct_UClass_UNiagaraComponent_NoRegister();
+	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride();
 	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_ANSSE_Manager_ReciveEventSend();
 	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_ANSSE_Manager_StartManager();
 	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_ANSSE_Manager_StopManager();
@@ -66,10 +69,120 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 	{
 		UClass* Class = ANSSE_Manager::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "GetNiagFloatParamByName", &ANSSE_Manager::execGetNiagFloatParamByName },
+			{ "GetParametersOverrride", &ANSSE_Manager::execGetParametersOverrride },
 			{ "StartManager", &ANSSE_Manager::execStartManager },
 			{ "StopManager", &ANSSE_Manager::execStopManager },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics
+	{
+		struct NSSE_Manager_eventGetNiagFloatParamByName_Parms
+		{
+			const UNiagaraComponent* NiagCompoRef;
+			FName ParamName;
+			float OutFloat;
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_OutFloat;
+		static const UE4CodeGen_Private::FNamePropertyParams NewProp_ParamName;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NiagCompoRef_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_NiagCompoRef;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((NSSE_Manager_eventGetNiagFloatParamByName_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(NSSE_Manager_eventGetNiagFloatParamByName_Parms), &Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_OutFloat = { "OutFloat", nullptr, (EPropertyFlags)0x0010000000000180, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_Manager_eventGetNiagFloatParamByName_Parms, OutFloat), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FNamePropertyParams Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_ParamName = { "ParamName", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_Manager_eventGetNiagFloatParamByName_Parms, ParamName), METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_NiagCompoRef_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_NiagCompoRef = { "NiagCompoRef", nullptr, (EPropertyFlags)0x0010000000080082, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_Manager_eventGetNiagFloatParamByName_Parms, NiagCompoRef), Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_NiagCompoRef_MetaData, ARRAY_COUNT(Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_NiagCompoRef_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_ReturnValue,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_OutFloat,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_ParamName,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::NewProp_NiagCompoRef,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NSSE_Manager" },
+		{ "ModuleRelativePath", "Public/NSSE_Manager.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANSSE_Manager, nullptr, "GetNiagFloatParamByName", sizeof(NSSE_Manager_eventGetNiagFloatParamByName_Parms), Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::PropPointers, ARRAY_COUNT(Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04420401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::Function_MetaDataParams, ARRAY_COUNT(Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics
+	{
+		struct NSSE_Manager_eventGetParametersOverrride_Parms
+		{
+			const UNiagaraComponent* NiagCompoRef;
+			TArray<FString> ReturnValue;
+		};
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FStrPropertyParams NewProp_ReturnValue_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NiagCompoRef_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_NiagCompoRef;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_Manager_eventGetParametersOverrride_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::NewProp_ReturnValue_Inner = { "ReturnValue", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::NewProp_NiagCompoRef_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::NewProp_NiagCompoRef = { "NiagCompoRef", nullptr, (EPropertyFlags)0x0010000000080082, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_Manager_eventGetParametersOverrride_Parms, NiagCompoRef), Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::NewProp_NiagCompoRef_MetaData, ARRAY_COUNT(Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::NewProp_NiagCompoRef_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::NewProp_ReturnValue,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::NewProp_ReturnValue_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::NewProp_NiagCompoRef,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NSSE_Manager" },
+		{ "ModuleRelativePath", "Public/NSSE_Manager.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANSSE_Manager, nullptr, "GetParametersOverrride", sizeof(NSSE_Manager_eventGetParametersOverrride_Parms), Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::PropPointers, ARRAY_COUNT(Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::Function_MetaDataParams, ARRAY_COUNT(Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_ANSSE_Manager_ReciveEventSend_Statics
 	{
@@ -192,6 +305,8 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_NiagaraSystemSongEvent,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_ANSSE_Manager_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_ANSSE_Manager_GetNiagFloatParamByName, "GetNiagFloatParamByName" }, // 3826659815
+		{ &Z_Construct_UFunction_ANSSE_Manager_GetParametersOverrride, "GetParametersOverrride" }, // 1562885810
 		{ &Z_Construct_UFunction_ANSSE_Manager_ReciveEventSend, "ReciveEventSend" }, // 4136710549
 		{ &Z_Construct_UFunction_ANSSE_Manager_StartManager, "StartManager" }, // 3835462464
 		{ &Z_Construct_UFunction_ANSSE_Manager_StopManager, "StopManager" }, // 3342082742
@@ -265,7 +380,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ANSSE_Manager, 3918095104);
+	IMPLEMENT_CLASS(ANSSE_Manager, 3163747613);
 	template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<ANSSE_Manager>()
 	{
 		return ANSSE_Manager::StaticClass();

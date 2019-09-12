@@ -166,6 +166,10 @@ ENSSE_NumberParameterChange UGestorNiagaraParameters::GetMultiParameter(const FN
 	{
 		return ENSSE_NumberParameterChange::EPC_MultipleParameters;
 	}
+	else
+	{
+		return ENSSE_NumberParameterChange::EPC_ErrorParameters;
+	}
 }
 
 void UGestorNiagaraParameters::StartParameterChanges()

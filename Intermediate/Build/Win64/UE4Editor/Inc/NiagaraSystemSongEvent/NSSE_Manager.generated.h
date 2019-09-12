@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UNiagaraComponent;
 #ifdef NIAGARASYSTEMSONGEVENT_NSSE_Manager_generated_h
 #error "NSSE_Manager.generated.h already included, missing '#pragma once' in NSSE_Manager.h"
 #endif
@@ -28,6 +29,26 @@ static inline void FEventManagerTrigger_DelegateWrapper(const FMulticastScriptDe
 
 #define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_Manager_h_19_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execGetNiagFloatParamByName) \
+	{ \
+		P_GET_OBJECT(UNiagaraComponent,Z_Param_NiagCompoRef); \
+		P_GET_PROPERTY(UNameProperty,Z_Param_ParamName); \
+		P_GET_PROPERTY_REF(UFloatProperty,Z_Param_Out_OutFloat); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(bool*)Z_Param__Result=P_THIS->GetNiagFloatParamByName(Z_Param_NiagCompoRef,Z_Param_ParamName,Z_Param_Out_OutFloat); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetParametersOverrride) \
+	{ \
+		P_GET_OBJECT(UNiagaraComponent,Z_Param_NiagCompoRef); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(TArray<FString>*)Z_Param__Result=P_THIS->GetParametersOverrride(Z_Param_NiagCompoRef); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execStopManager) \
 	{ \
 		P_FINISH; \
@@ -46,6 +67,26 @@ static inline void FEventManagerTrigger_DelegateWrapper(const FMulticastScriptDe
 
 
 #define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_Manager_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execGetNiagFloatParamByName) \
+	{ \
+		P_GET_OBJECT(UNiagaraComponent,Z_Param_NiagCompoRef); \
+		P_GET_PROPERTY(UNameProperty,Z_Param_ParamName); \
+		P_GET_PROPERTY_REF(UFloatProperty,Z_Param_Out_OutFloat); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(bool*)Z_Param__Result=P_THIS->GetNiagFloatParamByName(Z_Param_NiagCompoRef,Z_Param_ParamName,Z_Param_Out_OutFloat); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetParametersOverrride) \
+	{ \
+		P_GET_OBJECT(UNiagaraComponent,Z_Param_NiagCompoRef); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(TArray<FString>*)Z_Param__Result=P_THIS->GetParametersOverrride(Z_Param_NiagCompoRef); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execStopManager) \
 	{ \
