@@ -7,7 +7,6 @@
 #include "NSSE_DataStrucTypes.h"
 #include "GestorNiagaraParameters.generated.h"
 
-class UNiagaraComponent;
 class UNiagaraSystem;
 
 
@@ -23,7 +22,7 @@ public:
 protected:
 
 	
-	TArray<UNiagaraComponent*> OwnTargetsNiagCompoArray;
+	TArray<class UNiagaraComponent*> OwnTargetsNiagCompoArray;
 	ENSSE_NumberParameterChange MultiParameterType;
 	FNSSE_NiagaraGestorData OwnNiagGestorData;
 

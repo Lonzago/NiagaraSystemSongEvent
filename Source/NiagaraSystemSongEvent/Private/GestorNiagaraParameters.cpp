@@ -71,7 +71,7 @@ void UGestorNiagaraParameters::TickComponent(float DeltaTime, ELevelTick TickTyp
 void UGestorNiagaraParameters::ExecuteChangeSingleParamByEnum(int32 IndexNiagCompoRef)
 {
 	//Hace el paso por multiples parametros o por uno solo.
-	switch (NumParamChange)
+	switch (MultiParameterType)
 	{
 	case ENSSE_NumberParameterChange::EPC_SinglerParameter:
 
@@ -125,7 +125,6 @@ float UGestorNiagaraParameters::GetAlphaTime() const
 	return FMath::GetMappedRangeValueClamped(InputClamp, OutClamp, GetPercentage());
 }
 
-
 bool UGestorNiagaraParameters::IsRuningEvent() const
 {
 	return bDoStart;
@@ -133,34 +132,37 @@ bool UGestorNiagaraParameters::IsRuningEvent() const
 
 void UGestorNiagaraParameters::SetUpGestorParticleEvent(const TArray<UNiagaraComponent*>& NiagaraCompoTargert, const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
-	
-	if(IsRuningEvent()){}
+	//Si esta en Evento lo para para reiniciarse
+	if (IsRuningEvent()) { StopCountTime();}
 
+	//InicialSettings--------------------------------------
 	OwnTargetsNiagCompoArray = NiagaraCompoTargert;
 	OwnNiagGestorData = NiagaraGestorData;
+	MultiParameterType = GetMultiParameter(NiagaraGestorData);
 
-	
+	////#DebugText Debug del tipo de MultiParametro
+	//FString enumname = FindObject<UEnum>(ANY_PACKAGE, TEXT("ENSSE_NumberParameterChange"), true)->GetNameStringByIndex(static_cast<uint8>(MultiParameterType));
+	//UE_LOG(LogTemp, Warning, TEXT("Parameters : %s"), *enumname);
 
-	//#DebugText
-	FString enumname = FindObject<UEnum>(ANY_PACKAGE, TEXT("ENSSE_NumberParameterChange"), true)->GetNameStringByIndex(static_cast<uint8>(NumParamChange));
-	UE_LOG(LogTemp, Warning, TEXT("Parameters : %s"), *enumname);
 
 	//#GonDev #IncluirTimeDelay Incluir aqui un delay si queremos que empiece mas tarde el evento. Aunque estoy hay que plantearselo porque quizas no haga fata.
 	/*
 		Incluir.
 	*/
 
+
+	//InitializedEvent-------------------------------------
 	StartParameterChanges();
 }
 
-ENSSE_NumberParameterChange UGestorNiagaraParameters::GetMultiParameter()
+ENSSE_NumberParameterChange UGestorNiagaraParameters::GetMultiParameter(const FNSSE_NiagaraGestorData& NiagaraGestorData) const
 {
-	if (OwnNiagGestorData.SingleParametersList.Num() != 0 && OwnNiagGestorData.SingleParametersList.Num() == 1)
+	if (NiagaraGestorData.SingleParametersList.Num() != 0 && NiagaraGestorData.SingleParametersList.Num() == 1)
 	{
 		return ENSSE_NumberParameterChange::EPC_SinglerParameter;
 
 	}
-	else if (OwnNiagGestorData.SingleParametersList.Num() != 0 && OwnNiagGestorData.SingleParametersList.Num() > 1)
+	else if (NiagaraGestorData.SingleParametersList.Num() != 0 && NiagaraGestorData.SingleParametersList.Num() > 1)
 	{
 		return ENSSE_NumberParameterChange::EPC_MultipleParameters;
 	}
@@ -172,11 +174,7 @@ void UGestorNiagaraParameters::StartParameterChanges()
 	bDoStart = true;
 }
 
-void UGestorNiagaraParameters::OverrideSetupParameters()
-{
-	OwnNiagGestorData = NiagaraGestorData;
 
-}
 
 //No soporte para algunos tipos de datos de momneto #TOFUTURE Implementar para todos los tipos de datos en niagara
 void UGestorNiagaraParameters::ChangeSingleParameter(UNiagaraComponent* NiagCompoRef, int32 IndexParam, const FNSSE_NiagaraGestorData& GestorData)
