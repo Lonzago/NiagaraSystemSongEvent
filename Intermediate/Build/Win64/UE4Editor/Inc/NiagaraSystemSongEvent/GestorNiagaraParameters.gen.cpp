@@ -111,7 +111,7 @@ void EmptyLinkFunctionForGeneratedCodeGestorNiagaraParameters() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UGestorNiagaraParameters_Statics::Class_MetaDataParams[] = {
 		{ "BlueprintSpawnableComponent", "" },
-		{ "ClassGroupNames", "Custom" },
+		{ "ClassGroupNames", "NiagaraSystemSongEvent" },
 		{ "HideCategories", "Trigger PhysicsVolume" },
 		{ "IncludePath", "GestorNiagaraParameters.h" },
 		{ "ModuleRelativePath", "Public/GestorNiagaraParameters.h" },
@@ -144,7 +144,7 @@ void EmptyLinkFunctionForGeneratedCodeGestorNiagaraParameters() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UGestorNiagaraParameters, 4130126491);
+	IMPLEMENT_CLASS(UGestorNiagaraParameters, 3083387837);
 	template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<UGestorNiagaraParameters>()
 	{
 		return UGestorNiagaraParameters::StaticClass();

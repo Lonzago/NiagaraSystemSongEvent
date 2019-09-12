@@ -28,8 +28,6 @@ void ANSSE_Manager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-
-
 	if(bIsRecording)
 	{
 		DisplayTimeCount();
@@ -38,6 +36,8 @@ void ANSSE_Manager::Tick(float DeltaTime)
 			if (EventCast.IsBound())//Forma segura de llamar al Delegate
 			{
 				EventCast.Broadcast(EventTable[IndexCheck].EventName);
+
+				//#DebugText
 				GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, FString::Printf(TEXT("Send Event with Index %d Event : %s"), IndexCheck, *EventTable[IndexCheck].EventName));
 				IndexCheck++;
 				if (IndexCheck >= EventTable.Num()) {
@@ -45,9 +45,7 @@ void ANSSE_Manager::Tick(float DeltaTime)
 				}
 			}
 		}
-
 	}
-
 }
 
 

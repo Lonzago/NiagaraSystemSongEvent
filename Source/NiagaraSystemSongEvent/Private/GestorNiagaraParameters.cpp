@@ -55,7 +55,7 @@ void UGestorNiagaraParameters::TickComponent(float DeltaTime, ELevelTick TickTyp
 			NumberFormat.MinimumFractionalDigits = 2;
 			NumberFormat.MaximumFractionalDigits = 2;
 
-			FString TimeCurrent = FText::AsNumber(GetCurrentTime(), &NumberFormat).ToString();
+			FString TimeCurrent = FText::AsNumber(GetGestorTime(), &NumberFormat).ToString();
 			FString PercentageTime = FText::AsNumber(GetAlphaTime(), &NumberFormat).ToString();
 			FString RemainTime = FText::AsNumber(GetRemainTime(), &NumberFormat).ToString();
 			GEngine->AddOnScreenDebugMessage(-1, 0.001, FColor::Emerald, FString::Printf(TEXT("TotalTime: %f TimeCurrent: %s  Alphatime: %s  Remain: %s"), TotalTimeTrasition, *TimeCurrent, *PercentageTime, *RemainTime), true, FVector2D(1.5, 1.5));
@@ -99,25 +99,26 @@ void UGestorNiagaraParameters::ExecuteChangeSingleParamByEnum(int32 IndexNiagCom
 void UGestorNiagaraParameters::StopCountTime()
 {
 	bDoStart = false;
-	UE_LOG(LogTemp, Warning, TEXT("Timer:: Timer Is Stoped"));
+	//#DebugText
+	UE_LOG(LogTemp, Warning, TEXT("NiagaraParameters::StopCountTime--> Timer Is Stoped"));
 }
 
-float UGestorNiagaraParameters::GetCurrentTime()
+float UGestorNiagaraParameters::GetGestorTime()const
 {
 	return GetWorld()->GetTimeSeconds() - StartTime;
 }
 
-float UGestorNiagaraParameters::GetPercentage()
+float UGestorNiagaraParameters::GetPercentage()const
 {
-	return GetCurrentTime() * 100 / TotalTimeTrasition;
+	return GetGestorTime() * 100 / TotalTimeTrasition;
 }
 
-float UGestorNiagaraParameters::GetRemainTime()
+float UGestorNiagaraParameters::GetRemainTime() const
 {
-	return TotalTimeTrasition - GetCurrentTime();
+	return TotalTimeTrasition - GetGestorTime();
 }
 
-float UGestorNiagaraParameters::GetAlphaTime()
+float UGestorNiagaraParameters::GetAlphaTime() const
 {
 	FVector2D InputClamp = FVector2D(0, 100);
 	FVector2D OutClamp = FVector2D(0, 1.0f);
@@ -125,20 +126,20 @@ float UGestorNiagaraParameters::GetAlphaTime()
 }
 
 
+bool UGestorNiagaraParameters::IsRuningEvent() const
+{
+	return bDoStart;
+}
+
 void UGestorNiagaraParameters::SetUpGestorParticleEvent(const TArray<UNiagaraComponent*>& NiagaraCompoTargert, const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
+	
+	if(IsRuningEvent()){}
+
 	OwnTargetsNiagCompoArray = NiagaraCompoTargert;
 	OwnNiagGestorData = NiagaraGestorData;
 
-	if (OwnNiagGestorData.SingleParametersList.Num() != 0 && OwnNiagGestorData.SingleParametersList.Num() == 1)
-	{
-		NumParamChange = ENSSE_NumberParameterChange::EPC_SinglerParameter;
-
-	}
-	else if (OwnNiagGestorData.SingleParametersList.Num() != 0 && OwnNiagGestorData.SingleParametersList.Num() > 1)
-	{
-		NumParamChange = ENSSE_NumberParameterChange::EPC_MultipleParameters;
-	}
+	
 
 	//#DebugText
 	FString enumname = FindObject<UEnum>(ANY_PACKAGE, TEXT("ENSSE_NumberParameterChange"), true)->GetNameStringByIndex(static_cast<uint8>(NumParamChange));
@@ -152,10 +153,29 @@ void UGestorNiagaraParameters::SetUpGestorParticleEvent(const TArray<UNiagaraCom
 	StartParameterChanges();
 }
 
+ENSSE_NumberParameterChange UGestorNiagaraParameters::GetMultiParameter()
+{
+	if (OwnNiagGestorData.SingleParametersList.Num() != 0 && OwnNiagGestorData.SingleParametersList.Num() == 1)
+	{
+		return ENSSE_NumberParameterChange::EPC_SinglerParameter;
+
+	}
+	else if (OwnNiagGestorData.SingleParametersList.Num() != 0 && OwnNiagGestorData.SingleParametersList.Num() > 1)
+	{
+		return ENSSE_NumberParameterChange::EPC_MultipleParameters;
+	}
+}
+
 void UGestorNiagaraParameters::StartParameterChanges()
 {
 	StartTime = GetWorld()->GetTimeSeconds();
 	bDoStart = true;
+}
+
+void UGestorNiagaraParameters::OverrideSetupParameters()
+{
+	OwnNiagGestorData = NiagaraGestorData;
+
 }
 
 //No soporte para algunos tipos de datos de momneto #TOFUTURE Implementar para todos los tipos de datos en niagara

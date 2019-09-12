@@ -51,6 +51,10 @@ void UNSSE_ActionGestor::BeginPlay()
 		//#DebugText
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, TEXT("Manager Not Found"));
 	}
+	//RegisterComponents--------------------
+
+	GetAllNiagaraGestors();
+	
 }
 
 void UNSSE_ActionGestor::Activate(bool bReset)
@@ -60,7 +64,8 @@ void UNSSE_ActionGestor::Activate(bool bReset)
 
 void UNSSE_ActionGestor::OnRegister()
 {
-	UE_LOG(LogTemp, Warning, TEXT("ActionGestor::OnRegister OwnerName --> %s"), *GetOwner()->GetName());
+	//#DebugText
+	//UE_LOG(LogTemp, Warning, TEXT("ActionGestor::OnRegister OwnerName --> %s"), *GetOwner()->GetName());
 	GetAllNiagaraGestors();
 	Super::OnRegister();
 	
@@ -71,7 +76,7 @@ void UNSSE_ActionGestor::PostEditChangeProperty(FPropertyChangedEvent& PropertyC
 
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 
-	//GetAllNiagaraGestors();
+	GetAllNiagaraGestors();
 }
 
 void UNSSE_ActionGestor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -99,21 +104,23 @@ void UNSSE_ActionGestor::EventNiagaraCalled(FString NameEvent)
 {
 	//Called Event
 	//#DebugText
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, FString::Printf(TEXT("Mensaje: %s en %s"), *NameEvent, *GetOwner()->GetName()));
+	//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, FString::Printf(TEXT("Mensaje: %s en %s"), *NameEvent, *GetOwner()->GetName()));
 	
 	FName NEvent = FName(*NameEvent);
 
 	if (CheckEventName(NEvent))
-	{
+	{	
+		//#DebugText
+		UE_LOG(LogTemp, Warning, TEXT("ActionGestor::CheckEventName    NameEvent-->Found¡¡"));
 		FString Context = "Action Event";
 		FNSSE_DataTableActionGestor* DataTableActionEvent = ActionEventList->FindRow<FNSSE_DataTableActionGestor>(NEvent,*Context,true);
 
-		
-  		if (OwnNiagaraGestorArray.Num()>=1)
+  		if (!OwnNiagaraGestorArray.Num()==0)
 		{
 			for (UNSSE_NiagGestorCompo* Gestor : OwnNiagaraGestorArray)
 			{
 				Gestor->NSSE_DoNiagaraAction(DataTableActionEvent->ActionGestor, DataTableActionEvent->ParamActionData);
+				UE_LOG(LogTemp, Warning, TEXT("Evento : %s  En : %s "),*NameEvent,*Gestor->GetName());
 			}
 		}
 		else
@@ -121,6 +128,7 @@ void UNSSE_ActionGestor::EventNiagaraCalled(FString NameEvent)
 			//#DebugError 
 			UE_LOG(LogTemp, Error, TEXT("ActionGestor::EventNiagaraCalledtoNiagaraGestorCompo NiagaraGestorCompo NO ASSIGNED"));
 		}
+		
 	}
 }
 
@@ -152,7 +160,7 @@ void UNSSE_ActionGestor::EventManagerBind()
 
 bool UNSSE_ActionGestor::CheckEventName(FName NameEvent)
 {
-	return EventRowNames[0]==NameEvent;
+	return EventRowNames.Contains(NameEvent);
 }
 
 void UNSSE_ActionGestor::GetAllNiagaraGestors()
@@ -182,11 +190,11 @@ void UNSSE_ActionGestor::GetAllNiagaraGestors()
 				OwnNiagaraGestorArray.Add(NigCompo);
 			}
 			//#DebugText
-			UE_LOG(LogTemp, Warning, TEXT("ActionGestor::GetAllNiagaragestors  Add component --> %s"), *Compo->GetName());
+			//UE_LOG(LogTemp, Warning, TEXT("ActionGestor::GetAllNiagaragestors  Add component --> %s"), *Compo->GetName());
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("ActionGestor::GetAllNiagaragestors NO Added component --> %s"), *Compo->GetName());
+			//UE_LOG(LogTemp, Warning, TEXT("ActionGestor::GetAllNiagaragestors NO Added component --> %s"), *Compo->GetName());
 		}
 	}
 }

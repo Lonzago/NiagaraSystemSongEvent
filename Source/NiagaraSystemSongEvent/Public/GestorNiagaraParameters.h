@@ -11,7 +11,7 @@ class UNiagaraComponent;
 class UNiagaraSystem;
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(NiagaraSystemSongEvent), meta=(BlueprintSpawnableComponent) )
 class NIAGARASYSTEMSONGEVENT_API UGestorNiagaraParameters : public USceneComponent
 {
 	GENERATED_BODY()
@@ -24,7 +24,7 @@ protected:
 
 	
 	TArray<UNiagaraComponent*> OwnTargetsNiagCompoArray;
-	ENSSE_NumberParameterChange NumParamChange;
+	ENSSE_NumberParameterChange MultiParameterType;
 	FNSSE_NiagaraGestorData OwnNiagGestorData;
 
 	bool bDoStart;
@@ -43,11 +43,13 @@ public:
 
 	////		TimerControl		////
 	void StopCountTime();
-	float GetRemainTime();
-	float GetCurrentTime();
-	float GetPercentage();
-	float GetAlphaTime();
+	float GetRemainTime()const;
+	float GetGestorTime()const;
+	float GetPercentage()const;
+	float GetAlphaTime()const;
 
+
+	bool IsRuningEvent()const;
 	////////////////////
 	//				CUSTOM METHODS
 	////////////////////
@@ -55,8 +57,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Gestor Params Niagara")
 	void SetUpGestorParticleEvent(const TArray<UNiagaraComponent*>& NiagaraCompoTargert,const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
-	void StartParameterChanges();
+	ENSSE_NumberParameterChange GetMultiParameter(const FNSSE_NiagaraGestorData& NiagaraGestorData)const;
 
+	void StartParameterChanges();
+	
 	void ChangeSingleParameter(UNiagaraComponent* NiagCompoRef, int32 IndexParam, const FNSSE_NiagaraGestorData& GestorData);
 
 	void InstanNiagaraChanges(UNiagaraComponent* NiagCompoRef, ENSSE_InstanTransTiming InstaTiming, FString ParameterName, const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime);

@@ -25,6 +25,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "NSSE ActionGestor")
 	TArray<class UNSSE_NiagGestorCompo*> OwnNiagaraGestorArray;
 
+	
 	TArray<FName> EventRowNames;
 
 	UNSSE_ActionGestor(const FObjectInitializer& OI);
@@ -55,7 +56,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable)
-		TArray<FString> GetRegisterNiagaraGestorNames();
+	TArray<FString> GetRegisterNiagaraGestorNames();
 
 	UFUNCTION()
 	void EventNiagaraCalled(FString NameEvent);
