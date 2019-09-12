@@ -9,50 +9,48 @@
 
 
 
-UCLASS( ClassGroup=(NiagaraSystemSongEvent), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup=(NiagaraSystemSongEvent), meta=(BlueprintSpawnableComponent) )
 class NIAGARASYSTEMSONGEVENT_API UNSSE_NiagGestorCompo : public USceneComponent
 {
 	GENERATED_BODY()
 
 public:	
 	
-	class UNiagaraComponent* NiagaraC_Main;
-	class UNiagaraComponent* NiagaraC_Second;
+	/*Registro de NiagaraComponents que esten atachados a este componente*/
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "NSSE NiagaraComponent")
+	TArray <class UNiagaraComponent*> NiagarasComponentsArray;
 
-
-	class UGestorNiagaraParameters* MyParameterGestor;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE TEST")
-	class UNiagaraSystem* NiagaraS_Default;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE TEST")
-	class UNiagaraSystem* NiagaraS_Swip;
-
-	
+	UGestorNiagaraParameters* OwnGestorParameters;
 	
 	UNSSE_NiagGestorCompo();
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void OnRegister()override;
+	
 
 public:	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable, Category = "NSSE TEST")
-	void NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_ChangeParamsActionData& EventParameters);
+	void NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_NiagaraGestorData& NiagaraGestorData);
+	void GetNigarasComponentsAttached();
+	bool IsRefNiagaraCompoEmpty() const;
+
 
 	//////////////////////////
 	//Actions Functions
 	//////////////////////////
 	void SpawnSlow();
-	void SpanwInstan();
+	void SpanwInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
 	void KillSlow();
-	void KillInstan();
+	void KillInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
-	void SwitchHardParticles();
+	void SwitchHardParticles(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
 
-	void ModifierParamByTime(const FNSSE_ChangeParamsActionData& EventData);
+	void ModifierParamByTime(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
-	void CreateNewNiagaraCompo();
+	void CreateNewNiagaraCompo(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 };

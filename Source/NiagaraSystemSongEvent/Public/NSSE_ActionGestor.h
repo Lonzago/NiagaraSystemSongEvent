@@ -22,16 +22,25 @@ public:
 	FString GroupName = "Trackers";
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE ActionGestor")
 	UDataTable* ActionEventList;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE ActionGestor")
-	class UNSSE_NiagGestorCompo* MyNiagaraGestor;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "NSSE ActionGestor")
+	TArray<class UNSSE_NiagGestorCompo*> OwnNiagaraGestorArray;
 
+	
 	TArray<FName> EventRowNames;
 
-	UNSSE_ActionGestor();
+	UNSSE_ActionGestor(const FObjectInitializer& OI);
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	virtual void Activate(bool bReset) override;
+	virtual void OnRegister() override;
+
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+
+	
+
 
 	/** Looking for NSSE_Manager in the world*/
 	ANSSE_Manager* GetManagerWithGroup(UWorld* Wold, FString NameGroup);
@@ -39,14 +48,16 @@ protected:
 	void EventManagerBind();
 	/**Check is recived event from NSSE_Manager has the same name form own list event name*/
 	bool CheckEventName(FName NameEvent);
-
+	void GetAllNiagaraGestors();
 
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	
+	UFUNCTION(BlueprintCallable)
+	TArray<FString> GetRegisterNiagaraGestorNames();
+
 	UFUNCTION()
 	void EventNiagaraCalled(FString NameEvent);
 

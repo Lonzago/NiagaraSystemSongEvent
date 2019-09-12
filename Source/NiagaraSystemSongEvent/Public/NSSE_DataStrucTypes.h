@@ -8,12 +8,6 @@
 #include "NSSE_DataStrucTypes.generated.h"
 
 
-
-
-///////////////////
-//					GestorNiagaraParameters
-//////////////////////////////////////
-
 UENUM(BlueprintType)
 enum class ENSSE_ParameterType : uint8
 {
@@ -43,9 +37,6 @@ enum class ENSSE_InstanTransTiming : uint8
 	ETII_AtEnd		UMETA(DisplayName = "At End")
 };
 
-///////////////////
-//					NiagaraGestorCompo
-//////////////////////////////////////
 
 UENUM(BlueprintType)
 enum class ENSSE_NiagaraGestorActions : uint8
@@ -98,8 +89,6 @@ struct FNSSE_SinglerParameterData
 {
 	GENERATED_BODY()
 
-	//INCLUIR SI ES INSTANTANEO
-	//INCLUIR TIEMPO DE MODIFICACION
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Instan;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -118,19 +107,10 @@ struct FNSSE_SinglerParameterData
 
 };
 
-//DEPRECATED
-//USTRUCT(BlueprintType)
-//struct FNSSE_ChangeParamsActionData
-//{
-//	GENERATED_BODY()
-//
-//	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-//		TArray<FNSSE_SinglerParameterData> SingleParameterData;
-//
-//};
+
 
 USTRUCT(BlueprintType)
-struct FNSSE_ChangeParamsActionData
+struct FNSSE_NiagaraGestorData
 {
 	GENERATED_BODY()
 
@@ -140,38 +120,22 @@ struct FNSSE_ChangeParamsActionData
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<FNSSE_SinglerParameterData> SingleParametersList;
 	
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		//FNSSE_ChangeParamsActionData EventParameters;
+
 };
 
-///////////////////
-//					Action Gestor
-//////////////////////////////////////
-
-//DEPRECATED
-//USTRUCT(BlueprintType)
-//struct FNSSE_ActionEventList : public FTableRowBase
-//{
-//	GENERATED_BODY()
-//	TArray<FNSSE_DataTableEventAction> ActionEvents;
-//};
 
 
 USTRUCT(BlueprintType)
-struct FNSSE_DataTableActionEvent : public FTableRowBase
+struct FNSSE_DataTableActionGestor : public FTableRowBase
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		ENSSE_NiagaraGestorActions ActionGestor;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FNSSE_ChangeParamsActionData ParamActionData;
+		FNSSE_NiagaraGestorData ParamActionData;
 
 };
-
-///////////////////
-//					EventManager
-//////////////////////////////////////
 
 
 USTRUCT(BlueprintType)

@@ -7,11 +7,10 @@
 #include "NSSE_DataStrucTypes.h"
 #include "GestorNiagaraParameters.generated.h"
 
-class UNiagaraComponent;
 class UNiagaraSystem;
-class FTimerManager;
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+
+UCLASS( ClassGroup=(NiagaraSystemSongEvent), meta=(BlueprintSpawnableComponent) )
 class NIAGARASYSTEMSONGEVENT_API UGestorNiagaraParameters : public USceneComponent
 {
 	GENERATED_BODY()
@@ -23,9 +22,9 @@ public:
 protected:
 
 	
-	UNiagaraComponent* TargetNiagCompo;
-	ENSSE_NumberParameterChange NumParamChange;
-	FNSSE_ChangeParamsActionData EventData;
+	TArray<class UNiagaraComponent*> OwnTargetsNiagCompoArray;
+	ENSSE_NumberParameterChange MultiParameterType;
+	FNSSE_NiagaraGestorData OwnNiagGestorData;
 
 	bool bDoStart;
 	float StartTime;
@@ -39,24 +38,30 @@ protected:
 public:	
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	void ExecuteChangeSingleParamByEnum(int32 IndexNiagCompoRef);
+
 	////		TimerControl		////
 	void StopCountTime();
-	float GetRemainTime();
-	float GetCurrentTime();
-	float GetPercentage();
-	float GetAlphaTime();
+	float GetRemainTime()const;
+	float GetGestorTime()const;
+	float GetPercentage()const;
+	float GetAlphaTime()const;
 
+
+	bool IsRuningEvent()const;
 	////////////////////
 	//				CUSTOM METHODS
 	////////////////////
 
 	UFUNCTION(BlueprintCallable, Category = "Gestor Params Niagara")
-	void SetUpGestorParticleEvent(UNiagaraComponent* NiagaraCompoTargert,const FNSSE_ChangeParamsActionData& DataParticleChange);
+	void SetUpGestorParticleEvent(const TArray<UNiagaraComponent*>& NiagaraCompoTargert,const FNSSE_NiagaraGestorData& NiagaraGestorData);
+
+	ENSSE_NumberParameterChange GetMultiParameter(const FNSSE_NiagaraGestorData& NiagaraGestorData)const;
 
 	void StartParameterChanges();
+	
+	void ChangeSingleParameter(UNiagaraComponent* NiagCompoRef, int32 IndexParam, const FNSSE_NiagaraGestorData& GestorData);
 
-	void ChangeSingleParameter(int32 IndexParam, const FNSSE_ChangeParamsActionData& InputData);
-
-	void InstanNiagaraChanges(ENSSE_InstanTransTiming InstaTiming, FString ParameterName, const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime);
-	void LerpNiagaraChanges(FString ParameterName, const FNSSE_UnitParameterType& InputInicial ,const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime);
+	void InstanNiagaraChanges(UNiagaraComponent* NiagCompoRef, ENSSE_InstanTransTiming InstaTiming, FString ParameterName, const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime);
+	void LerpNiagaraChanges(UNiagaraComponent* NiagCompoRef, FString ParameterName, const FNSSE_UnitParameterType& InputInicial ,const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime);
 };
