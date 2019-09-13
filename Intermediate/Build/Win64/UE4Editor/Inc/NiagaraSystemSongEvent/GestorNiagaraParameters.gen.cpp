@@ -115,6 +115,7 @@ void EmptyLinkFunctionForGeneratedCodeGestorNiagaraParameters() {}
 		{ "HideCategories", "Trigger PhysicsVolume" },
 		{ "IncludePath", "GestorNiagaraParameters.h" },
 		{ "ModuleRelativePath", "Public/GestorNiagaraParameters.h" },
+		{ "ToolTip", "class UNiagaraComponent;" },
 	};
 #endif
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UGestorNiagaraParameters_Statics::StaticCppClassTypeInfo = {
@@ -144,7 +145,7 @@ void EmptyLinkFunctionForGeneratedCodeGestorNiagaraParameters() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UGestorNiagaraParameters, 3083387837);
+	IMPLEMENT_CLASS(UGestorNiagaraParameters, 3239840067);
 	template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<UGestorNiagaraParameters>()
 	{
 		return UGestorNiagaraParameters::StaticClass();

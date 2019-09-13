@@ -63,7 +63,7 @@ void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Acti
 		break;
 	case ENSSE_NiagaraGestorActions::NGA_SpawmSlow:
 		//
-		SpawnSlow();
+		SpawnSlow(TODO);
 		break;
 	case ENSSE_NiagaraGestorActions::NGA_SpawnInstan:
 		//
@@ -125,8 +125,18 @@ bool UNSSE_NiagGestorCompo::IsRefNiagaraCompoEmpty() const
 //	Actions Functions
 ////////////////////////////
 
-void UNSSE_NiagGestorCompo::SpawnSlow()
+void UNSSE_NiagGestorCompo::SpawnSlow(const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
+	if (!IsRefNiagaraCompoEmpty())
+	{
+		//Llamamos a la funcion de spawnslow de la strutra que lo que hace es sobreescribir el valor inicial a 0
+		ModifierParamByTime(FNSSE_NiagaraGestorData::SpawnSlow(NiagaraGestorData));
+	}
+	else
+	{
+		CreateNewNiagaraCompo(NiagaraGestorData);
+		ModifierParamByTime(FNSSE_NiagaraGestorData::SpawnSlow(NiagaraGestorData));
+	}
 }
 
 void UNSSE_NiagGestorCompo::SpanwInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData)

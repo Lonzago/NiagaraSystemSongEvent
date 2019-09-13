@@ -8,6 +8,7 @@
 #include "GestorNiagaraParameters.generated.h"
 
 class UNiagaraSystem;
+//class UNiagaraComponent;
 
 
 UCLASS( ClassGroup=(NiagaraSystemSongEvent), meta=(BlueprintSpawnableComponent) )
@@ -22,7 +23,7 @@ public:
 protected:
 
 	
-	TArray<class UNiagaraComponent*> OwnTargetsNiagCompoArray;
+	TArray<UNiagaraComponent*> OwnTargetsNiagCompoArray;
 	ENSSE_NumberParameterChange MultiParameterType;
 	FNSSE_NiagaraGestorData OwnNiagGestorData;
 

@@ -59,7 +59,7 @@ struct FNSSE_UnitParameterType
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		AActor* PActor;
+		AActor* PActor = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool			PBool;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -77,12 +77,23 @@ struct FNSSE_UnitParameterType
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FVector4		PVec4;
 
+
+	//#TOFUTURE Añadir todos los constructores de datos
 	FNSSE_UnitParameterType()
-		: 	PActor(nullptr)
 	{
-
 	}
-
+	FNSSE_UnitParameterType(float InFloat)
+		: PFloat(InFloat)
+	{
+	}
+	FNSSE_UnitParameterType(int32 InInt32)
+		: PInt(InInt32)
+	{
+	}
+	FNSSE_UnitParameterType(FVector InVector)
+		: PVec(InVector)
+	{
+	}
 };
 
 USTRUCT(BlueprintType)
@@ -107,26 +118,30 @@ struct FNSSE_SinglerParameterData
 
 	
 
-	void SpawnSlow(float _TimeTransition, float _LastValue, FString _NameParam = TEXT("User.SpawnRate"))
+	FNSSE_SinglerParameterData& SpawnSlow(float _TimeTransition, float _LastValue, FString _NameParam = TEXT("User.SpawnRate"))
 	{
-		Instan = false;
-		TiempoTrans = _TimeTransition;
-		DataType = ENSSE_ParameterType::EPT_Float;
-		NameParam = _NameParam;
+		FNSSE_SinglerParameterData NewSinglerData;
+		NewSinglerData.Instan = false;
+		NewSinglerData.TiempoTrans = _TimeTransition;
+		NewSinglerData.DataType = ENSSE_ParameterType::EPT_Float;
+		NewSinglerData.NameParam = _NameParam;
 
-		ParametroInicial.PFloat = 0;
-		ParametroFinal.PFloat	= _LastValue;
+		NewSinglerData.ParametroInicial.PFloat = 0;
+		NewSinglerData.ParametroFinal.PFloat= _LastValue;
+		return NewSinglerData;
 	}
 	
-	void KillSlow (float _TimeTransition, float _CurrentValue, FString _NameParam = TEXT("User.SpawnRate"))
+	FNSSE_SinglerParameterData& KillSlow (float _TimeTransition, float _CurrentValue, FString _NameParam = TEXT("User.SpawnRate"))
 	{
-		Instan = false;
-		TiempoTrans = _TimeTransition;
-		DataType = ENSSE_ParameterType::EPT_Float;
-		NameParam = _NameParam;
+		FNSSE_SinglerParameterData NewSinglerData;
+		NewSinglerData.Instan = false;
+		NewSinglerData.TiempoTrans = _TimeTransition;
+		NewSinglerData.DataType = ENSSE_ParameterType::EPT_Float;
+		NewSinglerData.NameParam = _NameParam;
 
-		ParametroInicial.PFloat = _CurrentValue;
-		ParametroFinal.PFloat = 0;
+		NewSinglerData.ParametroInicial.PFloat = _CurrentValue;
+		NewSinglerData.ParametroFinal.PFloat = 0;
+		return NewSinglerData;
 	}
 
 };
@@ -144,6 +159,17 @@ struct FNSSE_NiagaraGestorData
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<FNSSE_SinglerParameterData> SingleParametersList;
 	
+
+	FNSSE_NiagaraGestorData& SpawnSlow(const FNSSE_NiagaraGestorData& InNiagaraGestor)
+	{
+		FNSSE_NiagaraGestorData OutNiagaraGestor = InNiagaraGestor;
+		FNSSE_SinglerParameterData OutSimpleParam = InNiagaraGestor.SingleParametersList[0];
+		OutSimpleParam.ParametroInicial = FNSSE_UnitParameterType(0.0f);
+		OutNiagaraGestor.SingleParametersList[0] = OutSimpleParam;
+		
+		return OutNiagaraGestor;
+	}
+
 
 };
 
@@ -194,5 +220,11 @@ UCLASS()
 class NIAGARASYSTEMSONGEVENT_API UNSSE_DataStrucTypes : public UObject
 {
 	GENERATED_BODY()
-	
+
+public:
+		template<typename T>
+		bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,const FNSSE_NiagaraGestorData& InNiagaraGestorData, T& OutFloat)const;
+		template<typename T>
+		bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,FString InNameParam, T& OutFloat)const;
+
 };

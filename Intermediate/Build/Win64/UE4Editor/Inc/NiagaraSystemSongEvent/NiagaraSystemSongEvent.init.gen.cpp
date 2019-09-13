@@ -25,7 +25,7 @@ void EmptyLinkFunctionForGeneratedCodeNiagaraSystemSongEvent_init() {}
 				SingletonFuncArray,
 				ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x0FCC0444,
+				0x9CC6401B,
 				0x06B38DA9,
 				METADATA_PARAMS(nullptr, 0)
 			};

@@ -73,7 +73,6 @@ void ANSSE_Manager::StopManager()
 
 TArray<FString> ANSSE_Manager::GetParametersOverrride(const class UNiagaraComponent* NiagCompoRef)
 {
-
 	TArray<FNiagaraVariable> NiagVarArray;
 	NiagCompoRef->GetSystemInstance()->GetInstanceParameters().GetParameters(NiagVarArray);
 		
@@ -83,18 +82,12 @@ TArray<FString> ANSSE_Manager::GetParametersOverrride(const class UNiagaraCompon
 	{
 		NamesParams.Add(Var.GetName().ToString());
 	}
-
-
 	return NamesParams;
 }
 
 
 bool ANSSE_Manager::GetNiagFloatParamByName(const class UNiagaraComponent* NiagCompoRef, FName ParamName, float& OutFloat)
 {
-
-	
-
-
 	TArray<FNiagaraVariable> NiagVarArray;
 	NiagCompoRef->GetSystemInstance()->GetInstanceParameters().GetParameters(NiagVarArray);
 
@@ -103,15 +96,9 @@ bool ANSSE_Manager::GetNiagFloatParamByName(const class UNiagaraComponent* NiagC
 		if (Var.GetName()==ParamName)
 		{
 			OutFloat = NiagCompoRef->GetOverrideParameters().GetParameterValue<float>(Var);
-
-
-			/*FNiagaraTypeDefinition FloatValue = Var.GetValue<FNiagaraTypeDefinition>();
-			OutFloat = FloatValue.FloatStruct->;
-			*/
 			return true;
 		}
 	}
-
 	return false;
 }
 

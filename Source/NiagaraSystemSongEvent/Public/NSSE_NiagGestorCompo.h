@@ -41,7 +41,7 @@ public:
 	//////////////////////////
 	//Actions Functions
 	//////////////////////////
-	void SpawnSlow();
+	void SpawnSlow(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 	void SpanwInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
 	void KillSlow();
