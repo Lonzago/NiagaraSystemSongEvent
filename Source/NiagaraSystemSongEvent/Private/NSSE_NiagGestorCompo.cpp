@@ -63,7 +63,7 @@ void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Acti
 		break;
 	case ENSSE_NiagaraGestorActions::NGA_SpawmSlow:
 		//
-		SpawnSlow(TODO);
+		SpawnSlow(NiagaraGestorData);
 		break;
 	case ENSSE_NiagaraGestorActions::NGA_SpawnInstan:
 		//

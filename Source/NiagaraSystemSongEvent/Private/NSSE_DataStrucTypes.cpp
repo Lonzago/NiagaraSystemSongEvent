@@ -4,6 +4,7 @@
 #include "NSSE_DataStrucTypes.h"
 #include "Niagara/Public/NiagaraComponent.h"
 
+template<typename T>
 bool UNSSE_DataStrucTypes::GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo, const FNSSE_NiagaraGestorData& InNiagaraGestorData, T& OutFloat) const
 {
 	TArray<FNiagaraVariable> ArrayNiagaraVars;
@@ -22,6 +23,7 @@ bool UNSSE_DataStrucTypes::GetOverrideParam(const class UNiagaraComponent* InNia
 	return false;
 }
 
+template<typename T>
 bool UNSSE_DataStrucTypes::GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo, FString InNameParam, T& OutFloat) const
 {
 	TArray<FNiagaraVariable> ArrayNiagaraVars;

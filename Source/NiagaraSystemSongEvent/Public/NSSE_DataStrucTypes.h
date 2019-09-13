@@ -160,7 +160,7 @@ struct FNSSE_NiagaraGestorData
 		TArray<FNSSE_SinglerParameterData> SingleParametersList;
 	
 
-	FNSSE_NiagaraGestorData& SpawnSlow(const FNSSE_NiagaraGestorData& InNiagaraGestor)
+	static FNSSE_NiagaraGestorData SpawnSlow(const FNSSE_NiagaraGestorData& InNiagaraGestor)
 	{
 		FNSSE_NiagaraGestorData OutNiagaraGestor = InNiagaraGestor;
 		FNSSE_SinglerParameterData OutSimpleParam = InNiagaraGestor.SingleParametersList[0];
@@ -169,8 +169,6 @@ struct FNSSE_NiagaraGestorData
 		
 		return OutNiagaraGestor;
 	}
-
-
 };
 
 

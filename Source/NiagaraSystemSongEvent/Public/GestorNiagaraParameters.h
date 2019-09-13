@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Components/SceneComponent.h"
+#include "Niagara/Public/NiagaraComponent.h"
 #include "NSSE_DataStrucTypes.h"
 #include "GestorNiagaraParameters.generated.h"
 
-class UNiagaraSystem;
+//class UNiagaraSystem;
 //class UNiagaraComponent;
 
 
