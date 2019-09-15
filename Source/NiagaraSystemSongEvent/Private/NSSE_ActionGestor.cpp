@@ -65,7 +65,7 @@ void UNSSE_ActionGestor::Activate(bool bReset)
 void UNSSE_ActionGestor::OnRegister()
 {
 	//#DebugText
-	//UE_LOG(LogTemp, Warning, TEXT("ActionGestor::OnRegister OwnerName --> %s"), *GetOwner()->GetName());
+	//UE_LOG(LogNSSE, Warning, TEXT("ActionGestor::OnRegister OwnerName --> %s"), *GetOwner()->GetName());
 	GetAllNiagaraGestors();
 	Super::OnRegister();
 	
@@ -111,7 +111,7 @@ void UNSSE_ActionGestor::EventNiagaraCalled(FString NameEvent)
 	if (CheckEventName(NEvent))
 	{	
 		//#DebugText
-		UE_LOG(LogTemp, Warning, TEXT("ActionGestor::CheckEventName    NameEvent-->Found¡¡"));
+		UE_LOG(LogNSSE, Warning, TEXT("ActionGestor::CheckEventName    NameEvent-->Found¡¡"));
 		FString Context = "Action Event";
 		FNSSE_DataTableActionGestor* DataTableActionEvent = ActionEventList->FindRow<FNSSE_DataTableActionGestor>(NEvent,*Context,true);
 
@@ -126,7 +126,7 @@ void UNSSE_ActionGestor::EventNiagaraCalled(FString NameEvent)
 		else
 		{
 			//#DebugError 
-			UE_LOG(LogTemp, Error, TEXT("ActionGestor::EventNiagaraCalledtoNiagaraGestorCompo NiagaraGestorCompo NO ASSIGNED"));
+			UE_LOG(LogNSSE, Error, TEXT("ActionGestor::EventNiagaraCalledtoNiagaraGestorCompo NiagaraGestorCompo NO ASSIGNED"));
 		}
 		
 	}
@@ -169,7 +169,7 @@ void UNSSE_ActionGestor::GetAllNiagaraGestors()
 	TArray<USceneComponent*> ArrayComponents;
 
 	if (!Owner) { //#DebugError
-					UE_LOG(LogTemp, Error, TEXT("ActionGestor::GetAllNiagaraGestor  Owner NOT FOUND¡")); 
+					UE_LOG(LogNSSE, Error, TEXT("ActionGestor::GetAllNiagaraGestor  Owner NOT FOUND¡"));
 					return; }
 
 	Owner->GetRootComponent()->GetChildrenComponents(true, ArrayComponents);
@@ -190,11 +190,11 @@ void UNSSE_ActionGestor::GetAllNiagaraGestors()
 				OwnNiagaraGestorArray.Add(NigCompo);
 			}
 			//#DebugText
-			//UE_LOG(LogTemp, Warning, TEXT("ActionGestor::GetAllNiagaragestors  Add component --> %s"), *Compo->GetName());
+			//UE_LOG(LogNSSE, Warning, TEXT("ActionGestor::GetAllNiagaragestors  Add component --> %s"), *Compo->GetName());
 		}
 		else
 		{
-			//UE_LOG(LogTemp, Warning, TEXT("ActionGestor::GetAllNiagaragestors NO Added component --> %s"), *Compo->GetName());
+			//UE_LOG(LogNSSE, Warning, TEXT("ActionGestor::GetAllNiagaragestors NO Added component --> %s"), *Compo->GetName());
 		}
 	}
 }

@@ -4,6 +4,7 @@
 #include "NSSE_NiagGestorCompo.h"
 #include "Niagara\Public\NiagaraComponent.h"
 #include "GestorNiagaraParameters.h"
+#include "NSSE_DataStrucTypes.h"
 #include "Components\BillboardComponent.h"
 
 
@@ -29,7 +30,7 @@ void UNSSE_NiagGestorCompo::BeginPlay()
 	Super::BeginPlay();
 
 	GetNigarasComponentsAttached();
-	
+
 }
 
 void UNSSE_NiagGestorCompo::OnRegister()
@@ -54,8 +55,8 @@ void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Acti
 	switch (Action)
 	{
 	case ENSSE_NiagaraGestorActions::NGA_KillSlow:
-		//
-		KillSlow();
+		//	
+		KillSlow(OwnNiagarasComponentsArray[0], NiagaraGestorData);
 		break;
 	case ENSSE_NiagaraGestorActions::NGA_KillInstan:
 		//
@@ -103,15 +104,15 @@ void UNSSE_NiagGestorCompo::GetNigarasComponentsAttached()
 			if (Niag)
 			{
 				OwnNiagarasComponentsArray.Add(Niag);
-				//#DebugText
-				UE_LOG(LogTemp, Warning, TEXT("NiagaraGestor::GetNiagarasComponents AddedCompo--> %s"), *Niag->GetName());
+				//#DebugText Añadido componente
+				UE_LOG(LogNSSE, Display, TEXT("NiagaraGestor::GetNiagarasComponents AddedCompo--> %s"), *Niag->GetName());
 			}
 		}
 	}
 	else
 	{
-		//#DebugText
-		UE_LOG(LogTemp, Warning, TEXT("NiagaraGestor::GetNiagarasComponents  No NiagaraComponent Child assigned."));
+		//#DebugText No NiagaraComponents Child Assigned
+		UE_LOG(LogNSSE, Display, TEXT("NiagaraGestor::GetNiagarasComponents  No NiagaraComponent Child assigned."));
 	}
 
 }
@@ -146,37 +147,45 @@ void UNSSE_NiagGestorCompo::SpanwInstan(const FNSSE_NiagaraGestorData& NiagaraGe
 	{
 		SwitchHardParticles(NiagaraGestorData);
 	}
-	else 
+	else
 	{
 		//Tiene que tener una particula asignada
 		CreateNewNiagaraCompo(NiagaraGestorData);
 	}
-	
+
 }
 
-void UNSSE_NiagGestorCompo::KillSlow()
+void UNSSE_NiagGestorCompo::KillSlow(const UNiagaraComponent* NiagaraCompoRef, const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
-	
-	
+	if (NiagaraCompoRef==nullptr)
+	{
+		//#DebugText 
+		UE_LOG(LogNSSE, Warning, TEXT("NiagGestorCompo::KillSlow--> No NiagaraComponent Found Can't KillSlow"));
+		return;
+	}
+
+	float CurrentValue;
+	UNSSE_DataStrucTypes::GetOverrideParam<float>(NiagaraCompoRef, TEXT("User.SpawnRate"), CurrentValue);
+
+	ModifierParamByTime(FNSSE_NiagaraGestorData::KillSlow(CurrentValue, NiagaraGestorData));
+
 }
 
 void UNSSE_NiagGestorCompo::KillInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
-	if (!IsRefNiagaraCompoEmpty())
+	if (IsRefNiagaraCompoEmpty())
 	{
-		for (UNiagaraComponent* Compo : OwnNiagarasComponentsArray)
-		{
-			Compo->SetAsset(nullptr);
-			//#DebugText
-			UE_LOG(LogTemp, Warning, TEXT("NiagGestorCompo::KillInstan Null Asset in --> %s  At compo %s"), *GetOwner()->GetName(),*Compo->GetName());
-		}
-	}
-	else
-	{
-		//#DebugText
-		UE_LOG(LogTemp, Warning, TEXT("NiagaraGestor::KillInstan  NiagaraComponentArray is Empty. Nothing to remove."));
+		//#DebugText NiagaraComponentArry Empty
+		UE_LOG(LogNSSE, Warning, TEXT("NiagaraGestor::KillInstan  NiagaraComponentArray is Empty. Nothing to remove."));
+		return;
 	}
 
+	for (UNiagaraComponent* Compo : OwnNiagarasComponentsArray)
+	{
+		Compo->SetAsset(nullptr);
+		//#DebugText 
+		//UE_LOG(LogNSSE, Warning, TEXT("NiagGestorCompo::KillInstan Null Asset in --> %s  At compo %s"), *GetOwner()->GetName(), *Compo->GetName());
+	}
 }
 
 void UNSSE_NiagGestorCompo::SwitchHardParticles(const FNSSE_NiagaraGestorData& NiagaraGestorData)
@@ -197,14 +206,15 @@ void UNSSE_NiagGestorCompo::ModifierParamByTime(const FNSSE_NiagaraGestorData& N
 	{
 		CreateNewNiagaraCompo(NiagaraGestorData);
 	}
-	OwnGestorParameters->SetUpGestorParticleEvent(OwnNiagarasComponentsArray, NiagaraGestorData);	
+	OwnGestorParameters->SetUpGestorParticleEvent(OwnNiagarasComponentsArray, NiagaraGestorData);
 }
 
 void UNSSE_NiagGestorCompo::CreateNewNiagaraCompo(const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
 	if (NiagaraGestorData.NiagaraSystemRef)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Creado NiagaraComponente"));
+		//#DebugText Creacion de componentes
+		UE_LOG(LogNSSE, Warning, TEXT("Creado NiagaraComponente"));
 		UNiagaraComponent* NewNiagaraCompo = NewObject<UNiagaraComponent>(this);
 		NewNiagaraCompo->SetupAttachment(this);
 		NewNiagaraCompo->RegisterComponentWithWorld(GetWorld());
@@ -213,8 +223,8 @@ void UNSSE_NiagGestorCompo::CreateNewNiagaraCompo(const FNSSE_NiagaraGestorData&
 		OwnNiagarasComponentsArray.Add(NewNiagaraCompo);
 	}
 	else
-	{	
-		//#DebugError si no hay una referencia de NiagaraSystem
-		UE_LOG(LogTemp, Error, TEXT("NiagaraGestorCompo::CreateNewNiagaraComponent   No NiagaraSystem asiganado. Componente no creado"));
+	{
+		//#DebugError No referencias de NiagaraSystem
+		UE_LOG(LogNSSE, Error, TEXT("NiagaraGestorCompo::CreateNewNiagaraComponent   No NiagaraSystem asiganado. Componente no creado"));
 	}
 }

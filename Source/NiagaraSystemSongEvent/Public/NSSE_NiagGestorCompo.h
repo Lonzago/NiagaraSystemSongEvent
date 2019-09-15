@@ -7,7 +7,7 @@
 #include "NSSE_DataStrucTypes.h"
 #include "NSSE_NiagGestorCompo.generated.h"
 
-
+class UNiagaraComponent;
 
 UCLASS(ClassGroup=(NiagaraSystemSongEvent), meta=(BlueprintSpawnableComponent) )
 class NIAGARASYSTEMSONGEVENT_API UNSSE_NiagGestorCompo : public USceneComponent
@@ -18,7 +18,7 @@ public:
 	
 	/*Registro de NiagaraComponents que esten atachados a este componente*/
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "NSSE NiagaraComponent")
-	TArray <class UNiagaraComponent*> OwnNiagarasComponentsArray;
+	TArray <UNiagaraComponent*> OwnNiagarasComponentsArray;
 
 	UGestorNiagaraParameters* OwnGestorParameters;
 	
@@ -44,7 +44,7 @@ public:
 	void SpawnSlow(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 	void SpanwInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
-	void KillSlow();
+	void KillSlow(const UNiagaraComponent* NiagaraCompoRef, const FNSSE_NiagaraGestorData& NiagaraGestorData);
 	void KillInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
 	void SwitchHardParticles(const FNSSE_NiagaraGestorData& NiagaraGestorData);

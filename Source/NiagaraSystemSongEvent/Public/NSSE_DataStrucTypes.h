@@ -9,7 +9,7 @@
 
 
 UENUM(BlueprintType)
-enum class ENSSE_ParameterType : uint8
+enum class  ENSSE_ParameterType : uint8
 {
 	EPT_Actor		UMETA(DisplayName = "Param Actor"),
 	EPT_Bool		UMETA(DisplayName = "Param Bool"),
@@ -23,7 +23,7 @@ enum class ENSSE_ParameterType : uint8
 };
 
 UENUM(BlueprintType)
-enum class ENSSE_NumberParameterChange : uint8
+enum class  ENSSE_NumberParameterChange : uint8
 {
 	EPC_SinglerParameter	UMETA(DisplayName = "Singler Parameter"),
 	EPC_MultipleParameters	UMETA(DisplayName = "Multiple Parameter"),
@@ -31,7 +31,7 @@ enum class ENSSE_NumberParameterChange : uint8
 };
 
 UENUM(BlueprintType)
-enum class ENSSE_InstanTransTiming : uint8
+enum class  ENSSE_InstanTransTiming : uint8
 {
 	EITT_AtStart	UMETA(DisplayName = "At Start"),
 	ETII_Middle		UMETA(DisplayName = "Middle"),
@@ -40,7 +40,7 @@ enum class ENSSE_InstanTransTiming : uint8
 
 
 UENUM(BlueprintType)
-enum class ENSSE_NiagaraGestorActions : uint8
+enum class  ENSSE_NiagaraGestorActions : uint8
 {
 	NGA_KillSlow			UMETA(DisplayName = "Kill Slow"),
 	NGA_KillInstan			UMETA(DisplayName = "Kill Instan"),
@@ -55,7 +55,7 @@ enum class ENSSE_NiagaraGestorActions : uint8
 };
 
 USTRUCT(BlueprintType)
-struct FNSSE_UnitParameterType
+struct  FNSSE_UnitParameterType
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -97,7 +97,7 @@ struct FNSSE_UnitParameterType
 };
 
 USTRUCT(BlueprintType)
-struct FNSSE_SinglerParameterData
+struct  FNSSE_SinglerParameterData
 {
 	GENERATED_BODY()
 
@@ -118,7 +118,7 @@ struct FNSSE_SinglerParameterData
 
 	
 
-	FNSSE_SinglerParameterData& SpawnSlow(float _TimeTransition, float _LastValue, FString _NameParam = TEXT("User.SpawnRate"))
+	static FNSSE_SinglerParameterData& SpawnSlow(float _TimeTransition, float _LastValue, FString _NameParam = TEXT("User.SpawnRate"))
 	{
 		FNSSE_SinglerParameterData NewSinglerData;
 		NewSinglerData.Instan = false;
@@ -131,7 +131,7 @@ struct FNSSE_SinglerParameterData
 		return NewSinglerData;
 	}
 	
-	FNSSE_SinglerParameterData& KillSlow (float _TimeTransition, float _CurrentValue, FString _NameParam = TEXT("User.SpawnRate"))
+	static FNSSE_SinglerParameterData& KillSlow (float _TimeTransition, float _CurrentValue, FString _NameParam = TEXT("User.SpawnRate"))
 	{
 		FNSSE_SinglerParameterData NewSinglerData;
 		NewSinglerData.Instan = false;
@@ -149,7 +149,7 @@ struct FNSSE_SinglerParameterData
 
 
 USTRUCT(BlueprintType)
-struct FNSSE_NiagaraGestorData
+struct  FNSSE_NiagaraGestorData
 {
 	GENERATED_BODY()
 
@@ -169,12 +169,24 @@ struct FNSSE_NiagaraGestorData
 		
 		return OutNiagaraGestor;
 	}
+
+	static FNSSE_NiagaraGestorData KillSlow(float InCurrentValue ,const FNSSE_NiagaraGestorData& InNiagaraGestor)
+	{
+		FNSSE_NiagaraGestorData OutNiagaraGestor = InNiagaraGestor;
+		FNSSE_SinglerParameterData OutSimpleParam = InNiagaraGestor.SingleParametersList[0];
+		OutSimpleParam.ParametroInicial = InCurrentValue;
+		OutSimpleParam.ParametroFinal = FNSSE_UnitParameterType(0.0f);
+		OutNiagaraGestor.SingleParametersList[0] = OutSimpleParam;
+
+		return OutNiagaraGestor;
+	}
+
 };
 
 
 
 USTRUCT(BlueprintType)
-struct FNSSE_DataTableActionGestor : public FTableRowBase
+struct  FNSSE_DataTableActionGestor : public FTableRowBase
 {
 	GENERATED_BODY()
 
@@ -187,7 +199,7 @@ struct FNSSE_DataTableActionGestor : public FTableRowBase
 
 
 USTRUCT(BlueprintType)
-struct FNSSE_ManagerEventList 
+struct  FNSSE_ManagerEvent
 {
 
 	GENERATED_BODY()
@@ -199,16 +211,27 @@ struct FNSSE_ManagerEventList
 };
 
 
-//DEPRECATED
-//USTRUCT(BlueprintType)
-//struct FNSSE_EventList 
-//{
-//
-//	GENERATED_BODY()
-//
-//	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-//		TArray<FNSSE_EventListData> EventsList;
-//};
+
+USTRUCT(BlueprintType)
+struct FNSSE_ManagerEventList : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<FNSSE_ManagerEvent> EventsList;
+
+
+	FNSSE_ManagerEventList& operator=(const FNSSE_ManagerEventList& Other)
+	{
+		EventsList = Other.EventsList;
+		return *this;
+	}
+
+	void ClearData() 
+	{
+		EventsList.Empty();
+	}
+};
 
 
 
@@ -221,8 +244,8 @@ class NIAGARASYSTEMSONGEVENT_API UNSSE_DataStrucTypes : public UObject
 
 public:
 		template<typename T>
-		bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,const FNSSE_NiagaraGestorData& InNiagaraGestorData, T& OutFloat)const;
+		static bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,const FNSSE_NiagaraGestorData& InNiagaraGestorData, T& OutFloat);
 		template<typename T>
-		bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,FString InNameParam, T& OutFloat)const;
+		static bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,FString InNameParam, T& OutFloat);
 
 };

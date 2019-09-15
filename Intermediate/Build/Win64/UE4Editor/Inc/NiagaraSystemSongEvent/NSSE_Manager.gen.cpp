@@ -25,6 +25,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_ANSSE_Manager_StartManager();
 	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_ANSSE_Manager_StopManager();
 	NIAGARASYSTEMSONGEVENT_API UScriptStruct* Z_Construct_UScriptStruct_FNSSE_ManagerEventList();
+	ENGINE_API UClass* Z_Construct_UClass_UDataTable_NoRegister();
 // End Cross Module References
 	struct Z_Construct_UDelegateFunction_NiagaraSystemSongEvent_EventManagerTrigger__DelegateSignature_Statics
 	{
@@ -280,6 +281,10 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_EventsListData_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FStructPropertyParams NewProp_EventsListData;
+#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PresitionValue_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FIntPropertyParams NewProp_PresitionValue;
@@ -288,10 +293,9 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 #endif
 		static const UE4CodeGen_Private::FFloatPropertyParams NewProp_ToleranceRange;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_EventTable_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_EventListTable_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_EventTable;
-		static const UE4CodeGen_Private::FStructPropertyParams NewProp_EventTable_Inner;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_EventListTable;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_GroupManager_MetaData[];
 #endif
@@ -318,6 +322,13 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 	};
 #endif
 #if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventsListData_MetaData[] = {
+		{ "Category", "NSSE_Manager" },
+		{ "ModuleRelativePath", "Public/NSSE_Manager.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventsListData = { "EventsListData", nullptr, (EPropertyFlags)0x0010000000020015, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ANSSE_Manager, EventsListData), Z_Construct_UScriptStruct_FNSSE_ManagerEventList, METADATA_PARAMS(Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventsListData_MetaData, ARRAY_COUNT(Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventsListData_MetaData)) };
+#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_PresitionValue_MetaData[] = {
 		{ "Category", "NSSE_Manager" },
 		{ "ModuleRelativePath", "Public/NSSE_Manager.h" },
@@ -332,13 +343,12 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 #endif
 	const UE4CodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_ToleranceRange = { "ToleranceRange", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ANSSE_Manager, ToleranceRange), METADATA_PARAMS(Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_ToleranceRange_MetaData, ARRAY_COUNT(Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_ToleranceRange_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventTable_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventListTable_MetaData[] = {
 		{ "Category", "NSSE_Manager" },
 		{ "ModuleRelativePath", "Public/NSSE_Manager.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventTable = { "EventTable", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ANSSE_Manager, EventTable), METADATA_PARAMS(Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventTable_MetaData, ARRAY_COUNT(Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventTable_MetaData)) };
-	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventTable_Inner = { "EventTable", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FNSSE_ManagerEventList, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventListTable = { "EventListTable", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ANSSE_Manager, EventListTable), Z_Construct_UClass_UDataTable_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventListTable_MetaData, ARRAY_COUNT(Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventListTable_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_GroupManager_MetaData[] = {
 		{ "Category", "NSSE_Manager" },
@@ -347,10 +357,10 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 #endif
 	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_GroupManager = { "GroupManager", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ANSSE_Manager, GroupManager), METADATA_PARAMS(Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_GroupManager_MetaData, ARRAY_COUNT(Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_GroupManager_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ANSSE_Manager_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventsListData,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_PresitionValue,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_ToleranceRange,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventTable,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventTable_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_EventListTable,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANSSE_Manager_Statics::NewProp_GroupManager,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ANSSE_Manager_Statics::StaticCppClassTypeInfo = {
@@ -380,7 +390,7 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_Manager() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ANSSE_Manager, 3163747613);
+	IMPLEMENT_CLASS(ANSSE_Manager, 1251554128);
 	template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<ANSSE_Manager>()
 	{
 		return ANSSE_Manager::StaticClass();

@@ -4,7 +4,10 @@
 #include "NSSE_Manager.h"
 #include "Engine/Engine.h"
 #include "Niagara/Public/NiagaraComponent.h"
+#include "NSSE_DataStrucTypes.h"
 #include "NiagaraTypes.h"
+#include "NiagaraSystemSongEvent.h"
+#include "Engine/DataTable.h"
 
 // Sets default values for this component's properties
 ANSSE_Manager::ANSSE_Manager()
@@ -12,7 +15,7 @@ ANSSE_Manager::ANSSE_Manager()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryActorTick.bCanEverTick = true;
-
+	GetEventsListData();
 	// ...
 }
 
@@ -33,16 +36,16 @@ void ANSSE_Manager::Tick(float DeltaTime)
 	if(bIsRecording)
 	{
 		DisplayTimeCount();
-		if (CheckEventTrigger(IndexCheck, ToleranceRange) && (IndexCheck <= EventTable.Num()-1))
+		if (CheckEventTrigger(IndexCheck, ToleranceRange) && (IndexCheck <= EventsListData.EventsList.Num()-1))
 		{
 			if (EventCast.IsBound())//Forma segura de llamar al Delegate
 			{
-				EventCast.Broadcast(EventTable[IndexCheck].EventName);
+				EventCast.Broadcast(EventsListData.EventsList[IndexCheck].EventName);
 
 				//#DebugText
-				GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, FString::Printf(TEXT("Send Event with Index %d Event : %s"), IndexCheck, *EventTable[IndexCheck].EventName));
+				GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, FString::Printf(TEXT("Send Event with Index %d Event : %s"), IndexCheck, *EventsListData.EventsList[IndexCheck].EventName));
 				IndexCheck++;
-				if (IndexCheck >= EventTable.Num()) {
+				if (IndexCheck >= EventsListData.EventsList.Num()-1) {
 					StopManager();
 				}
 			}
@@ -53,10 +56,14 @@ void ANSSE_Manager::Tick(float DeltaTime)
 
 
 //--------------Custom Functions
-
-
 void ANSSE_Manager::StartManager()
 {
+	if (EventsListData.EventsList.Num() == 0)
+	{
+		UE_LOG(LogNSSE, Error, TEXT("NSSE_Manager::StartManager --> No EventListTable¡¡ Set a corret DataTable and Check it's not Empty"));
+		return;
+	}
+
 	StartTime = GetWorld()->TimeSeconds;
 	IndexCheck = 0;
 	bIsRecording = true;
@@ -68,8 +75,6 @@ void ANSSE_Manager::StopManager()
 	//#DebugText
 	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, TEXT("StopedManger"));
 }
-
-
 
 TArray<FString> ANSSE_Manager::GetParametersOverrride(const class UNiagaraComponent* NiagCompoRef)
 {
@@ -84,7 +89,6 @@ TArray<FString> ANSSE_Manager::GetParametersOverrride(const class UNiagaraCompon
 	}
 	return NamesParams;
 }
-
 
 bool ANSSE_Manager::GetNiagFloatParamByName(const class UNiagaraComponent* NiagCompoRef, FName ParamName, float& OutFloat)
 {
@@ -108,10 +112,30 @@ float ANSSE_Manager::GetTimeManager()
 	return CurrenteTime - StartTime;
 }
 
+void ANSSE_Manager::GetEventsListData()
+{
+	if (EventListTable != nullptr)
+	{
+		FString Context = "Event List Table";
+		FNSSE_ManagerEventList* NewList = EventListTable->FindRow<FNSSE_ManagerEventList>(FName(*GroupManager), Context, true);
+
+		if (EventListTable->GetRowStructName().ToString() == "NSSE_ManagerEventList" && NewList != nullptr)
+		{
+			EventsListData = *NewList;
+		}
+		else
+		{
+			//#DebugText
+			UE_LOG(LogNSSE, Display, TEXT("NSSE_Manager::GetEventsListData --> Not Corret DataTable"));
+			EventsListData.ClearData();
+		}
+	}
+}
+
 bool ANSSE_Manager::CheckEventTrigger(int Index , float Tolerance)
 {
 	float CurrentTimeCheck = FloatPresition(GetTimeManager(),2);
-	float ReferenceTimeCheck = FloatPresition(EventTable[Index].EventTime,2);
+	float ReferenceTimeCheck = FloatPresition(EventsListData.EventsList[Index].EventTime,2);
 
 	return FMath::IsNearlyEqual(CurrentTimeCheck, ReferenceTimeCheck , Tolerance);
 }
@@ -124,16 +148,30 @@ float ANSSE_Manager::FloatPresition(float NumberToPresition,float Presition)
 }
 
 
+// ON PROPERTY CHANGE -----------------------------------------------------------
+//-----------------------------------------------------------
+void ANSSE_Manager::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	GetEventsListData();
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+}
+void ANSSE_Manager::PostInitProperties()
+{
+	GetEventsListData();
+	Super::PostInitProperties();
+}
+//-----------------------------------------------------------
+//-----------------------------------------------------------
+
 
 //Display 
 void ANSSE_Manager::DisplayTimeCount()
 {
 	float FrameTime = GetTimeManager();
-	float ConvertedTime = FloatPresition(GetTimeManager(),PresitionValue);
+	float ConvertedTime = FloatPresition(GetTimeManager(), PresitionValue);
 	int32 Minuts = FrameTime / 60;
 	int32 Seconds = FMath::TruncToInt(FrameTime) % 60;
-	
-	//#DebugText
-	GEngine->AddOnScreenDebugMessage(-1, .01f, FColor::Red, FString::Printf(TEXT("CurrentTime: %d : %d   RawTime: %f"), Minuts, Seconds,ConvertedTime));
-}
 
+	//#DebugText
+	GEngine->AddOnScreenDebugMessage(-1, .01f, FColor::Red, FString::Printf(TEXT("CurrentTime: %d : %d   RawTime: %f"), Minuts, Seconds, ConvertedTime));
+}

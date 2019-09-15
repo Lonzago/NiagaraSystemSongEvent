@@ -6,6 +6,7 @@
 #include "Engine\Engine.h"
 #include "TimerManager.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "NiagaraSystemSongEvent.h"
 
 #include "Niagara\Public\NiagaraComponent.h"
 
@@ -100,7 +101,7 @@ void UGestorNiagaraParameters::StopCountTime()
 {
 	bDoStart = false;
 	//#DebugText
-	UE_LOG(LogTemp, Warning, TEXT("NiagaraParameters::StopCountTime--> Timer Is Stoped"));
+	UE_LOG(LogNSSE, Warning, TEXT("NiagaraParameters::StopCountTime--> Timer Is Stoped"));
 }
 
 float UGestorNiagaraParameters::GetGestorTime()const
@@ -142,7 +143,7 @@ void UGestorNiagaraParameters::SetUpGestorParticleEvent(const TArray<UNiagaraCom
 
 	////#DebugText Debug del tipo de MultiParametro
 	//FString enumname = FindObject<UEnum>(ANY_PACKAGE, TEXT("ENSSE_NumberParameterChange"), true)->GetNameStringByIndex(static_cast<uint8>(MultiParameterType));
-	//UE_LOG(LogTemp, Warning, TEXT("Parameters : %s"), *enumname);
+	//UE_LOG(LogNSSE, Warning, TEXT("Parameters : %s"), *enumname);
 
 
 	//#GonDev #IncluirTimeDelay Incluir aqui un delay si queremos que empiece mas tarde el evento. Aunque estoy hay que plantearselo porque quizas no haga fata.

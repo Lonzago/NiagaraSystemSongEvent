@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "NSSE_DataStrucTypes.h"
+#include "Engine/DataTable.h"
 #include "NSSE_Manager.generated.h"
 
 
@@ -25,11 +26,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
 		FString GroupManager = "Trackers";
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
-		TArray<FNSSE_ManagerEventList> EventTable;
+		UDataTable* EventListTable;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
 		float ToleranceRange=0.001f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NSSE_Manager")
 		int32 PresitionValue = 2;
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "NSSE_Manager")
+	FNSSE_ManagerEventList EventsListData;
 
 	FEventManagerTrigger EventCast;		
 
@@ -44,11 +47,14 @@ protected:
 	virtual void BeginPlay() override;
 
 	float GetTimeManager();
+	void GetEventsListData();
 	bool  CheckEventTrigger(int Index, float Tolerance);
 	float FloatPresition(float NumberToPresition, float Presition);
 
 	void DisplayTimeCount();
 
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)override;
+	virtual void PostInitProperties()override;
 
 public:	
 

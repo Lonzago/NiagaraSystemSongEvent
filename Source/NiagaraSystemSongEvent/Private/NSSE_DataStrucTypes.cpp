@@ -5,10 +5,10 @@
 #include "Niagara/Public/NiagaraComponent.h"
 
 template<typename T>
-bool UNSSE_DataStrucTypes::GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo, const FNSSE_NiagaraGestorData& InNiagaraGestorData, T& OutFloat) const
+bool UNSSE_DataStrucTypes::GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo, const FNSSE_NiagaraGestorData& InNiagaraGestorData, T& OutFloat) 
 {
 	TArray<FNiagaraVariable> ArrayNiagaraVars;
-	InNiagaraCompo->GetOverrideParameters()->GetParameters(ArrayNiagaraVars);
+	InNiagaraCompo->GetOverrideParameters().GetParameters(ArrayNiagaraVars);
 
 	if (InNiagaraGestorData.SingleParametersList[0] == NULL) return false;
 
@@ -16,7 +16,7 @@ bool UNSSE_DataStrucTypes::GetOverrideParam(const class UNiagaraComponent* InNia
 	{
 		if (NiagVar.GetName() == FName(*InNiagaraGestorData.SingleParametersList[0].NameParam))
 		{
-			OutFloat = InNiagaraCompo->GetOverrideParameters()->GetParameterData<T>(NiagVar);
+			OutFloat = InNiagaraCompo->GetOverrideParameters().GetParameterValue<T>(NiagVar);
 			return true;
 		}
 	}
@@ -24,16 +24,16 @@ bool UNSSE_DataStrucTypes::GetOverrideParam(const class UNiagaraComponent* InNia
 }
 
 template<typename T>
-bool UNSSE_DataStrucTypes::GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo, FString InNameParam, T& OutFloat) const
+bool UNSSE_DataStrucTypes::GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo, FString InNameParam, T& OutFloat) 
 {
 	TArray<FNiagaraVariable> ArrayNiagaraVars;
-	InNiagaraCompo->GetOverrideParameters()->GetParameters(ArrayNiagaraVars);
+	InNiagaraCompo->GetOverrideParameters().GetParameters(ArrayNiagaraVars);
 
 	for (const FNiagaraVariable& NiagVar : ArrayNiagaraVars)
 	{
 		if (NiagVar.GetName() == FName(*InNameParam))
 		{
-			OutFloat = InNiagaraCompo->GetOverrideParameters()->GetParameterData<T>(NiagVar);
+			OutFloat = InNiagaraCompo->GetOverrideParameters().GetParameterValue<T>(NiagVar);
 			return true;
 		}
 	}
