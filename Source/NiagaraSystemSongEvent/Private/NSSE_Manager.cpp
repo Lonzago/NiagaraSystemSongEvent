@@ -24,6 +24,7 @@ void ANSSE_Manager::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetEventsListData();
 	// ...
 	
 }
@@ -43,9 +44,10 @@ void ANSSE_Manager::Tick(float DeltaTime)
 				EventCast.Broadcast(EventsListData.EventsList[IndexCheck].EventName);
 
 				//#DebugText
-				GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, FString::Printf(TEXT("Send Event with Index %d Event : %s"), IndexCheck, *EventsListData.EventsList[IndexCheck].EventName));
+				GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Cyan, FString::Printf(TEXT("Send Event with Index %d Event : %s"), IndexCheck, *EventsListData.EventsList[IndexCheck].EventName),true,FVector2D(1.2,1.2));
 				IndexCheck++;
-				if (IndexCheck >= EventsListData.EventsList.Num()-1) {
+
+				if (IndexCheck > EventsListData.EventsList.Num()-1) {
 					StopManager();
 				}
 			}
@@ -196,5 +198,5 @@ void ANSSE_Manager::DisplayTimeCount()
 	int32 Seconds = FMath::TruncToInt(FrameTime) % 60;
 
 	//#DebugText
-	GEngine->AddOnScreenDebugMessage(-1, .01f, FColor::Red, FString::Printf(TEXT("CurrentTime: %d : %d   RawTime: %f"), Minuts, Seconds, ConvertedTime));
+	GEngine->AddOnScreenDebugMessage(-1, .005f, FColor::Red, FString::Printf(TEXT("CurrentTime: %d : %d   RawTime: %f"), Minuts, Seconds, ConvertedTime),true,FVector2D(1.1,1.1));
 }

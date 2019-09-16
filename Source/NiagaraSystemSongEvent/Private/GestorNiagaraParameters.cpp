@@ -81,7 +81,7 @@ void UGestorNiagaraParameters::ExecuteChangeSingleParamByEnum(int32 IndexNiagCom
 	case ENSSE_NumberParameterChange::EPC_MultipleParameters:
 
 		//Pasa por todos los parametros a cambiar
-		for (int i = 0; i < OwnNiagGestorData.SingleParametersList.Num() - 1; i++)
+		for (int i = 0; i <= OwnNiagGestorData.SingleParametersList.Num() - 1; i++)
 		{
 			ChangeSingleParameter(OwnTargetsNiagCompoArray[IndexNiagCompoRef], i, OwnNiagGestorData);
 		}
@@ -140,8 +140,8 @@ void UGestorNiagaraParameters::SetUpGestorParticleEvent(const TArray<UNiagaraCom
 	MultiParameterType = GetMultiParameter(NiagaraGestorData);
 
 	////#DebugText Debug del tipo de MultiParametro
-	//FString enumname = FindObject<UEnum>(ANY_PACKAGE, TEXT("ENSSE_NumberParameterChange"), true)->GetNameStringByIndex(static_cast<uint8>(MultiParameterType));
-	//UE_LOG(LogNSSE, Warning, TEXT("Parameters : %s"), *enumname);
+	FString enumname = FindObject<UEnum>(ANY_PACKAGE, TEXT("ENSSE_NumberParameterChange"), true)->GetNameStringByIndex(static_cast<uint8>(MultiParameterType));
+	UE_LOG(LogNSSE, Warning, TEXT("Parameters : %s"), *enumname);
 
 
 	//#GonDev #IncluirTimeDelay Incluir aqui un delay si queremos que empiece mas tarde el evento. Aunque estoy hay que plantearselo porque quizas no haga fata.
