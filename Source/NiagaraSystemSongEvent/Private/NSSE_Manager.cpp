@@ -60,7 +60,17 @@ void ANSSE_Manager::StartManager()
 {
 	if (EventsListData.EventsList.Num() == 0)
 	{
-		UE_LOG(LogNSSE, Error, TEXT("NSSE_Manager::StartManager --> No EventListTable¡¡ Set a corret DataTable and Check it's not Empty"));
+		//#DebugError EventListData is Empty
+		UE_LOG(LogNSSE, Error, TEXT("NSSE_Manager::StartManager --> No EventListData¡¡ Set a corret DataTable and Check it's not Empty"));
+		UE_LOG(LogNSSE, Error, TEXT("NSSE_Manager::StartManager --> ABORT START EVENT TIMER IN >%s<"), *GetName());
+
+		
+		if (GEngine)
+		{
+			//#DebugScreen Abort Start TIMER
+			GEngine->AddOnScreenDebugMessage(-1, 7, FColor::Red, FString::Printf(TEXT("ABORT START EVENT TIMER ON >%s< |--> CHECK OUTLOG to details"), *GetName()));
+		}
+
 		return;
 	}
 
@@ -119,16 +129,29 @@ void ANSSE_Manager::GetEventsListData()
 		FString Context = "Event List Table";
 		FNSSE_ManagerEventList* NewList = EventListTable->FindRow<FNSSE_ManagerEventList>(FName(*GroupManager), Context, true);
 
-		if (EventListTable->GetRowStructName().ToString() == "NSSE_ManagerEventList" && NewList != nullptr)
+		bool DataNameCorrect = EventListTable->GetRowStructName() == TEXT("NSSE_ManagerEventList");
+
+		if (NewList != nullptr && DataNameCorrect)
 		{
+
 			EventsListData = *NewList;
+			//#DebugText Succeed to load Datatable
+			UE_LOG(LogNSSE, Display, TEXT("NSSE_Manager::GetEventsListData -->SUCCEED to load DataTableEventsList. This DataTable is %s"), *EventListTable->GetRowStructName().ToString());
+			return;
+		}
+		else if	(!DataNameCorrect)
+		{
+			//#DebugText No Corret DataTableType
+			UE_LOG(LogNSSE, Warning, TEXT("NSSE_Manager::GetEventsListData --> Not Corret DataTable. This DataTable is %s"), *EventListTable->GetRowStructName().ToString());
+			
 		}
 		else
 		{
-			//#DebugText
-			UE_LOG(LogNSSE, Display, TEXT("NSSE_Manager::GetEventsListData --> Not Corret DataTable"));
-			EventsListData.ClearData();
+			//#DebugText Not Row Name Found
+			UE_LOG(LogNSSE, Warning, TEXT("NSSE_Manager::GetEventsListData --> NOT FOUND¡¡ RowName-->""%s""< in this DataTable"), *GroupManager);
 		}
+
+		EventsListData.ClearData();
 	}
 }
 

@@ -28,7 +28,7 @@
 /wd4838
 /we4668
 /I .
-/I D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Private
+/I "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Private"
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\CoreUObject
 /I Runtime
 /I Runtime\CoreUObject\Public
@@ -427,10 +427,10 @@
 /I ThirdParty
 /I ThirdParty\libSampleRate\Public
 /I ThirdParty\libSampleRate
-/I D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent
-/I D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Source
-/I D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Public
-/I D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent
+/I "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Inc\NiagaraSystemSongEvent"
+/I "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source"
+/I "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent\Public"
+/I "D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Source\NiagaraSystemSongEvent"
 /I ..\Plugins\FX\Niagara\Intermediate\Build\Win64\UE4Editor\Inc\Niagara
 /I ..\Plugins\FX\Niagara\Source
 /I ..\Plugins\FX\Niagara\Source\Niagara\Classes
@@ -460,18 +460,18 @@
 /I Runtime\Portal\LauncherPlatform
 /I ..\Plugins\FX\Niagara\Source\NiagaraVertexFactories\Public
 /I ..\Plugins\FX\Niagara\Source\NiagaraVertexFactories
-/I "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\INCLUDE"
-/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"
-/FI"D:\ProgramingProyects\Unreal\PluginNiagara\Intermediate\Build\Win64\PluginNiagaraEditor\Development\Engine\SharedPCH.Engine.h"
-/Yu"D:\ProgramingProyects\Unreal\PluginNiagara\Intermediate\Build\Win64\PluginNiagaraEditor\Development\Engine\SharedPCH.Engine.h"
-/Fp"D:\ProgramingProyects\Unreal\PluginNiagara\Intermediate\Build\Win64\PluginNiagaraEditor\Development\Engine\SharedPCH.Engine.h.pch"
-"D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Module.NiagaraSystemSongEvent.cpp"
-/FI"D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Definitions.NiagaraSystemSongEvent.h"
-/Fo"D:\ProgramingProyects\Unreal\PluginNiagara\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Module.NiagaraSystemSongEvent.cpp.obj"
+/I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\INCLUDE"
+/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6\include\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\ucrt"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\shared"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\winrt"
+/FI"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Intermediate\Build\Win64\DanceParticles4_22Editor\Development\Engine\SharedPCH.Engine.h"
+/Yu"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Intermediate\Build\Win64\DanceParticles4_22Editor\Development\Engine\SharedPCH.Engine.h"
+/Fp"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Intermediate\Build\Win64\DanceParticles4_22Editor\Development\Engine\SharedPCH.Engine.h.pch"
+"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Module.NiagaraSystemSongEvent.cpp"
+/FI"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Definitions.NiagaraSystemSongEvent.h"
+/Fo"D:\BrainboxVR\Documents\Unreal Projects\DanceParticles4_22\Plugins\NiagaraSystemSongEvent\Intermediate\Build\Win64\UE4Editor\Development\NiagaraSystemSongEvent\Module.NiagaraSystemSongEvent.cpp.obj"
 /TP
 /GR-
 /W4

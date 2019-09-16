@@ -7,14 +7,13 @@
 #include "TimerManager.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "NiagaraSystemSongEvent.h"
-
 #include "Niagara\Public\NiagaraComponent.h"
 
 
 UGestorNiagaraParameters::UGestorNiagaraParameters()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-
+	bDoStart = false;
 }
 
 void UGestorNiagaraParameters::BeginPlay()
@@ -30,7 +29,6 @@ void UGestorNiagaraParameters::TickComponent(float DeltaTime, ELevelTick TickTyp
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	bool IsUnderPorcentage = GetPercentage() <= 100;
-
 
 	if (bDoStart && IsUnderPorcentage)
 	{
@@ -131,13 +129,13 @@ bool UGestorNiagaraParameters::IsRuningEvent() const
 	return bDoStart;
 }
 
-void UGestorNiagaraParameters::SetUpGestorParticleEvent(const TArray<UNiagaraComponent*>& NiagaraCompoTargert, const FNSSE_NiagaraGestorData& NiagaraGestorData)
+void UGestorNiagaraParameters::SetUpGestorParticleEvent(const TArray<UNiagaraComponent*>& NiagaraComposTargerts, const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
 	//Si esta en Evento lo para para reiniciarse
 	if (IsRuningEvent()) { StopCountTime();}
 
 	//InicialSettings--------------------------------------
-	OwnTargetsNiagCompoArray = NiagaraCompoTargert;
+	OwnTargetsNiagCompoArray = NiagaraComposTargerts;
 	OwnNiagGestorData = NiagaraGestorData;
 	MultiParameterType = GetMultiParameter(NiagaraGestorData);
 
@@ -169,6 +167,8 @@ ENSSE_NumberParameterChange UGestorNiagaraParameters::GetMultiParameter(const FN
 	}
 	else
 	{
+		//#DebugError
+		UE_LOG(LogNSSE, Error, TEXT("GestorNiagaraParameters::GetMultiParameter --> ErrorParameters"));
 		return ENSSE_NumberParameterChange::EPC_ErrorParameters;
 	}
 }
@@ -176,6 +176,11 @@ ENSSE_NumberParameterChange UGestorNiagaraParameters::GetMultiParameter(const FN
 void UGestorNiagaraParameters::StartParameterChanges()
 {
 	StartTime = GetWorld()->GetTimeSeconds();
+
+	//#DebugText Total Time StartParams Display
+	//UE_LOG(LogNSSE, Display, TEXT("GestorNiagara TotalTimeTransition = %s"), *FString::SanitizeFloat(OwnNiagGestorData.SingleParametersList[0].TiempoTrans));
+
+	TotalTimeTrasition = OwnNiagGestorData.SingleParametersList[0].TiempoTrans;
 	bDoStart = true;
 }
 

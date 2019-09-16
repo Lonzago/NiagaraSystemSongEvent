@@ -8,9 +8,6 @@
 #include "NSSE_DataStrucTypes.h"
 #include "GestorNiagaraParameters.generated.h"
 
-//class UNiagaraSystem;
-//class UNiagaraComponent;
-
 
 UCLASS( ClassGroup=(NiagaraSystemSongEvent), meta=(BlueprintSpawnableComponent) )
 class NIAGARASYSTEMSONGEVENT_API UGestorNiagaraParameters : public USceneComponent
@@ -56,7 +53,7 @@ public:
 	////////////////////
 
 	UFUNCTION(BlueprintCallable, Category = "Gestor Params Niagara")
-	void SetUpGestorParticleEvent(const TArray<UNiagaraComponent*>& NiagaraCompoTargert,const FNSSE_NiagaraGestorData& NiagaraGestorData);
+	void SetUpGestorParticleEvent(const TArray<UNiagaraComponent*>& NiagaraComposTargerts,const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
 	ENSSE_NumberParameterChange GetMultiParameter(const FNSSE_NiagaraGestorData& NiagaraGestorData)const;
 

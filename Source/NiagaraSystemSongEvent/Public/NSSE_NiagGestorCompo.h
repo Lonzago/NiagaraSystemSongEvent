@@ -20,6 +20,7 @@ public:
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "NSSE NiagaraComponent")
 	TArray <UNiagaraComponent*> OwnNiagarasComponentsArray;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "NSSE NiagaraComponent")
 	UGestorNiagaraParameters* OwnGestorParameters;
 	
 	UNSSE_NiagGestorCompo();
@@ -35,7 +36,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "NSSE TEST")
 	void NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Action, const FNSSE_NiagaraGestorData& NiagaraGestorData);
 	void GetNigarasComponentsAttached();
-	bool IsRefNiagaraCompoEmpty() const;
+	bool IsArrayNiagCompoEmpty() const;
 
 
 	//////////////////////////
@@ -44,7 +45,7 @@ public:
 	void SpawnSlow(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 	void SpanwInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
-	void KillSlow(const UNiagaraComponent* NiagaraCompoRef, const FNSSE_NiagaraGestorData& NiagaraGestorData);
+	void KillSlow(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 	void KillInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
 	void SwitchHardParticles(const FNSSE_NiagaraGestorData& NiagaraGestorData);
@@ -53,4 +54,6 @@ public:
 	void ModifierParamByTime(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 
 	void CreateNewNiagaraCompo(const FNSSE_NiagaraGestorData& NiagaraGestorData);
+private:
+	void CheckNiagaraComponentSystem(const FNSSE_NiagaraGestorData& NiagaraGestorData);
 };

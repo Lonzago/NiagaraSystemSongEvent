@@ -16,9 +16,6 @@ UNSSE_NiagGestorCompo::UNSSE_NiagGestorCompo()
 	//UBillboardComponent* Billboard = CreateDefaultSubobject<UBillboardComponent>(TEXT("Billboard"));
 	//Billboard->SetupAttachment(this);
 
-	/*NiagaraC_Main = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraMain"));
-	NiagaraC_Main->SetupAttachment(this);
-	NiagaraC_Main->RegisterComponent();*/
 
 	OwnGestorParameters = CreateDefaultSubobject<UGestorNiagaraParameters>(TEXT("GestorParameters"));
 	OwnGestorParameters->SetupAttachment(this);
@@ -56,7 +53,7 @@ void UNSSE_NiagGestorCompo::NSSE_DoNiagaraAction(ENSSE_NiagaraGestorActions Acti
 	{
 	case ENSSE_NiagaraGestorActions::NGA_KillSlow:
 		//	
-		KillSlow(OwnNiagarasComponentsArray[0], NiagaraGestorData);
+		KillSlow(NiagaraGestorData);
 		break;
 	case ENSSE_NiagaraGestorActions::NGA_KillInstan:
 		//
@@ -105,7 +102,7 @@ void UNSSE_NiagGestorCompo::GetNigarasComponentsAttached()
 			{
 				OwnNiagarasComponentsArray.Add(Niag);
 				//#DebugText Añadido componente
-				UE_LOG(LogNSSE, Display, TEXT("NiagaraGestor::GetNiagarasComponents AddedCompo--> %s"), *Niag->GetName());
+				//UE_LOG(LogNSSE, Display, TEXT("NiagaraGestor::GetNiagarasComponents AddedCompo--> %s"), *Niag->GetName());
 			}
 		}
 	}
@@ -117,7 +114,7 @@ void UNSSE_NiagGestorCompo::GetNigarasComponentsAttached()
 
 }
 
-bool UNSSE_NiagGestorCompo::IsRefNiagaraCompoEmpty() const
+bool UNSSE_NiagGestorCompo::IsArrayNiagCompoEmpty() const
 {
 	return OwnNiagarasComponentsArray.Num() == 0;
 }
@@ -128,10 +125,12 @@ bool UNSSE_NiagGestorCompo::IsRefNiagaraCompoEmpty() const
 
 void UNSSE_NiagGestorCompo::SpawnSlow(const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
-	if (!IsRefNiagaraCompoEmpty())
+	if (!IsArrayNiagCompoEmpty())
 	{
-		//Llamamos a la funcion de spawnslow de la strutra que lo que hace es sobreescribir el valor inicial a 0
-		ModifierParamByTime(FNSSE_NiagaraGestorData::SpawnSlow(NiagaraGestorData));
+		ModifierParamByTime(NiagaraGestorData);
+		
+		////Llamamos a la funcion de spawnslow de la strutra que lo que hace es sobreescribir el valor inicial a 0
+		//ModifierParamByTime(FNSSE_NiagaraGestorData::SpawnSlow(NiagaraGestorData));
 	}
 	else
 	{
@@ -143,7 +142,7 @@ void UNSSE_NiagGestorCompo::SpawnSlow(const FNSSE_NiagaraGestorData& NiagaraGest
 void UNSSE_NiagGestorCompo::SpanwInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
 	//Si ya tiene referencias las cambia 
-	if (!IsRefNiagaraCompoEmpty())
+	if (!IsArrayNiagCompoEmpty())
 	{
 		SwitchHardParticles(NiagaraGestorData);
 	}
@@ -155,9 +154,9 @@ void UNSSE_NiagGestorCompo::SpanwInstan(const FNSSE_NiagaraGestorData& NiagaraGe
 
 }
 
-void UNSSE_NiagGestorCompo::KillSlow(const UNiagaraComponent* NiagaraCompoRef, const FNSSE_NiagaraGestorData& NiagaraGestorData)
+void UNSSE_NiagGestorCompo::KillSlow(const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
-	if (NiagaraCompoRef==nullptr)
+	if (IsArrayNiagCompoEmpty())
 	{
 		//#DebugText 
 		UE_LOG(LogNSSE, Warning, TEXT("NiagGestorCompo::KillSlow--> No NiagaraComponent Found Can't KillSlow"));
@@ -165,15 +164,19 @@ void UNSSE_NiagGestorCompo::KillSlow(const UNiagaraComponent* NiagaraCompoRef, c
 	}
 
 	float CurrentValue;
-	UNSSE_DataStrucTypes::GetOverrideParam<float>(NiagaraCompoRef, TEXT("User.SpawnRate"), CurrentValue);
-
-	ModifierParamByTime(FNSSE_NiagaraGestorData::KillSlow(CurrentValue, NiagaraGestorData));
+	if(UNSSE_DataStrucTypes::GetOverrideParam<float>(OwnNiagarasComponentsArray[0], TEXT("User.SpawnRate"), CurrentValue))
+	{
+		//#DebugText 
+		UE_LOG(LogNSSE, Display, TEXT("NiagGestorCompo::KillSlow-->Current Value = %s"),*FString::SanitizeFloat(CurrentValue));
+		ModifierParamByTime(FNSSE_NiagaraGestorData::KillSlow(CurrentValue, NiagaraGestorData));
+	}
+	
 
 }
 
 void UNSSE_NiagGestorCompo::KillInstan(const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
-	if (IsRefNiagaraCompoEmpty())
+	if (IsArrayNiagCompoEmpty())
 	{
 		//#DebugText NiagaraComponentArry Empty
 		UE_LOG(LogNSSE, Warning, TEXT("NiagaraGestor::KillInstan  NiagaraComponentArray is Empty. Nothing to remove."));
@@ -190,7 +193,7 @@ void UNSSE_NiagGestorCompo::KillInstan(const FNSSE_NiagaraGestorData& NiagaraGes
 
 void UNSSE_NiagGestorCompo::SwitchHardParticles(const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
-	if (!IsRefNiagaraCompoEmpty() && NiagaraGestorData.NiagaraSystemRef)
+	if (!IsArrayNiagCompoEmpty() && NiagaraGestorData.NiagaraSystemRef)
 	{
 		for (int32 i = 0; i < OwnNiagarasComponentsArray.Num(); i++)
 		{
@@ -202,10 +205,21 @@ void UNSSE_NiagGestorCompo::SwitchHardParticles(const FNSSE_NiagaraGestorData& N
 
 void UNSSE_NiagGestorCompo::ModifierParamByTime(const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
-	if (IsRefNiagaraCompoEmpty())
+	if (IsArrayNiagCompoEmpty())
 	{
 		CreateNewNiagaraCompo(NiagaraGestorData);
 	}
+
+	if (!OwnGestorParameters)
+	{
+		//#DebugError
+		UE_LOG(LogNSSE, Warning, TEXT("NSSE_NiagGestorCompo::ModifierParamByTime --> NULL GESTORPARAMETER.  ABORT MODIFYPARAM"));
+		return;
+	}
+
+	//Comprueba que sea el mismo Systema al que se van a hacer las modificaciones
+	CheckNiagaraComponentSystem(NiagaraGestorData);
+
 	OwnGestorParameters->SetUpGestorParticleEvent(OwnNiagarasComponentsArray, NiagaraGestorData);
 }
 
@@ -226,5 +240,22 @@ void UNSSE_NiagGestorCompo::CreateNewNiagaraCompo(const FNSSE_NiagaraGestorData&
 	{
 		//#DebugError No referencias de NiagaraSystem
 		UE_LOG(LogNSSE, Error, TEXT("NiagaraGestorCompo::CreateNewNiagaraComponent   No NiagaraSystem asiganado. Componente no creado"));
+	}
+}
+
+
+//#TOFUTURE 
+/*Esta funcion comprueba y si no setea los systemas de los componentes que tenga asigando. 
+hay que añadirle que tambien puede forzar una paramatros iniciales o no*/
+void UNSSE_NiagGestorCompo::CheckNiagaraComponentSystem(const FNSSE_NiagaraGestorData& NiagaraGestorData)
+{
+	if (!OwnNiagarasComponentsArray[0]->GetSystemInstance() // Si el sistema no esta asignado
+		|| OwnNiagarasComponentsArray[0]->GetSystemInstance()->GetSystem() != NiagaraGestorData.NiagaraSystemRef) // O si la instancia no es igual al sistema que se quiere modificar
+	{
+		for (UNiagaraComponent* Compo : OwnNiagarasComponentsArray)
+		{
+			Compo->SetAsset(NiagaraGestorData.NiagaraSystemRef);
+			Compo->ResetSystem();
+		}
 	}
 }

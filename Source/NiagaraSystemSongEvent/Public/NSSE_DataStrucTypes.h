@@ -174,8 +174,8 @@ struct  FNSSE_NiagaraGestorData
 	{
 		FNSSE_NiagaraGestorData OutNiagaraGestor = InNiagaraGestor;
 		FNSSE_SinglerParameterData OutSimpleParam = InNiagaraGestor.SingleParametersList[0];
-		OutSimpleParam.ParametroInicial = InCurrentValue;
-		OutSimpleParam.ParametroFinal = FNSSE_UnitParameterType(0.0f);
+		OutSimpleParam.ParametroInicial = FNSSE_UnitParameterType(InCurrentValue);
+		OutSimpleParam.ParametroFinal = FNSSE_UnitParameterType(-1.0f);
 		OutNiagaraGestor.SingleParametersList[0] = OutSimpleParam;
 
 		return OutNiagaraGestor;
@@ -244,8 +244,8 @@ class NIAGARASYSTEMSONGEVENT_API UNSSE_DataStrucTypes : public UObject
 
 public:
 		template<typename T>
-		static bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,const FNSSE_NiagaraGestorData& InNiagaraGestorData, T& OutFloat);
+		static bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,const FNSSE_NiagaraGestorData& InNiagaraGestorData, T& OutValue);
 		template<typename T>
-		static bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,FString InNameParam, T& OutFloat);
+		static bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,FString InNameParam, T& OutValue);
 
 };
