@@ -1,8 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "GestorNiagaraParameters.h"
-#include "GameFramework\Actor.h"
+#include "NSSE_GestorNiagaraParameters.h"
 #include "Engine\Engine.h"
 #include "TimerManager.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -10,13 +9,13 @@
 #include "Niagara\Public\NiagaraComponent.h"
 
 
-UGestorNiagaraParameters::UGestorNiagaraParameters()
+UNSSE_GestorNiagaraParameters::UNSSE_GestorNiagaraParameters()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 	bDoStart = false;
 }
 
-void UGestorNiagaraParameters::BeginPlay()
+void UNSSE_GestorNiagaraParameters::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -24,7 +23,7 @@ void UGestorNiagaraParameters::BeginPlay()
 
 }
 
-void UGestorNiagaraParameters::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UNSSE_GestorNiagaraParameters::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
@@ -38,9 +37,9 @@ void UGestorNiagaraParameters::TickComponent(float DeltaTime, ELevelTick TickTyp
 			ExecuteChangeSingleParamByEnum(0);
 
 		}
-		else if (OwnTargetsNiagCompoArray.Num()> 1)
+		else if (OwnTargetsNiagCompoArray.Num() > 1)
 		{
-			for (int32 i = 0; i <OwnTargetsNiagCompoArray.Num(); i++)
+			for (int32 i = 0; i < OwnTargetsNiagCompoArray.Num(); i++)
 			{
 				ExecuteChangeSingleParamByEnum(i);
 			}
@@ -67,7 +66,7 @@ void UGestorNiagaraParameters::TickComponent(float DeltaTime, ELevelTick TickTyp
 
 }
 
-void UGestorNiagaraParameters::ExecuteChangeSingleParamByEnum(int32 IndexNiagCompoRef)
+void UNSSE_GestorNiagaraParameters::ExecuteChangeSingleParamByEnum(int32 IndexNiagCompoRef)
 {
 	//Hace el paso por multiples parametros o por uno solo.
 	switch (MultiParameterType)
@@ -95,44 +94,44 @@ void UGestorNiagaraParameters::ExecuteChangeSingleParamByEnum(int32 IndexNiagCom
 //				CUSTOM METHODS
 ////////////////////
 
-void UGestorNiagaraParameters::StopCountTime()
+void UNSSE_GestorNiagaraParameters::StopCountTime()
 {
 	bDoStart = false;
 	//#DebugText
 	UE_LOG(LogNSSE, Warning, TEXT("NiagaraParameters::StopCountTime--> Timer Is Stoped"));
 }
 
-float UGestorNiagaraParameters::GetGestorTime()const
+float UNSSE_GestorNiagaraParameters::GetGestorTime()const
 {
 	return GetWorld()->GetTimeSeconds() - StartTime;
 }
 
-float UGestorNiagaraParameters::GetPercentage()const
+float UNSSE_GestorNiagaraParameters::GetPercentage()const
 {
 	return GetGestorTime() * 100 / TotalTimeTrasition;
 }
 
-float UGestorNiagaraParameters::GetRemainTime() const
+float UNSSE_GestorNiagaraParameters::GetRemainTime() const
 {
 	return TotalTimeTrasition - GetGestorTime();
 }
 
-float UGestorNiagaraParameters::GetAlphaTime() const
+float UNSSE_GestorNiagaraParameters::GetAlphaTime() const
 {
 	FVector2D InputClamp = FVector2D(0, 100);
 	FVector2D OutClamp = FVector2D(0, 1.0f);
 	return FMath::GetMappedRangeValueClamped(InputClamp, OutClamp, GetPercentage());
 }
 
-bool UGestorNiagaraParameters::IsRuningEvent() const
+bool UNSSE_GestorNiagaraParameters::IsRuningEvent() const
 {
 	return bDoStart;
 }
 
-void UGestorNiagaraParameters::SetUpGestorParticleEvent(const TArray<UNiagaraComponent*>& NiagaraComposTargerts, const FNSSE_NiagaraGestorData& NiagaraGestorData)
+void UNSSE_GestorNiagaraParameters::SetUpGestorParticleEvent(const TArray<UNiagaraComponent*>& NiagaraComposTargerts, const FNSSE_NiagaraGestorData& NiagaraGestorData)
 {
 	//Si esta en Evento lo para para reiniciarse
-	if (IsRuningEvent()) { StopCountTime();}
+	if (IsRuningEvent()) { StopCountTime(); }
 
 	//InicialSettings--------------------------------------
 	OwnTargetsNiagCompoArray = NiagaraComposTargerts;
@@ -154,7 +153,7 @@ void UGestorNiagaraParameters::SetUpGestorParticleEvent(const TArray<UNiagaraCom
 	StartParameterChanges();
 }
 
-ENSSE_NumberParameterChange UGestorNiagaraParameters::GetMultiParameter(const FNSSE_NiagaraGestorData& NiagaraGestorData) const
+ENSSE_NumberParameterChange UNSSE_GestorNiagaraParameters::GetMultiParameter(const FNSSE_NiagaraGestorData& NiagaraGestorData) const
 {
 	if (NiagaraGestorData.SingleParametersList.Num() != 0 && NiagaraGestorData.SingleParametersList.Num() == 1)
 	{
@@ -173,7 +172,7 @@ ENSSE_NumberParameterChange UGestorNiagaraParameters::GetMultiParameter(const FN
 	}
 }
 
-void UGestorNiagaraParameters::StartParameterChanges()
+void UNSSE_GestorNiagaraParameters::StartParameterChanges()
 {
 	StartTime = GetWorld()->GetTimeSeconds();
 
@@ -187,12 +186,12 @@ void UGestorNiagaraParameters::StartParameterChanges()
 
 
 //No soporte para algunos tipos de datos de momneto #TOFUTURE Implementar para todos los tipos de datos en niagara
-void UGestorNiagaraParameters::ChangeSingleParameter(UNiagaraComponent* NiagCompoRef, int32 IndexParam, const FNSSE_NiagaraGestorData& GestorData)
+void UNSSE_GestorNiagaraParameters::ChangeSingleParameter(UNiagaraComponent* NiagCompoRef, int32 IndexParam, const FNSSE_NiagaraGestorData& GestorData)
 {
 	//Get Name and Type
 	FString ParameterName = GestorData.SingleParametersList[IndexParam].NameParam;
 	ENSSE_ParameterType ParamType = GestorData.SingleParametersList[IndexParam].DataType;
-	
+
 	//Instan Varaibles
 	bool IsInstanChange = GestorData.SingleParametersList[IndexParam].Instan;
 	ENSSE_InstanTransTiming InstanMoment = GestorData.SingleParametersList[IndexParam].InstanTiming;
@@ -214,7 +213,7 @@ void UGestorNiagaraParameters::ChangeSingleParameter(UNiagaraComponent* NiagComp
 
 }
 
-void UGestorNiagaraParameters::InstanNiagaraChanges(UNiagaraComponent* NiagCompoRef, ENSSE_InstanTransTiming InstaTiming, FString ParameterName, const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime)
+void UNSSE_GestorNiagaraParameters::InstanNiagaraChanges(UNiagaraComponent* NiagCompoRef, ENSSE_InstanTransTiming InstaTiming, FString ParameterName, const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime)
 {
 	switch (ParamType)
 	{
@@ -389,7 +388,7 @@ void UGestorNiagaraParameters::InstanNiagaraChanges(UNiagaraComponent* NiagCompo
 
 }
 
-void UGestorNiagaraParameters::LerpNiagaraChanges(UNiagaraComponent* NiagCompoRef, FString ParameterName, const FNSSE_UnitParameterType& InputInicial ,const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime)
+void UNSSE_GestorNiagaraParameters::LerpNiagaraChanges(UNiagaraComponent* NiagCompoRef, FString ParameterName, const FNSSE_UnitParameterType& InputInicial, const FNSSE_UnitParameterType& InputFinal, ENSSE_ParameterType ParamType, float AlphaTime)
 {
 
 	switch (ParamType)

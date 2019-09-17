@@ -1,0 +1,52 @@
+
+***---Niagara System Song Event---*** by GonDev (BlackBirdStudios) UrlGitHub:https://github.com/Lonzago/NiagaraSystemSongEvent
+
+
+Descripcion: 	Niagara System Song Event o NSSE es un plugin que maneja lanzaminetos de eventos para cambiar parametros de Niagara en 
+		tiempo real. Lo que hace es que hay una lista de eventos con nombre y tiempo que lo lanza a los Gestores de Acciones de 
+		Niagara. Estos se encargan de reconocer el evento y de aplicar una acccion al sistema de Niagara(SpawnSlow,SpawnInstan,
+		KillSlow,KillInstan,ModifyParamByTime...etc).
+
+
+**\Notes v0.1 "ProyectoBase"--> 17-09-2019 /**
+
+Funcionalidades:
+
+	-Parametros Soportados: Int32,Float,Vector3,LinearColor.
+	 Parametros NO Soportados: Vector2,Vector4,Actor,Bool,Quat.
+
+	-Accions Soportadas : SpawnSlow,SpawnInsta,KillSlow,KillInsta,SwitchHardParticles,ModifierParamByTime.
+	 Accions No Soportadas : FadeParticles,ModifierParamInstan
+
+Agregados:
+
+	C++ Scripts::
+	+ NSSE_MAnager(Actor)
+				Actor que tiene que estar OBLIGATORIO en la escena. Es el que envia una llamada a los componentes que esten	
+				subscritos al delegate. 
+				ES: Quien maneja los eventos				
+
+	+ NSSE_ActionGestor(ActorComponent)
+				Componente que se tiene que agregar al actor. Se auto subscribe al Manager que encuentre o el que tenga el mismo
+				el mismo nombre de grupo.
+				ES: Recibe los eventos, Checkea si tiene el nombre de evento y lo manda al NiagaraGestorCompo.			
+
+	+ NSSE_NiagaraGestorCompo(SceneCompoment)
+				Comonente que tiene como funcion el de gestionar las acciones y que se le manden y mandar los tiempos de 	
+				el GestorNiagaraParameters.
+
+	+ NSSE_GestorNiagaraParameters(SceneComponent)
+				Componente que es quien hace el cambio de parametros en el sistema de Niagara.
+
+	+ NSSE_DataStructTypes(UObject)
+				Archivo que guardas las estructuras de datos utilizadas dentro del plugin.
+
+	Conten Plugin::
+	+ /NiagaraTest(Folder)
+				Contiene Sistemas de Niagaras para hacer pruebas
+
+	+ /DataTest(Folder)
+				Contiene Datables para hacer pruebas
+
+	+ NSSE_MAnager(ActorBlueprint)
+	+ NSSE_Actor(ActorBlueprint)

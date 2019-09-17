@@ -7,6 +7,7 @@
 #include "Engine/DataTable.h"
 #include "NSSE_DataStrucTypes.generated.h"
 
+class UNiagaraComponent;
 
 UENUM(BlueprintType)
 enum class  ENSSE_ParameterType : uint8
@@ -244,8 +245,8 @@ class NIAGARASYSTEMSONGEVENT_API UNSSE_DataStrucTypes : public UObject
 
 public:
 		template<typename T>
-		static bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,const FNSSE_NiagaraGestorData& InNiagaraGestorData, T& OutValue);
+		static bool GetOverrideParam(const  UNiagaraComponent* InNiagaraCompo ,const FNSSE_NiagaraGestorData& InNiagaraGestorData, T& OutValue);
 		template<typename T>
-		static bool GetOverrideParam(const class UNiagaraComponent* InNiagaraCompo ,FString InNameParam, T& OutValue);
+		static bool GetOverrideParam(const  UNiagaraComponent* InNiagaraCompo ,FString InNameParam, T& OutValue);
 
 };

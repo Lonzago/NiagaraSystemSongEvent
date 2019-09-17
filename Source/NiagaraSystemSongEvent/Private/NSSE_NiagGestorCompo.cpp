@@ -3,7 +3,7 @@
 
 #include "NSSE_NiagGestorCompo.h"
 #include "Niagara\Public\NiagaraComponent.h"
-#include "GestorNiagaraParameters.h"
+#include "NSSE_GestorNiagaraParameters.h"
 #include "NSSE_DataStrucTypes.h"
 #include "Components\BillboardComponent.h"
 
@@ -17,7 +17,7 @@ UNSSE_NiagGestorCompo::UNSSE_NiagGestorCompo()
 	//Billboard->SetupAttachment(this);
 
 
-	OwnGestorParameters = CreateDefaultSubobject<UGestorNiagaraParameters>(TEXT("GestorParameters"));
+	OwnGestorParameters = CreateDefaultSubobject<UNSSE_GestorNiagaraParameters>(TEXT("GestorParameters"));
 	OwnGestorParameters->SetupAttachment(this);
 }
 
