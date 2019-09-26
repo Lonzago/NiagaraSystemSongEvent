@@ -35,6 +35,9 @@ void EmptyLinkFunctionForGeneratedCodeNSSE_DataStrucTypes() {}
 	NIAGARASYSTEMSONGEVENT_API UClass* Z_Construct_UClass_UNSSE_DataStrucTypes_NoRegister();
 	NIAGARASYSTEMSONGEVENT_API UClass* Z_Construct_UClass_UNSSE_DataStrucTypes();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject();
+	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType();
+	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName();
+	NIAGARASYSTEMSONGEVENT_API UFunction* Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams();
 // End Cross Module References
 	static UEnum* ENSSE_NiagaraGestorActions_StaticEnum()
 	{
@@ -1014,6 +1017,175 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Un
 	uint32 Get_Z_Construct_UScriptStruct_FNSSE_UnitParameterType_Hash() { return 2503253744U; }
 	void UNSSE_DataStrucTypes::StaticRegisterNativesUNSSE_DataStrucTypes()
 	{
+		UClass* Class = UNSSE_DataStrucTypes::StaticClass();
+		static const FNameNativePtrPair Funcs[] = {
+			{ "GetParametersType", &UNSSE_DataStrucTypes::execGetParametersType },
+			{ "GetParameterTypeByName", &UNSSE_DataStrucTypes::execGetParameterTypeByName },
+			{ "GetSystemOverrideParams", &UNSSE_DataStrucTypes::execGetSystemOverrideParams },
+		};
+		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics
+	{
+		struct NSSE_DataStrucTypes_eventGetParametersType_Parms
+		{
+			const UNiagaraSystem* NiagaraSystem;
+			TArray<FString> OutNamesVar;
+			TMap<FString,FString> OutMap;
+			TArray<FString> ReturnValue;
+		};
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FStrPropertyParams NewProp_ReturnValue_Inner;
+		static const UE4CodeGen_Private::FMapPropertyParams NewProp_OutMap;
+		static const UE4CodeGen_Private::FStrPropertyParams NewProp_OutMap_Key_KeyProp;
+		static const UE4CodeGen_Private::FStrPropertyParams NewProp_OutMap_ValueProp;
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_OutNamesVar;
+		static const UE4CodeGen_Private::FStrPropertyParams NewProp_OutNamesVar_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NiagaraSystem_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_NiagaraSystem;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_DataStrucTypes_eventGetParametersType_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_ReturnValue_Inner = { "ReturnValue", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FMapPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_OutMap = { "OutMap", nullptr, (EPropertyFlags)0x0010000000000180, UE4CodeGen_Private::EPropertyGenFlags::Map, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_DataStrucTypes_eventGetParametersType_Parms, OutMap), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_OutMap_Key_KeyProp = { "OutMap_Key", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_OutMap_ValueProp = { "OutMap", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, 1, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_OutNamesVar = { "OutNamesVar", nullptr, (EPropertyFlags)0x0010000000000180, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_DataStrucTypes_eventGetParametersType_Parms, OutNamesVar), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_OutNamesVar_Inner = { "OutNamesVar", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_NiagaraSystem_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_NiagaraSystem = { "NiagaraSystem", nullptr, (EPropertyFlags)0x0010000000000082, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_DataStrucTypes_eventGetParametersType_Parms, NiagaraSystem), Z_Construct_UClass_UNiagaraSystem_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_NiagaraSystem_MetaData, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_NiagaraSystem_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_ReturnValue,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_ReturnValue_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_OutMap,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_OutMap_Key_KeyProp,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_OutMap_ValueProp,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_OutNamesVar,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_OutNamesVar_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::NewProp_NiagaraSystem,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NSSE_NiagaraSystem" },
+		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UNSSE_DataStrucTypes, nullptr, "GetParametersType", sizeof(NSSE_DataStrucTypes_eventGetParametersType_Parms), Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::PropPointers, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04422401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::Function_MetaDataParams, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics
+	{
+		struct NSSE_DataStrucTypes_eventGetParameterTypeByName_Parms
+		{
+			const UNiagaraSystem* NigaraSystem;
+			FString NameParam;
+			FString ReturnValue;
+		};
+		static const UE4CodeGen_Private::FStrPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FStrPropertyParams NewProp_NameParam;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NigaraSystem_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_NigaraSystem;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_DataStrucTypes_eventGetParameterTypeByName_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::NewProp_NameParam = { "NameParam", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_DataStrucTypes_eventGetParameterTypeByName_Parms, NameParam), METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::NewProp_NigaraSystem_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::NewProp_NigaraSystem = { "NigaraSystem", nullptr, (EPropertyFlags)0x0010000000000082, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_DataStrucTypes_eventGetParameterTypeByName_Parms, NigaraSystem), Z_Construct_UClass_UNiagaraSystem_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::NewProp_NigaraSystem_MetaData, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::NewProp_NigaraSystem_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::NewProp_ReturnValue,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::NewProp_NameParam,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::NewProp_NigaraSystem,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NSSE_NiagaraSystem" },
+		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UNSSE_DataStrucTypes, nullptr, "GetParameterTypeByName", sizeof(NSSE_DataStrucTypes_eventGetParameterTypeByName_Parms), Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::PropPointers, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::Function_MetaDataParams, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics
+	{
+		struct NSSE_DataStrucTypes_eventGetSystemOverrideParams_Parms
+		{
+			const UNiagaraSystem* NiagaraSystem;
+			TArray<FString> ReturnValue;
+		};
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FStrPropertyParams NewProp_ReturnValue_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NiagaraSystem_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_NiagaraSystem;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_DataStrucTypes_eventGetSystemOverrideParams_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::NewProp_ReturnValue_Inner = { "ReturnValue", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::NewProp_NiagaraSystem_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::NewProp_NiagaraSystem = { "NiagaraSystem", nullptr, (EPropertyFlags)0x0010000000000082, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(NSSE_DataStrucTypes_eventGetSystemOverrideParams_Parms, NiagaraSystem), Z_Construct_UClass_UNiagaraSystem_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::NewProp_NiagaraSystem_MetaData, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::NewProp_NiagaraSystem_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::NewProp_ReturnValue,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::NewProp_ReturnValue_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::NewProp_NiagaraSystem,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::Function_MetaDataParams[] = {
+		{ "Category", "NSSE_NiagaraSystem" },
+		{ "ModuleRelativePath", "Public/NSSE_DataStrucTypes.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UNSSE_DataStrucTypes, nullptr, "GetSystemOverrideParams", sizeof(NSSE_DataStrucTypes_eventGetSystemOverrideParams_Parms), Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::PropPointers, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::Function_MetaDataParams, ARRAY_COUNT(Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	UClass* Z_Construct_UClass_UNSSE_DataStrucTypes_NoRegister()
 	{
@@ -1022,6 +1194,7 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Un
 	struct Z_Construct_UClass_UNSSE_DataStrucTypes_Statics
 	{
 		static UObject* (*const DependentSingletons[])();
+		static const FClassFunctionLinkInfo FuncInfo[];
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
@@ -1031,6 +1204,11 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Un
 	UObject* (*const Z_Construct_UClass_UNSSE_DataStrucTypes_Statics::DependentSingletons[])() = {
 		(UObject* (*)())Z_Construct_UClass_UObject,
 		(UObject* (*)())Z_Construct_UPackage__Script_NiagaraSystemSongEvent,
+	};
+	const FClassFunctionLinkInfo Z_Construct_UClass_UNSSE_DataStrucTypes_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParametersType, "GetParametersType" }, // 931545201
+		{ &Z_Construct_UFunction_UNSSE_DataStrucTypes_GetParameterTypeByName, "GetParameterTypeByName" }, // 3594435072
+		{ &Z_Construct_UFunction_UNSSE_DataStrucTypes_GetSystemOverrideParams, "GetSystemOverrideParams" }, // 2724906683
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UNSSE_DataStrucTypes_Statics::Class_MetaDataParams[] = {
@@ -1047,11 +1225,11 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Un
 		nullptr,
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
-		nullptr,
+		FuncInfo,
 		nullptr,
 		nullptr,
 		ARRAY_COUNT(DependentSingletons),
-		0,
+		ARRAY_COUNT(FuncInfo),
 		0,
 		0,
 		0x001000A0u,
@@ -1066,7 +1244,7 @@ static struct FScriptStruct_NiagaraSystemSongEvent_StaticRegisterNativesFNSSE_Un
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UNSSE_DataStrucTypes, 121736456);
+	IMPLEMENT_CLASS(UNSSE_DataStrucTypes, 2656592352);
 	template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<UNSSE_DataStrucTypes>()
 	{
 		return UNSSE_DataStrucTypes::StaticClass();

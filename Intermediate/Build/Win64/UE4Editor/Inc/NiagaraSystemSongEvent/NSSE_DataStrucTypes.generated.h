@@ -8,12 +8,14 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UNiagaraSystem;
+ 
 #ifdef NIAGARASYSTEMSONGEVENT_NSSE_DataStrucTypes_generated_h
 #error "NSSE_DataStrucTypes.generated.h already included, missing '#pragma once' in NSSE_DataStrucTypes.h"
 #endif
 #define NIAGARASYSTEMSONGEVENT_NSSE_DataStrucTypes_generated_h
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_219_GENERATED_BODY \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_219_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FNSSE_ManagerEventList_Statics; \
 	NIAGARASYSTEMSONGEVENT_API static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -21,14 +23,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<struct FNSSE_ManagerEventList>();
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_206_GENERATED_BODY \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_206_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FNSSE_ManagerEvent_Statics; \
 	NIAGARASYSTEMSONGEVENT_API static class UScriptStruct* StaticStruct();
 
 
 template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<struct FNSSE_ManagerEvent>();
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_192_GENERATED_BODY \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_192_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FNSSE_DataTableActionGestor_Statics; \
 	NIAGARASYSTEMSONGEVENT_API static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -36,30 +38,94 @@ template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<struct FNSSE_M
 
 template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<struct FNSSE_DataTableActionGestor>();
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_155_GENERATED_BODY \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_155_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FNSSE_NiagaraGestorData_Statics; \
 	NIAGARASYSTEMSONGEVENT_API static class UScriptStruct* StaticStruct();
 
 
 template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<struct FNSSE_NiagaraGestorData>();
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_103_GENERATED_BODY \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_103_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FNSSE_SinglerParameterData_Statics; \
 	NIAGARASYSTEMSONGEVENT_API static class UScriptStruct* StaticStruct();
 
 
 template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<struct FNSSE_SinglerParameterData>();
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_61_GENERATED_BODY \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_61_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FNSSE_UnitParameterType_Statics; \
 	NIAGARASYSTEMSONGEVENT_API static class UScriptStruct* StaticStruct();
 
 
 template<> NIAGARASYSTEMSONGEVENT_API UScriptStruct* StaticStruct<struct FNSSE_UnitParameterType>();
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_RPC_WRAPPERS
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_RPC_WRAPPERS_NO_PURE_DECLS
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_INCLASS_NO_PURE_DECLS \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execGetParameterTypeByName) \
+	{ \
+		P_GET_OBJECT(UNiagaraSystem,Z_Param_NigaraSystem); \
+		P_GET_PROPERTY(UStrProperty,Z_Param_NameParam); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FString*)Z_Param__Result=UNSSE_DataStrucTypes::GetParameterTypeByName(Z_Param_NigaraSystem,Z_Param_NameParam); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetParametersType) \
+	{ \
+		P_GET_OBJECT(UNiagaraSystem,Z_Param_NiagaraSystem); \
+		P_GET_TARRAY_REF(FString,Z_Param_Out_OutNamesVar); \
+		P_GET_TMAP_REF(FString,FString,Z_Param_Out_OutMap); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(TArray<FString>*)Z_Param__Result=UNSSE_DataStrucTypes::GetParametersType(Z_Param_NiagaraSystem,Z_Param_Out_OutNamesVar,Z_Param_Out_OutMap); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetSystemOverrideParams) \
+	{ \
+		P_GET_OBJECT(UNiagaraSystem,Z_Param_NiagaraSystem); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(TArray<FString>*)Z_Param__Result=UNSSE_DataStrucTypes::GetSystemOverrideParams(Z_Param_NiagaraSystem); \
+		P_NATIVE_END; \
+	}
+
+
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execGetParameterTypeByName) \
+	{ \
+		P_GET_OBJECT(UNiagaraSystem,Z_Param_NigaraSystem); \
+		P_GET_PROPERTY(UStrProperty,Z_Param_NameParam); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(FString*)Z_Param__Result=UNSSE_DataStrucTypes::GetParameterTypeByName(Z_Param_NigaraSystem,Z_Param_NameParam); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetParametersType) \
+	{ \
+		P_GET_OBJECT(UNiagaraSystem,Z_Param_NiagaraSystem); \
+		P_GET_TARRAY_REF(FString,Z_Param_Out_OutNamesVar); \
+		P_GET_TMAP_REF(FString,FString,Z_Param_Out_OutMap); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(TArray<FString>*)Z_Param__Result=UNSSE_DataStrucTypes::GetParametersType(Z_Param_NiagaraSystem,Z_Param_Out_OutNamesVar,Z_Param_Out_OutMap); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execGetSystemOverrideParams) \
+	{ \
+		P_GET_OBJECT(UNiagaraSystem,Z_Param_NiagaraSystem); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(TArray<FString>*)Z_Param__Result=UNSSE_DataStrucTypes::GetSystemOverrideParams(Z_Param_NiagaraSystem); \
+		P_NATIVE_END; \
+	}
+
+
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUNSSE_DataStrucTypes(); \
 	friend struct Z_Construct_UClass_UNSSE_DataStrucTypes_Statics; \
@@ -68,7 +134,7 @@ public: \
 	DECLARE_SERIALIZER(UNSSE_DataStrucTypes)
 
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_INCLASS \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_INCLASS \
 private: \
 	static void StaticRegisterNativesUNSSE_DataStrucTypes(); \
 	friend struct Z_Construct_UClass_UNSSE_DataStrucTypes_Statics; \
@@ -77,7 +143,7 @@ public: \
 	DECLARE_SERIALIZER(UNSSE_DataStrucTypes)
 
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_STANDARD_CONSTRUCTORS \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UNSSE_DataStrucTypes(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UNSSE_DataStrucTypes) \
@@ -90,7 +156,7 @@ private: \
 public:
 
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_ENHANCED_CONSTRUCTORS \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UNSSE_DataStrucTypes(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -103,26 +169,26 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UNSSE_DataStrucTypes); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UNSSE_DataStrucTypes)
 
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_PRIVATE_PROPERTY_OFFSET
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_241_PROLOG
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_GENERATED_BODY_LEGACY \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_PRIVATE_PROPERTY_OFFSET
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_241_PROLOG
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_PRIVATE_PROPERTY_OFFSET \
-	PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_RPC_WRAPPERS \
-	PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_INCLASS \
-	PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_STANDARD_CONSTRUCTORS \
+	DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_PRIVATE_PROPERTY_OFFSET \
+	DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_RPC_WRAPPERS \
+	DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_INCLASS \
+	DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_GENERATED_BODY \
+#define DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_PRIVATE_PROPERTY_OFFSET \
-	PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_RPC_WRAPPERS_NO_PURE_DECLS \
-	PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_INCLASS_NO_PURE_DECLS \
-	PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_ENHANCED_CONSTRUCTORS \
+	DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_PRIVATE_PROPERTY_OFFSET \
+	DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_RPC_WRAPPERS_NO_PURE_DECLS \
+	DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_INCLASS_NO_PURE_DECLS \
+	DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h_244_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -130,7 +196,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> NIAGARASYSTEMSONGEVENT_API UClass* StaticClass<class UNSSE_DataStrucTypes>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID PluginNiagara_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h
+#define CURRENT_FILE_ID DanceParticles4_22_Plugins_NiagaraSystemSongEvent_Source_NiagaraSystemSongEvent_Public_NSSE_DataStrucTypes_h
 
 
 #define FOREACH_ENUM_ENSSE_NIAGARAGESTORACTIONS(op) \

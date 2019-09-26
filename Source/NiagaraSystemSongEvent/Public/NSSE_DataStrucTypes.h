@@ -249,4 +249,14 @@ public:
 		template<typename T>
 		static bool GetOverrideParam(const  UNiagaraComponent* InNiagaraCompo ,FString InNameParam, T& OutValue);
 
+		UFUNCTION(BlueprintCallable, Category = "NSSE_NiagaraSystem")
+			static TArray<FString> GetSystemOverrideParams(const UNiagaraSystem* NiagaraSystem);
+		UFUNCTION(BlueprintCallable, Category = "NSSE_NiagaraSystem")
+			static TArray<FString> GetParametersType(const UNiagaraSystem* NiagaraSystem, TArray<FString>& OutNamesVar, TMap<FString, FString>& OutMap);
+		UFUNCTION(BlueprintCallable, Category = "NSSE_NiagaraSystem")
+			static FString GetParameterTypeByName(const UNiagaraSystem* NigaraSystem, FString NameParam);
+
+
+
+
 };
